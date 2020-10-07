@@ -6,8 +6,8 @@ public class BinaryHexCalculator {
     private final String numberSystem;
     private final int base;
 
-    public BinaryHexCalculator(int usrChoice) {
-        if (usrChoice == 1) {
+    public BinaryHexCalculator(int usrChoice) {     // implement a way to read calculations from text file
+        if (usrChoice == 1) {                       // computes and output results to a text file
             this.numberSystem = "Binary";
             this.base = 2;
         }
@@ -20,10 +20,10 @@ public class BinaryHexCalculator {
 
     private void selectOperation() {
         Scanner scanner = new Scanner(System.in);
-        System.out.printf("Select which %s operation to perform: \n", numberSystem);
-        System.out.printf("1. %s Calculation\n", numberSystem);
-        System.out.printf("2. %s to decimal\n", numberSystem);
-        System.out.printf("3. Decimal to %s\n", numberSystem);
+        System.out.printf("Select which %s operation to perform: \n", this.numberSystem);
+        System.out.printf("1. %s Calculation\n", this.numberSystem);
+        System.out.printf("2. %s to decimal\n", this.numberSystem);
+        System.out.printf("3. Decimal to %s\n", this.numberSystem);
         System.out.print(">>> ");
 
         String input = scanner.nextLine();
@@ -32,21 +32,21 @@ public class BinaryHexCalculator {
         switch (choice) {
             case 1 -> calculation();
             case 2 -> {
-                System.out.printf("Input %s: ", numberSystem);
+                System.out.printf("Input %s: ", this.numberSystem);
                 String inp = scanner.nextLine().toUpperCase();
                 String num;
-                if (numberSystem.equals("Binary") && !inp.matches("[0-1]+")) {
+                if (this.numberSystem.equals("Binary") && !inp.matches("[0-1]+")) {
                     System.out.println("The number need to contain 0 and 1 only.");
                     break;
                 }
-                else if (numberSystem.equals("Hex") && !inp.matches("[A-F0-9]+")) {
+                else if (this.numberSystem.equals("Hex") && !inp.matches("[A-F0-9]+")) {
                     System.out.println("The number need to contain 0-9 and A-F only.");
                     break;
                 }
                 else
                     num = inp;
 
-                System.out.printf("Decimal value: %d\n", (long)numberSystemToDecimal(num));
+                System.out.printf("Decimal value: %d\n", (long)numberSystemToDecimal(num, this.base));
             }
             case 3 -> {
                 System.out.print("Input decimal: ");
@@ -58,7 +58,7 @@ public class BinaryHexCalculator {
                 } else
                     decimal = Double.parseDouble(inp);
 
-                System.out.printf("%s value: %s\n", numberSystem, decimalToNumberSystem(decimal));
+                System.out.printf("%s value: %s\n", this.numberSystem, decimalToNumberSystem(decimal, this.base));
             }
             default -> System.out.println("Not an available option.");
         }
@@ -66,7 +66,7 @@ public class BinaryHexCalculator {
 
     private void calculation() {    // uses lots of conversion (4 times), can we do both hex and binary calculations without converting???
         Scanner scanner = new Scanner(System.in);
-        System.out.printf("Input %s calculation: ", numberSystem);
+        System.out.printf("Input %s calculation: ", this.numberSystem);
         String input = scanner.nextLine().toUpperCase();
         String calculation;
         if (!input.matches("^[-+*/A-Z0-9\\s]+")) {
@@ -78,8 +78,8 @@ public class BinaryHexCalculator {
             String operator = parseInp[1];
             String secondVar = parseInp[2];
 
-            double firstDeci = numberSystemToDecimal(firstVar);
-            double secondDeci = numberSystemToDecimal(secondVar);
+            double firstDeci = numberSystemToDecimal(firstVar, this.base);
+            double secondDeci = numberSystemToDecimal(secondVar, this.base);
             double resultDeci = 0;
             String resultBinary;
             switch (operator) {
@@ -89,11 +89,11 @@ public class BinaryHexCalculator {
                 case "/" -> resultDeci = firstDeci / secondDeci;
                 default -> System.out.println("Error");
             }
-            resultBinary = decimalToNumberSystem(resultDeci);
+            resultBinary = decimalToNumberSystem(resultDeci, this.base);
 
             if (operator.equals("/")) {
                 double remainder = firstDeci % secondDeci;
-                String binaryRemainder = decimalToNumberSystem(remainder);
+                String binaryRemainder = decimalToNumberSystem(remainder, this.base);
                 System.out.printf("Binary result = %s    Remainder : %s\n", resultBinary, binaryRemainder);
                 System.out.printf("Decimal result = %.0f    Remainder : %.0f", resultDeci, remainder);
             } else {
@@ -103,15 +103,16 @@ public class BinaryHexCalculator {
         }
     }
 
-    public double numberSystemToDecimal(String num) {
+    public static double numberSystemToDecimal(String num, int base) {
         double decimal = 0.0;
         int currentPow = num.length()-1;
         for (int i = 0; i < num.length(); i++, currentPow--) {
-            decimal += Character.getNumericValue(num.charAt(i)) * Utilities.power(this.base, currentPow);
+            decimal += Character.getNumericValue(num.charAt(i)) * Utilities.power(base, currentPow);
         }
         return decimal;
     }
-    public String decimalToNumberSystem(double decimalDouble) {
+
+    public static String decimalToNumberSystem(double decimalDouble, int base) {
         StringBuilder binary = new StringBuilder();
         long decimal = (long)decimalDouble;
         if (decimal == 0)
@@ -120,8 +121,8 @@ public class BinaryHexCalculator {
             binary.insert(0,"-");
 
         while (decimal != 0) {
-            binary.insert(0,HEX_VALUES.charAt((int)Utilities.absolute(decimal) % this.base));
-            decimal /= this.base;
+            binary.insert(0,HEX_VALUES.charAt((int)Utilities.absolute(decimal) % base));
+            decimal /= base;
         }
         return binary.toString();
     }

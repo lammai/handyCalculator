@@ -121,7 +121,7 @@ public class BinaryHexCalculator {
             binary.insert(0,"-");
 
         while (decimal != 0) {
-            binary.insert(0,HEX_VALUES.charAt((int)Utilities.absolute(decimal) % base));
+            binary.insert(0,HEX_VALUES.charAt((int) Utilities.absolute(decimal) % base));
             decimal /= base;
         }
         return binary.toString();

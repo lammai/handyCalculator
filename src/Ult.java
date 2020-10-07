@@ -1,6 +1,6 @@
-public class Utilities {
+public class Ult {
 
-    private Utilities() {}
+    private Ult() {}
 
     public static double power(double base, double pow) {
         if (pow == 0) {

@@ -46,7 +46,7 @@ public class BinaryHexCalculator {
                 else
                     num = inp;
 
-                System.out.printf("Decimal value: %d\n", (long)numberSystemToDecimal(num, this.base));
+                System.out.printf("Decimal value: %.0f\n", numberSystemToDecimal(num, this.base));
             }
             case 3 -> {
                 System.out.print("Input decimal: ");
@@ -73,7 +73,7 @@ public class BinaryHexCalculator {
             System.out.println("Invalid Input.");
         } else {
             calculation = input;
-            String[] parseInp = Utilities.parseOperation(calculation);
+            String[] parseInp = Ult.parseOperation(calculation);
             String firstVar = parseInp[0];
             String operator = parseInp[1];
             String secondVar = parseInp[2];
@@ -107,7 +107,7 @@ public class BinaryHexCalculator {
         double decimal = 0.0;
         int currentPow = num.length()-1;
         for (int i = 0; i < num.length(); i++, currentPow--) {
-            decimal += Character.getNumericValue(num.charAt(i)) * Utilities.power(base, currentPow);
+            decimal += Character.getNumericValue(num.charAt(i)) * Ult.power(base, currentPow);
         }
         return decimal;
     }
@@ -121,7 +121,8 @@ public class BinaryHexCalculator {
             binary.insert(0,"-");
 
         while (decimal != 0) {
-            binary.insert(0,HEX_VALUES.charAt((int) Utilities.absolute(decimal) % base));
+            double index = Ult.absolute(decimal) % base;
+            binary.insert(0,HEX_VALUES.charAt((int) index));
             decimal /= base;
         }
         return binary.toString();

@@ -1,3 +1,6 @@
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Ult {
 
     private Ult() {}
@@ -10,7 +13,7 @@ public class Ult {
             return base;
         }
         else {
-            return base *= power(base, pow-1);
+            return base * power(base, pow - 1);
         }
     }
 
@@ -37,5 +40,19 @@ public class Ult {
         parseInp[2] = calculation.substring(index+1).trim();
 
         return parseInp;
+    }
+
+    public static Map<Integer, String> generateNetMasks() {
+        Map<Integer, String> netMasks = new TreeMap<>();
+        int start = 128;
+        int increment = 64;
+        for (int i = 1; i < 9; i++, increment /= 2) {
+            netMasks.put(i, start + ".0.0.0");
+            netMasks.put((i+8), "255."+ start +".0.0");
+            netMasks.put((i+16), "255.255."+ start +".0");
+            netMasks.put((i+24), "255.255.255." + start);
+            start += increment;
+        }
+        return netMasks;
     }
 }

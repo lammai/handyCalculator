@@ -12,7 +12,7 @@ class BinaryHexCalculatorTest {
         long decimal4 = (long)BinaryHexCalculator.numberSystemToDecimal("100", 2);
         long decimal5 = (long)BinaryHexCalculator.numberSystemToDecimal("111", 2);
 
-        assertEquals(0, decimal0);
+        assertEquals(0, decimal0);  // maybe use Integer.toBinaryString() ???
         assertEquals(1, decimal1);
         assertEquals(2, decimal2);
         assertEquals(3, decimal3);

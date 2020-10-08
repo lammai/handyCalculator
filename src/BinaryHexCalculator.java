@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class BinaryHexCalculator {
 
     private static final String HEX_VALUES = "0123456789ABCDEF";
+    private final Scanner scanner = new Scanner(System.in);
     private final String numberSystem;
     private final int base;
 
@@ -19,11 +20,10 @@ public class BinaryHexCalculator {
     }
 
     private void selectOperation() {
-        Scanner scanner = new Scanner(System.in);
         System.out.printf("Select which %s operation to perform: \n", this.numberSystem);
-        System.out.printf("1. %s Calculation\n", this.numberSystem);
-        System.out.printf("2. %s to decimal\n", this.numberSystem);
-        System.out.printf("3. Decimal to %s\n", this.numberSystem);
+        System.out.printf("1: %s Calculation\n", this.numberSystem);
+        System.out.printf("2: %s to decimal\n", this.numberSystem);
+        System.out.printf("3: Decimal to %s\n", this.numberSystem);
         System.out.print(">>> ");
 
         String input = scanner.nextLine();
@@ -65,7 +65,6 @@ public class BinaryHexCalculator {
     }
 
     private void calculation() {    // uses lots of conversion (4 times), can we do both hex and binary calculations without converting???
-        Scanner scanner = new Scanner(System.in);
         System.out.printf("Input %s calculation: ", this.numberSystem);
         String input = scanner.nextLine().toUpperCase();
         String calculation;

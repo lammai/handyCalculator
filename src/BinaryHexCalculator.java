@@ -4,101 +4,99 @@ public class BinaryHexCalculator {
 
     private static final String HEX_VALUES = "0123456789ABCDEF";
     private final Scanner scanner = new Scanner(System.in);
-    private final String numberSystem;
+    private final NumberSystem type;
     private final int base;
 
     public BinaryHexCalculator(int usrChoice) {     // implement a way to read calculations from text file
         if (usrChoice == 1) {                       // computes and output results to a text file
-            this.numberSystem = "Binary";
+            this.type = NumberSystem.Binary;
             this.base = 2;
         }
         else {
-            this.numberSystem = "Hex";
+            this.type =  NumberSystem.Hex;
             this.base = 16;
         }
         selectOperation();
     }
 
     private void selectOperation() {
-        System.out.printf("Select which %s operation to perform: \n", this.numberSystem);
-        System.out.printf("1: %s Calculation\n", this.numberSystem);
-        System.out.printf("2: %s to decimal\n", this.numberSystem);
-        System.out.printf("3: Decimal to %s\n", this.numberSystem);
+        System.out.printf("Select which %s operation to perform: \n", this.type.toString());
+        System.out.printf("1: %s Calculation\n", this.type.toString());
+        System.out.printf("2: %s to decimal\n", this.type.toString());
+        System.out.printf("3: Decimal to %s\n", this.type.toString());
         System.out.print(">>> ");
 
         String input = scanner.nextLine();
-        int choice = input == null || !input.matches("[0-9]+") ? 0 : Integer.parseInt(input);
+        int choice = Integer.parseInt(Ult.validateInput(input, "[1-3]+"));
 
         switch (choice) {
             case 1 -> calculation();
             case 2 -> {
-                System.out.printf("Input %s: ", this.numberSystem);
+                System.out.printf("Input %s: ", this.type.toString());
                 String inp = scanner.nextLine().toUpperCase();
-                String num;
-                if (this.numberSystem.equals("Binary") && !inp.matches("[0-1]+")) {
-                    System.out.println("The number need to contain 0 and 1 only.");
-                    break;
-                }
-                else if (this.numberSystem.equals("Hex") && !inp.matches("[A-F0-9]+")) {
-                    System.out.println("The number need to contain 0-9 and A-F only.");
-                    break;
-                }
-                else
-                    num = inp;
-
+                String num = Ult.validateInput(inp, this.type);
                 System.out.printf("Decimal value: %.0f\n", numberSystemToDecimal(num, this.base));
             }
             case 3 -> {
                 System.out.print("Input decimal: ");
                 String inp = scanner.nextLine();
-                double decimal;
-                if (inp == null || !inp.matches("[0-9]+")) {
-                    System.out.println("The number need to contain 0-9 only.");
-                    break;
-                } else
-                    decimal = Double.parseDouble(inp);
-
-                System.out.printf("%s value: %s\n", this.numberSystem, decimalToNumberSystem(decimal, this.base));
+                double decimal = Double.parseDouble(Ult.validateInput(inp.substring(0, 15), "[-0-9]+"));
+                System.out.printf("%s value: %s\n", this.type.toString(), decimalToNumberSystem(decimal, this.base));
             }
-            default -> System.out.println("Not an available option.");
+            default -> System.out.println("Error: " + choice);
         }
     }
 
     private void calculation() {    // uses lots of conversion (4 times), can we do both hex and binary calculations without converting???
-        System.out.printf("Input %s calculation: ", this.numberSystem);
+        System.out.printf("Input %s calculation: ", this.type.toString());
         String input = scanner.nextLine().toUpperCase();
         String calculation;
-        if (!input.matches("^[-+*/A-Z0-9\\s]+")) {
-            System.out.println("Invalid Input.");
+        if (this.type == NumberSystem.Binary) {
+            calculation = Ult.validateInput(input, "[-+*/0-1\\s]+");
         } else {
-            calculation = input;
-            String[] parseInp = Ult.parseOperation(calculation);
-            String firstVar = parseInp[0];
-            String operator = parseInp[1];
-            String secondVar = parseInp[2];
+            calculation = Ult.validateInput(input, "[-+*/A-F0-9\\s]+");
+        }
+        String[] parseInp = Ult.splitCalculation(calculation);
+        String firstVar = parseInp[0];
+        String operator = parseInp[1];
+        String secondVar = parseInp[2];
 
-            double firstDeci = numberSystemToDecimal(firstVar, this.base);
-            double secondDeci = numberSystemToDecimal(secondVar, this.base);
-            double resultDeci = 0;
-            String resultBinary;
-            switch (operator) {
-                case "+" -> resultDeci = firstDeci + secondDeci;
-                case "-" -> resultDeci = firstDeci - secondDeci;
-                case "*" -> resultDeci = firstDeci * secondDeci;
-                case "/" -> resultDeci = firstDeci / secondDeci;
-                default -> System.out.println("Error");
-            }
-            resultBinary = decimalToNumberSystem(resultDeci, this.base);
-
-            if (operator.equals("/")) {
-                double remainder = firstDeci % secondDeci;
-                String binaryRemainder = decimalToNumberSystem(remainder, this.base);
-                System.out.printf("Binary result = %s    Remainder : %s\n", resultBinary, binaryRemainder);
-                System.out.printf("Decimal result = %.0f    Remainder : %.0f", resultDeci, remainder);
+        while (operator.equals("unknown") || secondVar.equals("unknown")) {
+            System.out.println("Please input valid calculation.");
+            System.out.print(">>> ");
+            input = scanner.nextLine().toUpperCase();
+            if (this.type == NumberSystem.Binary) {
+                calculation = Ult.validateInput(input, "[-+*/0-1\\s]+");
             } else {
-                System.out.printf("Binary result = %s\n", resultBinary);
-                System.out.printf("Decimal result = %.0f\n", resultDeci);
+                calculation = Ult.validateInput(input, "[-+*/A-F0-9\\s]+");
             }
+            parseInp = Ult.splitCalculation(calculation);
+            firstVar = parseInp[0];
+            operator = parseInp[1];
+            secondVar = parseInp[2];
+        }
+
+        double firstDeci = numberSystemToDecimal(firstVar, this.base);
+        double secondDeci = numberSystemToDecimal(secondVar, this.base);
+        double resultDeci = 0;
+        String resultBinary;
+        switch (operator) {
+            case "+" -> resultDeci = firstDeci + secondDeci;
+            case "-" -> resultDeci = firstDeci - secondDeci;
+            case "*" -> resultDeci = firstDeci * secondDeci;
+            case "/" -> resultDeci = firstDeci / secondDeci;
+            default -> System.out.printf("Error: %f %s %f\n", firstDeci, operator, secondDeci);
+        }
+        resultBinary = decimalToNumberSystem(resultDeci, this.base);
+
+        if (operator.equals("/")) {
+            double remainder = firstDeci % secondDeci;
+            String binaryRemainder = decimalToNumberSystem(remainder, this.base);
+            System.out.printf("%s result = %s    Remainder : %s\n", this.type.toString(), resultBinary, binaryRemainder);
+            System.out.printf("Decimal result = %.0f    Remainder : %.0f", resultDeci, remainder);
+        } else {
+            System.out.printf("%s result = %s\n", this.type.toString(), resultBinary);
+            System.out.printf("Decimal result = %.0f\n", resultDeci);
         }
     }
 
@@ -113,17 +111,17 @@ public class BinaryHexCalculator {
 
     public static String decimalToNumberSystem(double decimalDouble, int base) {
         StringBuilder binary = new StringBuilder();
-        long decimal = (long)decimalDouble;
+        long decimal = (long) decimalDouble;     // could this introduce overflow???
         if (decimal == 0)
             return "0";
-        else if (decimal < 0)
-            binary.insert(0,"-");
 
         while (decimal != 0) {
             double index = Ult.absolute(decimal) % base;
             binary.insert(0,HEX_VALUES.charAt((int) index));
             decimal /= base;
         }
+        if (decimalDouble < 0)
+            binary.insert(0, '-');
         return binary.toString();
     }
 }

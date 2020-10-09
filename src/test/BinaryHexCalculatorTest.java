@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BinaryHexCalculatorTest {
 
     @Test
-    void testBinaryToDecimal() {
+    void testBinaryToDecimal() {    // write better test classes
         long decimal0 = (long)BinaryHexCalculator.numberSystemToDecimal("0", 2);
         long decimal1 = (long)BinaryHexCalculator.numberSystemToDecimal("01", 2);
         long decimal2 = (long)BinaryHexCalculator.numberSystemToDecimal("10", 2);

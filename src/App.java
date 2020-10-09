@@ -12,14 +12,7 @@ public class App {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        int userChoice = input == null || !input.matches("[0-9]+") ? 0 : Integer.parseInt(input);
-
-        while (userChoice < 1 || userChoice > 4) {
-            System.out.println("Invalid input, Please try again: ");
-            System.out.print(">>> ");
-            input = scanner.nextLine();
-            userChoice = input == null || !input.matches("[0-9]+") ? 0 : Integer.parseInt(input);
-        }
+        int userChoice = Integer.parseInt(Ult.validateInput(input, "[1-4]+"));
 
         System.out.println("********************************");
         if (userChoice == 1 || userChoice == 2) {

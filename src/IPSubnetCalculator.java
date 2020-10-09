@@ -34,7 +34,7 @@ public class IPSubnetCalculator {
         String input = scanner.nextLine().toUpperCase();
         String networkClass = !input.matches("[A-Z]+") ? "Unknown" : input; // what if they enter random string of letters
 
-        Map<Integer, String> subnetMasks = Ult.generateNetMasks();
+        Map<Integer, String> subnetMasks = Ult.generateNetMasks();      // make this class field? initialize using block???
         //Output table of subnet masks according to network class
         int trackColumn = 1;
         switch(networkClass) {

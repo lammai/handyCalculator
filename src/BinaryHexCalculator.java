@@ -21,7 +21,7 @@ public class BinaryHexCalculator {
 
     private void selectOperation() {
         System.out.printf("Select which %s operation to perform: \n", this.type.toString());
-        System.out.printf("1: %s Calculation\n", this.type.toString());
+        System.out.printf("1: %s calculation\n", this.type.toString());
         System.out.printf("2: %s to decimal\n", this.type.toString());
         System.out.printf("3: Decimal to %s\n", this.type.toString());
         System.out.print(">>> ");
@@ -40,8 +40,8 @@ public class BinaryHexCalculator {
             case 3 -> {
                 System.out.print("Input decimal: ");
                 String inp = scanner.nextLine();
-                double decimal = Double.parseDouble(Ult.validateInput(inp.substring(0, 15), "[-0-9]+"));
-                System.out.printf("%s value: %s\n", this.type.toString(), decimalToNumberSystem(decimal, this.base));
+                double decimal = Double.parseDouble(Ult.validateInput(inp.substring(0, 15), "[-0-9]+"));        // is it a good idea to only take 16 digits like calculator.net?
+                System.out.printf("%s value: %s\n", this.type.toString(), decimalToNumberSystem(decimal, this.base));   // can we do better?
             }
             default -> System.out.println("Error: " + choice);
         }
@@ -57,11 +57,8 @@ public class BinaryHexCalculator {
             calculation = Ult.validateInput(input, "[-+*/A-F0-9\\s]+");
         }
         String[] parseInp = Ult.splitCalculation(calculation);
-        String firstVar = parseInp[0];
-        String operator = parseInp[1];
-        String secondVar = parseInp[2];
 
-        while (operator.equals("unknown") || secondVar.equals("unknown")) {
+        while (parseInp[0] == null) {                                                  // How can we shorten this input validation?
             System.out.println("Please input valid calculation.");
             System.out.print(">>> ");
             input = scanner.nextLine().toUpperCase();
@@ -71,17 +68,18 @@ public class BinaryHexCalculator {
                 calculation = Ult.validateInput(input, "[-+*/A-F0-9\\s]+");
             }
             parseInp = Ult.splitCalculation(calculation);
-            firstVar = parseInp[0];
-            operator = parseInp[1];
-            secondVar = parseInp[2];
         }
+
+        String firstVar = parseInp[0];
+        String operator = parseInp[1];
+        String secondVar = parseInp[2];
 
         double firstDeci = numberSystemToDecimal(firstVar, this.base);
         double secondDeci = numberSystemToDecimal(secondVar, this.base);
         double resultDeci = 0;
         String resultBinary;
         switch (operator) {
-            case "+" -> resultDeci = firstDeci + secondDeci;
+            case "+" -> resultDeci = firstDeci + secondDeci;        // make methods out of these calculations so they can be unit tested
             case "-" -> resultDeci = firstDeci - secondDeci;
             case "*" -> resultDeci = firstDeci * secondDeci;
             case "/" -> resultDeci = firstDeci / secondDeci;
@@ -93,7 +91,7 @@ public class BinaryHexCalculator {
             double remainder = firstDeci % secondDeci;
             String binaryRemainder = decimalToNumberSystem(remainder, this.base);
             System.out.printf("%s result = %s    Remainder : %s\n", this.type.toString(), resultBinary, binaryRemainder);
-            System.out.printf("Decimal result = %.0f    Remainder : %.0f", resultDeci, remainder);
+            System.out.printf("Decimal result = %.0f    Remainder : %.0f", Math.floor(resultDeci), remainder);
         } else {
             System.out.printf("%s result = %s\n", this.type.toString(), resultBinary);
             System.out.printf("Decimal result = %.0f\n", resultDeci);
@@ -104,7 +102,7 @@ public class BinaryHexCalculator {
         double decimal = 0.0;
         int currentPow = num.length()-1;
         for (int i = 0; i < num.length(); i++, currentPow--) {
-            decimal += Character.getNumericValue(num.charAt(i)) * Ult.power(base, currentPow);
+            decimal += Character.getNumericValue(num.charAt(i)) * Math.pow(base, currentPow);
         }
         return decimal;
     }
@@ -116,7 +114,7 @@ public class BinaryHexCalculator {
             return "0";
 
         while (decimal != 0) {
-            double index = Ult.absolute(decimal) % base;
+            double index = Math.abs(decimal) % base;
             binary.insert(0,HEX_VALUES.charAt((int) index));
             decimal /= base;
         }

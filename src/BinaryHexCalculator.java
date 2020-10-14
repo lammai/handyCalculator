@@ -30,7 +30,41 @@ public class BinaryHexCalculator {
         int choice = Integer.parseInt(Ult.validateInput(input, "[1-3]+"));
 
         switch (choice) {
-            case 1 -> calculation();
+            case 1 -> {
+                System.out.printf("Input %s calculation: ", this.type.toString());
+                input = scanner.nextLine().toUpperCase();
+                String calculation;
+                if (this.type == NumberSystem.Binary) {
+                    calculation = Ult.validateInput(input, "[-+*/0-1\\s]+");
+                } else {
+                    calculation = Ult.validateInput(input, "[-+*/A-F0-9\\s]+");
+                }
+                String[] parseInp = Ult.splitCalculation(calculation);
+
+                while (parseInp[0] == null) {                                                  // How can we shorten this input validation?
+                    System.out.println("Please input valid calculation.");
+                    System.out.print(">>> ");
+                    input = scanner.nextLine().toUpperCase();
+                    if (this.type == NumberSystem.Binary) {
+                        calculation = Ult.validateInput(input, "[-+*/0-1\\s]+");
+                    } else {
+                        calculation = Ult.validateInput(input, "[-+*/A-F0-9\\s]+");
+                    }
+                    parseInp = Ult.splitCalculation(calculation);
+                }
+                String result = calculation(parseInp[0], parseInp[1], parseInp[2], this.base);
+                double resultDeci = numberSystemToDecimal(result, this.base);
+
+                if (parseInp[1].equals("/")) {
+                    double remainder = numberSystemToDecimal(parseInp[0], this.base) % numberSystemToDecimal(parseInp[2], this.base);
+                    String binaryRemainder = decimalToNumberSystem(remainder, base);
+                    System.out.printf("%s result = %s    Remainder : %s\n", this.type.toString(), result, binaryRemainder);
+                    System.out.printf("Decimal result = %.0f    Remainder : %.0f", Math.floor(resultDeci), remainder);
+                } else {
+                    System.out.printf("%s result = %s\n", this.type.toString(), result);
+                    System.out.printf("Decimal result = %.0f\n", resultDeci);
+                }
+            }
             case 2 -> {
                 System.out.printf("Input %s: ", this.type.toString());
                 String inp = scanner.nextLine().toUpperCase();
@@ -47,55 +81,18 @@ public class BinaryHexCalculator {
         }
     }
 
-    private void calculation() {    // uses lots of conversion (4 times), can we do both hex and binary calculations without converting???
-        System.out.printf("Input %s calculation: ", this.type.toString());
-        String input = scanner.nextLine().toUpperCase();
-        String calculation;
-        if (this.type == NumberSystem.Binary) {
-            calculation = Ult.validateInput(input, "[-+*/0-1\\s]+");
-        } else {
-            calculation = Ult.validateInput(input, "[-+*/A-F0-9\\s]+");
-        }
-        String[] parseInp = Ult.splitCalculation(calculation);
-
-        while (parseInp[0] == null) {                                                  // How can we shorten this input validation?
-            System.out.println("Please input valid calculation.");
-            System.out.print(">>> ");
-            input = scanner.nextLine().toUpperCase();
-            if (this.type == NumberSystem.Binary) {
-                calculation = Ult.validateInput(input, "[-+*/0-1\\s]+");
-            } else {
-                calculation = Ult.validateInput(input, "[-+*/A-F0-9\\s]+");
-            }
-            parseInp = Ult.splitCalculation(calculation);
-        }
-
-        String firstVar = parseInp[0];
-        String operator = parseInp[1];
-        String secondVar = parseInp[2];
-
-        double firstDeci = numberSystemToDecimal(firstVar, this.base);
-        double secondDeci = numberSystemToDecimal(secondVar, this.base);
+    public static String calculation(String var1, String op, String var2, int base) {    // uses lots of conversion (4 times), can we do both hex and binary calculations without converting???
+        double firstDeci = numberSystemToDecimal(var1, base);
+        double secondDeci = numberSystemToDecimal(var2, base);
         double resultDeci = 0;
-        String resultBinary;
-        switch (operator) {
-            case "+" -> resultDeci = firstDeci + secondDeci;        // make methods out of these calculations so they can be unit tested
+        switch (op) {
+            case "+" -> resultDeci = firstDeci + secondDeci;
             case "-" -> resultDeci = firstDeci - secondDeci;
             case "*" -> resultDeci = firstDeci * secondDeci;
             case "/" -> resultDeci = firstDeci / secondDeci;
-            default -> System.out.printf("Error: %f %s %f\n", firstDeci, operator, secondDeci);
+            default -> System.out.printf("Error: %f %s %f\n", firstDeci, op, secondDeci);
         }
-        resultBinary = decimalToNumberSystem(resultDeci, this.base);
-
-        if (operator.equals("/")) {
-            double remainder = firstDeci % secondDeci;
-            String binaryRemainder = decimalToNumberSystem(remainder, this.base);
-            System.out.printf("%s result = %s    Remainder : %s\n", this.type.toString(), resultBinary, binaryRemainder);
-            System.out.printf("Decimal result = %.0f    Remainder : %.0f", Math.floor(resultDeci), remainder);
-        } else {
-            System.out.printf("%s result = %s\n", this.type.toString(), resultBinary);
-            System.out.printf("Decimal result = %.0f\n", resultDeci);
-        }
+        return decimalToNumberSystem(resultDeci, base);
     }
 
     public static double numberSystemToDecimal(String num, int base) {

@@ -7,7 +7,7 @@ public class Ult {
     private Ult() {}
 
     public static String validateInput(String input, String regex) {
-        while (input == null || !input.matches(regex)) {
+        while (!isGoodInput(input, regex)) {
             System.out.println("Invalid input, please try again:");
             System.out.print(">>> ");
             input = scanner.nextLine();

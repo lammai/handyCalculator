@@ -41,6 +41,24 @@ public class Bandwidth {
                 if (!unit.equals(inpUnit))
                     System.out.println(dataSize*unitConvert(inpUnit, unit) + " " + unit);
             }
+        } else if (choice == 2) {
+            System.out.print("Input file size: ");
+            input = scanner.nextLine();
+            String fileSize = Ult.validateInput(input, "[0-9]+[\\s]?[KMGT]?B");
+
+            System.out.print("Input bandwidth: ");
+            input = scanner.nextLine();
+            String bandwidth = Ult.validateInput(input, "[0-9]+[\\s]??[KMGT]?bit/s");
+
+            // figure out fileSize unit and bandwidth unit
+            // Convert fileSize to bandwidth units
+            // fileSize / bandwidth (unit/second)
+            // Get unit/second to /minute or /hour accordingly
+
+        } else if (choice == 3) {
+
+        } else {
+
         }
     }
 

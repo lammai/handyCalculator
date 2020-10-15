@@ -14,21 +14,9 @@ public class Ult {
         }
         return input;
     }
-    public static String validateInput(String input, NumberSystem type) {
-        if (type == NumberSystem.Binary) {
-            while (input == null || !input.matches("[0-1]+")) {
-                System.out.println("The number need to contain 0 and 1 only.");
-                System.out.print(">>> ");
-                input = scanner.nextLine();
-            }
-        } else {
-            while (input == null || !input.matches("[A-F0-9]+")) {
-                System.out.println("The number need to contain 0-9 and A-F only.");
-                System.out.print(">>> ");
-                input = scanner.nextLine();
-            }
-        }
-        return input;
+
+    public static boolean isGoodInput(String input, String regex) {
+        return input != null && input.matches(regex);
     }
 
     public static String[] splitCalculation(String calculation) {

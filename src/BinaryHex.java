@@ -16,10 +16,10 @@ public class BinaryHex {
     }
 
     public void selectOperation() {
-        System.out.printf("Select which %s operation to perform: \n", this.type.toString());
-        System.out.printf("1: %s calculation\n", this.type.toString());
-        System.out.printf("2: %s to decimal\n", this.type.toString());
-        System.out.printf("3: Decimal to %s\n", this.type.toString());
+        System.out.printf("\n\n\033[1;4mSelect which %s operation to perform: \033[0m\n", this.type.toString());
+        System.out.printf("\033[91m1\033[0m: %s calculation\n", this.type.toString());
+        System.out.printf("\033[91m2\033[0m: %s to decimal\n", this.type.toString());
+        System.out.printf("\033[91m3\033[0m: Decimal to %s\n", this.type.toString());
         System.out.print(">>> ");
 
         String input = scanner.nextLine();
@@ -38,24 +38,15 @@ public class BinaryHex {
             String[] parseInp = InputHandler.splitCalculation(calculation);
 
             while (parseInp[0] == null) {         // How can we shorten this input validation?
-                System.out.println("Please input valid calculation.");
+                System.out.println("\033[31mPlease input valid calculation.\033[0m");
                 System.out.print(">>> ");
                 input = scanner.nextLine().toUpperCase();
                 calculation = InputHandler.validateInput(input, regex);
                 parseInp = InputHandler.splitCalculation(calculation);
             }
-            String result = calculation(parseInp[0], parseInp[1], parseInp[2], this.base);
-            double resultDeci = biHex2Decimal(result, this.base);
+            String[] print = calcToString(parseInp, this.type, this.base);
+            System.out.print("\033[96;1m"+print[0] + "\n" + print[1] + "\033[0m\n");
 
-            if (parseInp[1].equals("/")) {
-                double remainder = biHex2Decimal(parseInp[0], this.base) % biHex2Decimal(parseInp[2], this.base);
-                String numSysRemainder = decimal2BiHex(remainder, base);
-                System.out.printf("%s result = %s    Remainder : %s\n", this.type.toString(), result, numSysRemainder);
-                System.out.printf("Decimal result = %.0f    Remainder : %.0f", Math.floor(resultDeci), remainder);
-            } else {
-                System.out.printf("%s result = %s\n", this.type.toString(), result);
-                System.out.printf("Decimal result = %.0f\n", resultDeci);
-            }
         } else if (choice == 2) {
             System.out.printf("Input %s: ", this.type.toString());
             String inp = scanner.nextLine().toUpperCase();
@@ -64,13 +55,29 @@ public class BinaryHex {
                 num = InputHandler.validateInput(inp, "[0-1]+");
             else
                 num = InputHandler.validateInput(inp, "[A-F0-9]+");
-            System.out.printf("Decimal value: %.0f\n", biHex2Decimal(num, this.base));
+            System.out.printf("Decimal value: \033[96;1m%.0f\033[0m\n", biHex2Decimal(num, this.base));
         } else {
             System.out.print("Input decimal: ");
             String inp = scanner.nextLine();
             double decimal = Double.parseDouble(InputHandler.validateInput(inp, "[-0-9]+"));        // is it a good idea to only take 16 digits like calculator.net?
-            System.out.printf("%s value: %s\n", this.type.toString(), decimal2BiHex(decimal, this.base));   // can we do better?
+            System.out.printf("%s value: \033[96;1m%s\033[0m\n", this.type.toString(), decimal2BiHex(decimal, this.base));   // can we do better?
         }
+    }
+
+    public static String[] calcToString(String[] input, NumberSystem type, int base) {
+        String result = calculation(input[0], input[1], input[2], base);
+        double resultDeci = biHex2Decimal(result, base);
+        String[] out = new String[2];
+        if (input[1].equals("/")) {
+            double remainder = biHex2Decimal(input[0], base) % biHex2Decimal(input[2], base);
+            String numSysRemainder = decimal2BiHex(remainder, base);
+            out[0] = String.format("%s result = %s    Remainder : %s", type.toString(), result, numSysRemainder);
+            out[1] = String.format("Decimal result = %.0f    Remainder : %.0f", Math.floor(resultDeci), remainder);
+        } else {
+            out[0] = String.format("%s result = %s", type.toString(), result);
+            out[1] = String.format("Decimal result = %.0f", resultDeci);
+        }
+        return out;
     }
 
     public static String calculation(String var1, String op, String var2, int base) {    // uses lots of conversion (4 times), can we do both hex and binary calculations without converting???

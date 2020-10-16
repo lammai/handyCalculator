@@ -2,22 +2,30 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("**********Calculator**********");           // add more eye candy ascii
-        System.out.println("Please select from the following options: ");
-        System.out.println("1: Binary Calculator");
-        System.out.println("2: Hex Calculator");
-        System.out.println("3: Bandwidth Calculator");
-        System.out.println("4: Input data file");
-        System.out.print(">>> ");
-
+        System.out.println("\033[31m█▀▀ ▄▀█ █░░ █▀▀ █░█ █░░ ▄▀█ ▀█▀ █▀█ █▀█");           // add more eye candy ascii
+        System.out.println("\033[31m█▄▄ █▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █▄█ █▀▄\033[0m");
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        int userChoice = Integer.parseInt(InputHandler.validateInput(input, "[1-4]+"));
+        String input;
+        do {
+            System.out.println("\n\n\033[1;4mPlease select from the following options: \033[0m");
+            System.out.println("\033[91m1\033[0m: Binary Calculator");
+            System.out.println("\033[91m2\033[0m: Hex Calculator");
+            System.out.println("\033[91m3\033[0m: Bandwidth Calculator");
+            System.out.println("\033[91m4\033[0m: Input data file");
+            System.out.println("\033[91mq\033[0m: quit");
+            System.out.print(">>> ");
 
-        System.out.println("********************************");
-        if (userChoice == 1) new BinaryHex(NumberSystem.Binary);
-        else if (userChoice == 2) new BinaryHex(NumberSystem.Hex);
-        else if (userChoice == 3) new Bandwidth();
-        else InputHandler.fileIO();
+
+            input = scanner.nextLine();
+            String userChoice = InputHandler.validateInput(input, "[1-4q]");
+
+            System.out.println("******************************************");
+            switch (userChoice) {
+                case "1" -> new BinaryHex(NumberSystem.Binary);
+                case "2" -> new BinaryHex(NumberSystem.Hex);
+                case "3" -> new Bandwidth();
+                case "4" -> InputHandler.fileIO();
+            }
+        }while (!input.equals("q"));
     }
 }

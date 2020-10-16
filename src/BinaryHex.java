@@ -23,7 +23,7 @@ public class BinaryHex {
         System.out.print(">>> ");
 
         String input = scanner.nextLine();
-        int choice = Integer.parseInt(Ult.validateInput(input, "[1-3]+"));
+        int choice = Integer.parseInt(InputHandler.validateInput(input, "[1-3]+"));
 
         if (choice == 1) {
             System.out.printf("Input %s calculation: ", this.type.toString());
@@ -34,15 +34,15 @@ public class BinaryHex {
                 regex = "[-+*/0-1\\s]+";
             else
                 regex = "[-+*/A-F0-9\\s]+";
-            calculation = Ult.validateInput(input, regex);
-            String[] parseInp = Ult.splitCalculation(calculation);
+            calculation = InputHandler.validateInput(input, regex);
+            String[] parseInp = InputHandler.splitCalculation(calculation);
 
             while (parseInp[0] == null) {         // How can we shorten this input validation?
                 System.out.println("Please input valid calculation.");
                 System.out.print(">>> ");
                 input = scanner.nextLine().toUpperCase();
-                calculation = Ult.validateInput(input, regex);
-                parseInp = Ult.splitCalculation(calculation);
+                calculation = InputHandler.validateInput(input, regex);
+                parseInp = InputHandler.splitCalculation(calculation);
             }
             String result = calculation(parseInp[0], parseInp[1], parseInp[2], this.base);
             double resultDeci = biHex2Decimal(result, this.base);
@@ -61,14 +61,14 @@ public class BinaryHex {
             String inp = scanner.nextLine().toUpperCase();
             String num;
             if (this.type == NumberSystem.Binary)
-                num = Ult.validateInput(inp, "[0-1]+");
+                num = InputHandler.validateInput(inp, "[0-1]+");
             else
-                num = Ult.validateInput(inp, "[A-F0-9]+");
+                num = InputHandler.validateInput(inp, "[A-F0-9]+");
             System.out.printf("Decimal value: %.0f\n", biHex2Decimal(num, this.base));
         } else {
             System.out.print("Input decimal: ");
             String inp = scanner.nextLine();
-            double decimal = Double.parseDouble(Ult.validateInput(inp, "[-0-9]+"));        // is it a good idea to only take 16 digits like calculator.net?
+            double decimal = Double.parseDouble(InputHandler.validateInput(inp, "[-0-9]+"));        // is it a good idea to only take 16 digits like calculator.net?
             System.out.printf("%s value: %s\n", this.type.toString(), decimal2BiHex(decimal, this.base));   // can we do better?
         }
     }

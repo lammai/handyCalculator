@@ -14,6 +14,13 @@ public class Bandwidth {
                                 GIGABYTES_TO_BITS = 8e9,
                                 TERABYTES_TO_BITS = 8e12;
 
+    private static final double SECONDS_IN_YEAR = 3.15576e7,
+                                SECONDS_IN_MONTH = 2629800,
+                                SECONDS_IN_WEEK = 604800,
+                                SECONDS_IN_DAY = 86400,
+                                SECONDS_IN_HOUR = 3600,
+                                SECONDS_IN_MINUTE = 60;
+
     public Bandwidth() {
         selectOperation();
     }
@@ -27,12 +34,12 @@ public class Bandwidth {
         System.out.print(">>> ");
 
         String input = scanner.nextLine();
-        int choice = Integer.parseInt(Ult.validateInput(input, "[1-4]+"));
+        int choice = Integer.parseInt(InputHandler.validateInput(input, "[1-4]+"));
 
         if (choice == 1) {
             System.out.print("Input data size and unit(b-TB): ");
             input = scanner.nextLine().trim();
-            String validatedInput = Ult.validateInput(input, "[0-9]+[\\s]?[kmgtKMGT]?[bB]");
+            String validatedInput = InputHandler.validateInput(input, "[0-9]+[\\s]?[kmgtKMGT]?[bB]");
 
             double dataSize = Double.parseDouble(validatedInput.substring(0, validatedInput.length()-2));
             String inpUnit = validatedInput.substring(validatedInput.length()-2);
@@ -42,24 +49,77 @@ public class Bandwidth {
                     System.out.println(dataSize*unitConvert(inpUnit, unit) + " " + unit);
             }
         } else if (choice == 2) {
-            System.out.print("Input file size: ");
+            System.out.print("Input file size and unit(B-TB): ");
             input = scanner.nextLine();
-            String fileSize = Ult.validateInput(input, "[0-9]+[\\s]?[KMGT]?B");
+            String fileSize = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s]?[KMGT]?B");
 
-            System.out.print("Input bandwidth: ");
+            System.out.print("Input bandwidth and unit(bit/s - Tbit/s): ");
             input = scanner.nextLine();
-            String bandwidth = Ult.validateInput(input, "[0-9]+[\\s]??[KMGT]?bit/s");
+            String bandwidth = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s]?[KMGT]?bit/s");
 
-            // figure out fileSize unit and bandwidth unit
-            // Convert fileSize to bandwidth units
-            // fileSize / bandwidth (unit/second)
-            // Get unit/second to /minute or /hour accordingly
-
+            System.out.println(DownUpTime(fileSize, bandwidth));
         } else if (choice == 3) {
+            System.out.print("Input page views ([quantity] per [time unit]): ");
+            input = scanner.nextLine();
+            String pgViews = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s]per[\\s][a-zA-Z]+");
+
+            System.out.print("Input average page size ([quantity] [data unit]): ");
+            input = scanner.nextLine();
+            String pgSize = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s][KMGT]?B");
+
+            System.out.print("Input redundancy factor: ");
+            input = scanner.nextLine();
+            double redunFactor = Double.parseDouble(InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?"));
+
+            double[] needBW = webBandwidth(pgViews.toLowerCase(), pgSize);
+            System.out.printf("Actual bandwidth needed is %f Mbits/s or %f GB/month\n", needBW[0], needBW[1]);
+            System.out.printf("With redundancy factor of %.2f, the bandwidth needed is:\n%f Mbits/s or %f GB/month\n", redunFactor, redunFactor*needBW[0], redunFactor*needBW[1]);
 
         } else {
+            System.out.print("Input monthly usage ([quantity] [data unit(B-TB)]): ");
+            input = scanner.nextLine();
+            String usage = InputHandler.validateInput(input.toUpperCase(), "\\d+(?:\\.\\d+)?[\\s][KMGT]?B");
+            String[] usageToken = usage.split(" ");
 
+            System.out.print("Convert to? (bandwidth unit (bit/s to Tbit/s)): ");
+            input = scanner.nextLine();
+            String bUnit = InputHandler.validateInput(input, "[KMGT]?bit/s");
+            String unit = bUnit.substring(0, bUnit.lastIndexOf("b")+1).toLowerCase();
+            double usageAmount = Double.parseDouble(usageToken[0]);
+            String datUnit = usageToken[1];
+
+            System.out.printf("%.2f %s per month is equivalent to %f %s",usageAmount, datUnit, usageAmount*unitConvert(datUnit, unit)/SECONDS_IN_MONTH, bUnit);
         }
+    }
+
+    public static double[] webBandwidth(String pageViews, String pageSize) {
+        String[] pgViewsTokens = pageViews.split(" ");
+        String[] pgSizeToken = pageSize.split(" ");
+        double viewQuantity = Double.parseDouble(pgViewsTokens[0]);
+        double size = Double.parseDouble(pgSizeToken[0]);
+        String timeUnit = pgViewsTokens[2];
+        String sizeUnit = pgSizeToken[1];
+
+        double bandwidthMbits = (viewQuantity/timeConvert(timeUnit, "second")) * (size*unitConvert(sizeUnit, "mb"));
+        double bandwidthGB = (viewQuantity/timeConvert(timeUnit, "month")) * (size*unitConvert(sizeUnit, "GB"));
+
+        return new double[]{bandwidthMbits, bandwidthGB};
+    }
+
+    public static String DownUpTime(String fileSize, String bandwidth) {    // for file input of this, only take the first letter of the unit, lowercase, if its KMGT add b to it
+        double size = Double.parseDouble(fileSize.substring(0, fileSize.length()-2));   // we cant make this assumption that unit is only 2 letter (kb, mb) data input unit will be in Bytes, Kilobytes...
+        int lastIndex = bandwidth.matches("\\d+(?:\\.\\d+)?[\\s]?[KMGT]bit/s") ? bandwidth.lastIndexOf("b") - 1 : bandwidth.lastIndexOf("b");
+        double sizeBW = Double.parseDouble(bandwidth.substring(0, lastIndex));
+        String unit = fileSize.substring(fileSize.length()-2);
+        String unitBW = bandwidth.substring(lastIndex, lastIndex+2).toLowerCase();
+
+        double unitPerSecond =  size * unitConvert(unit, unitBW) / sizeBW;
+        double days = unitPerSecond / SECONDS_IN_DAY,
+                hours = (unitPerSecond % SECONDS_IN_DAY)/SECONDS_IN_HOUR,
+                minutes = (unitPerSecond % SECONDS_IN_HOUR)/SECONDS_IN_MINUTE,
+                seconds = (unitPerSecond % SECONDS_IN_MINUTE);
+
+        return String.format("%.0f d : %.0f h : %.0f m : %.0f s", days, hours, minutes, seconds);
     }
 
     public static double unitConvert(String from, String to) {
@@ -84,6 +144,26 @@ public class Bandwidth {
             case "MB" -> MEGABYTES_TO_BITS;
             case "GB" -> GIGABYTES_TO_BITS;
             case "TB" -> TERABYTES_TO_BITS;
+            default -> 1;
+        };
+    }
+
+    public static double timeConvert(String from, String to) {
+        return switch(from) {
+            case "year" -> SECONDS_IN_YEAR;
+            case "month" -> SECONDS_IN_MONTH;
+            case "week" -> SECONDS_IN_WEEK;
+            case "day" -> SECONDS_IN_DAY;
+            case "hour" -> SECONDS_IN_HOUR;
+            case "minute" -> SECONDS_IN_MINUTE;
+            default -> 1;
+        } / switch (to) {
+            case "year" -> SECONDS_IN_YEAR;
+            case "month" -> SECONDS_IN_MONTH;
+            case "week" -> SECONDS_IN_WEEK;
+            case "day" -> SECONDS_IN_DAY;
+            case "hour" -> SECONDS_IN_HOUR;
+            case "minute" -> SECONDS_IN_MINUTE;
             default -> 1;
         };
     }

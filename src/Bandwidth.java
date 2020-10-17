@@ -63,7 +63,7 @@ public class Bandwidth {
             input = scanner.nextLine();
             String pgViews = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s]per[\\s][a-zA-Z]+");
 
-            System.out.print("Input average page size ([quantity] [data unit]): ");
+            System.out.print("Input average page size ([quantity] [data unit(B - TB)]): ");
             input = scanner.nextLine();
             String pgSize = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s][KMGT]?B");
 
@@ -76,7 +76,7 @@ public class Bandwidth {
             System.out.printf("With redundancy factor of \033[96;1m%.2f\033[0m, the bandwidth needed is: \033[96;1m%f Mbits/s\033[0m or \033[96;1m%f GB/month\033[0m\n", redunFactor, redunFactor*needBW[0], redunFactor*needBW[1]);
 
         } else {
-            System.out.print("Input monthly usage ([quantity] [data unit(B-TB)]): ");
+            System.out.print("Input monthly usage ([quantity] [data unit(B - TB)]): ");
             input = scanner.nextLine();
             String usage = InputHandler.validateInput(input.toUpperCase(), "\\d+(?:\\.\\d+)?[\\s][KMGT]?B");
             String[] usageToken = usage.split(" ");

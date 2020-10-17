@@ -81,14 +81,14 @@ public class Bandwidth {
             String usage = InputHandler.validateInput(input.toUpperCase(), "\\d+(?:\\.\\d+)?[\\s][KMGT]?B");
             String[] usageToken = usage.split(" ");
 
-            System.out.print("Convert to? (bit/s - Tbit/s): ");
+            System.out.print("Convert to? [bandwidth unit](bit/s - Tbit/s): ");
             input = scanner.nextLine();
             String bUnit = InputHandler.validateInput(input, "[KMGT]?bit/s");
             String unit = bUnit.substring(0, bUnit.lastIndexOf("b")+1).toLowerCase();
             double usageAmount = Double.parseDouble(usageToken[0]);
             String datUnit = usageToken[1];
 
-            System.out.printf("\033[96;1m%.2f %s per month\033[0m is equivalent to \033[96;1m%f %s\033[0m",usageAmount, datUnit, usageAmount*unitConvert(datUnit, unit)/SECONDS_IN_MONTH, bUnit);
+            System.out.printf("\033[96;1m%.2f %s per month\033[0m is equivalent to \033[96;1m%f %s\033[0m\n",usageAmount, datUnit, usageAmount*unitConvert(datUnit, unit)/SECONDS_IN_MONTH, bUnit);
         }
     }
 

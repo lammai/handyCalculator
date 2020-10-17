@@ -26,7 +26,7 @@ public class BinaryHex {
         int choice = Integer.parseInt(InputHandler.validateInput(input, "[1-3]+"));
 
         if (choice == 1) {
-            System.out.printf("Input %s calculation: ", this.type.toString());
+            System.out.printf("Input %s calculation [var1] [operator] [var2]: ", this.type.toString());
             input = scanner.nextLine().toUpperCase();
             String calculation;
             String regex;

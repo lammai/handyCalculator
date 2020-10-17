@@ -12,7 +12,7 @@ public class App {
         System.out.println("\033[91m2\033[0m: Hex Calculator");
         System.out.println("\033[91m3\033[0m: Bandwidth Calculator");
         System.out.println("\033[91m4\033[0m: Input data file");
-        System.out.println("\033[91mq\033[0m: quit");
+        System.out.println("\033[91mq\033[0m: Quit");
         do {
             System.out.print("\033[31;1;3mMain Menu Selection >>> \033[0m");
             input = scanner.nextLine();

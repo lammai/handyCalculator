@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * The BinaryHex class handle the conversions and calculations related to Binary and Hexadecimal numbers.
+ */
 public class BinaryHex {
 
     private static final String HEX_VALUES = "0123456789ABCDEF";
@@ -7,15 +10,20 @@ public class BinaryHex {
     private final NumberSystem type;
     private final int base;
 
-    public BinaryHex(NumberSystem aType) {     // implement a way to read calculations from text file
+    /**
+     * This constructor set the base value correspond to the type of number system
+     * and promt the user for the next set of inputs.
+     * @param aType Determine the type of numbers system.
+     */
+    public BinaryHex(NumberSystem aType) {
         this.type = aType;
-        if (this.type == NumberSystem.Binary) this.base = 2;               // computes and output results to a text file
+        if (this.type == NumberSystem.Binary) this.base = 2;
         else this.base = 16;
 
         selectOperation();
     }
 
-    public void selectOperation() {
+    private void selectOperation() {
         System.out.printf("\n\n\033[1;4mSelect which %s operation to perform: \033[0m\n", this.type.toString());
         System.out.printf("\033[91m1\033[0m: %s calculation\n", this.type.toString());
         System.out.printf("\033[91m2\033[0m: %s to decimal\n", this.type.toString());
@@ -25,7 +33,7 @@ public class BinaryHex {
         String input = scanner.nextLine();
         int choice = Integer.parseInt(InputHandler.validateInput(input, "[1-3]+"));
 
-        if (choice == 1) {
+        if (choice == 1) {      // Calculation
             System.out.printf("Input %s calculation [var1] [operator] [var2]: ", this.type.toString());
             input = scanner.nextLine().toUpperCase();
             String calculation;
@@ -37,7 +45,7 @@ public class BinaryHex {
             calculation = InputHandler.validateInput(input, regex);
             String[] parseInp = InputHandler.splitCalculation(calculation);
 
-            while (parseInp[0] == null) {         // How can we shorten this input validation?
+            while (parseInp[0] == null) {   // calculation input validation loop
                 System.out.println("\033[31mPlease input valid calculation.\033[0m");
                 System.out.print(">>> ");
                 input = scanner.nextLine().toUpperCase();
@@ -47,7 +55,7 @@ public class BinaryHex {
             String[] print = calcToString(parseInp, this.type, this.base);
             System.out.print("\033[96;1m"+print[0] + "\n" + print[1] + "\033[0m\n");
 
-        } else if (choice == 2) {
+        } else if (choice == 2) {   // Binary/Hex to Decimal conversions
             System.out.printf("Input %s: ", this.type.toString());
             String inp = scanner.nextLine().toUpperCase();
             String num;
@@ -56,7 +64,7 @@ public class BinaryHex {
             else
                 num = InputHandler.validateInput(inp, "[A-F0-9]+");
             System.out.printf("Decimal value: \033[96;1m%.0f\033[0m\n", biHex2Decimal(num, this.base));
-        } else {
+        } else {            // Decimal to Binary/Hex conversions
             System.out.print("Input decimal: ");
             String inp = scanner.nextLine();
             double decimal = Double.parseDouble(InputHandler.validateInput(inp, "[-0-9]+"));        // is it a good idea to only take 16 digits like calculator.net?
@@ -64,6 +72,13 @@ public class BinaryHex {
         }
     }
 
+    /**
+     * This method construct a readable string with the calculation results in order to display it nicely for the user.
+     * @param input The number variables and operator of a calculation.
+     * @param type The type of number system.
+     * @param base The base of number system.
+     * @return a string array for result in the number system and in decimal.
+     */
     public static String[] calcToString(String[] input, NumberSystem type, int base) {
         String result = calculation(input[0], input[1], input[2], base);
         double resultDeci = biHex2Decimal(result, base);
@@ -80,6 +95,15 @@ public class BinaryHex {
         return out;
     }
 
+    /**
+     * This method calculation and return the result for Binary or Hex. Featuring four basic operations:
+     * addition, subtraction, multiplication, division.
+     * @param var1 The first variable in the calculation.
+     * @param op The operator in the calculation.
+     * @param var2 The second variable in the calculation.
+     * @param base The base of the number system.
+     * @return The result of the calculation in Binary or Hex.
+     */
     public static String calculation(String var1, String op, String var2, int base) {    // uses lots of conversion (4 times), can we do both hex and binary calculations without converting???
         double firstDeci = biHex2Decimal(var1, base);
         double secondDeci = biHex2Decimal(var2, base);
@@ -94,6 +118,12 @@ public class BinaryHex {
         return decimal2BiHex(resultDeci, base);
     }
 
+    /**
+     * This method convert a Binary or Hex number into decimal.
+     * @param num The Binary or Hexadecimal number to be converted.
+     * @param base The base correspond to the number system.
+     * @return The converted decimal value.
+     */
     public static double biHex2Decimal(String num, int base) {
         double decimal = 0.0;
         int currentPow = num.length()-1;
@@ -103,6 +133,12 @@ public class BinaryHex {
         return decimal;
     }
 
+    /**
+     * This method convert a decimal number into Binary or Hex.
+     * @param decimalDouble The decimal number to be converted.
+     * @param base The base of the number system to be convert to.
+     * @return The Binary or Hex value.
+     */
     public static String decimal2BiHex(double decimalDouble, int base) {
         StringBuilder binary = new StringBuilder();
         long decimal = (long) decimalDouble;     // could this introduce overflow???

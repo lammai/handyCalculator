@@ -1,10 +1,20 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This test class compare the results of the BinaryHex class with correct answers according to
+ * the wrapper methods and Calculator.net.
+ */
 class BinaryHexTest {
 
+    /**
+     * Create three test cases to test for 0,
+     * one extreme case, and one case in between to test
+     * the Binary to decimal method. The results should match
+     * the wrapper class results.
+     */
     @Test
-    void testBinary2Decimal() {    // write better test classes
+    void testBinary2Decimal() {
         String input1 = "0";
         String input2 = "1110101010000010101001010110";
         String input3 = "1010110101100101010101100101010101011010110010110111100";
@@ -13,6 +23,12 @@ class BinaryHexTest {
         assertEquals(Long.toString(Long.parseLong(input3, 2)), (Long.toString((long) BinaryHex.biHex2Decimal(input3, 2))));
     }
 
+    /**
+     * Create three test cases to test for 0,
+     * one extreme case, and one case in between to test
+     * the Hex to decimal method. The results should match
+     * the wrapper class results.
+     */
     @Test
     void testHex2Decimal() {
         String input1 = "0";
@@ -24,6 +40,12 @@ class BinaryHexTest {
         assertEquals(Long.toString(Long.parseLong(input3, 16)), String.format("%.0f",BinaryHex.biHex2Decimal(input3, 16)));
     }
 
+    /**
+     * Create three test cases to test for 0,
+     * one extreme case, and one case in between to test
+     * the decimal to Binary and Hex method. The results should match
+     * the wrapper class results.
+     */
     @Test
     void testDecimalHex2Binary() {
         String input1 = "0";
@@ -38,6 +60,13 @@ class BinaryHexTest {
         assertEquals(Long.toHexString(Long.parseLong(input3)), BinaryHex.decimal2BiHex(Double.parseDouble(input3), 16).toLowerCase());
     }
 
+    /**
+     * Create 2 test cases to test
+     * the four basic calculations. The results
+     * should match the wrapper class results. For subtraction however,
+     * the result should match Calculator.net because the wrapper class doesn't provide
+     * correct result for subtraction.
+     */
     @Test
     void testCalculations() {
         String var1 = "1010110101100101010101100101";

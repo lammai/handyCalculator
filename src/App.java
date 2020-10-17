@@ -1,9 +1,24 @@
 import java.util.Scanner;
 
+/**
+ * This Calculator program support Binary and Hexadecimal conversions as well as basic calculations.
+ * It includes a Bandwidth calculator that features data unit conversions and other bandwidth related utilities.
+ * It also enable the user to get output of multiple calculations by providing a text file.
+ *
+ * @author Lam Mai
+ * @version 1.0
+ * @since 10-16-2020
+ */
 public class App {
+
+    /**
+     * The main method serves as the main menu for the calculator, direct the user's choice to the corresponding
+     * calculator.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
-        System.out.println("\033[31m█▀▀ ▄▀█ █░░ █▀▀ █░█ █░░ ▄▀█ ▀█▀ █▀█ █▀█");           // add more eye candy ascii
-        System.out.println("\033[31m█▄▄ █▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █▄█ █▀▄\033[0m");
+        System.out.println("\033[96m█▀▀ ▄▀█ █░░ █▀▀ █░█ █░░ ▄▀█ ▀█▀ █▀█ █▀█");           // add more eye candy ascii
+        System.out.println("\033[96m█▄▄ █▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █▄█ █▀▄\033[0m");
 
         Scanner scanner = new Scanner(System.in);
         String input;
@@ -18,7 +33,7 @@ public class App {
             input = scanner.nextLine();
             String userChoice = InputHandler.validateInput(input, "[1-4q]");
 
-            System.out.println("▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄");
+            System.out.println("\033[96m▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\033[0m");
             switch (userChoice) {
                 case "1" -> new BinaryHex(NumberSystem.Binary);
                 case "2" -> new BinaryHex(NumberSystem.Hex);

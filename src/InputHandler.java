@@ -3,12 +3,25 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * This class provides important methods to validate user inputs across the entire program.
+ * It handle the file input and output operation.
+ */
 public class InputHandler {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    private InputHandler() {}
+    /**
+     * Default empty constructor does nothing
+     */
+    public InputHandler() {}
 
+    /**
+     * This method ask the user to provide the correct input before moving on.
+     * @param input The input to be validated.
+     * @param regex The regular expression to match the input with.
+     * @return The validated input.
+     */
     public static String validateInput(String input, String regex) {
         while (!isGoodInput(input, regex)) {
             System.out.println("\033[31mInvalid\033[0m input, please try again:");
@@ -18,10 +31,21 @@ public class InputHandler {
         return input;
     }
 
+    /**
+     * This method determine if an input is correct or not.
+     * @param input The input to be check.
+     * @param regex The regular expression to match the input with.
+     * @return A truth value base on the given input.
+     */
     public static boolean isGoodInput(String input, String regex) {
         return input != null && input.matches(regex);
     }
 
+    /**
+     * This method split a calculation input into the correct token to be use by calculation methods.
+     * @param calculation The validated calculation input.
+     * @return An array of two variables and an operator.
+     */
     public static String[] splitCalculation(String calculation) {
         String[] calcNumbers = calculation.split("[-+*/]");
         String[] parseInp = new String[3];
@@ -32,22 +56,27 @@ public class InputHandler {
             parseInp[2] = calcNumbers[1].trim();
         }
 
-        System.out.println(parseInp[0] + " " + parseInp[1] + " " + parseInp[2]);    // For debugging
         return parseInp;
     }
 
-    public static void fileIO() {   // this works but how to make this better? and easier to look at lmao
+    /**
+     * This method handle the reading of the text file input and give an output will answers to the calculations
+     * in the same folder as the input file.
+     */
+    public static void fileIO() {
         System.out.print("Enter path of your file: ");
-        String path = scanner.nextLine();       // how to validate this?
+        String path = scanner.nextLine();
         try {
             File file = new File(path);
             String fileName;
             Scanner readFile = new Scanner(file);
             String outPath;
+            // Figure out the name of the input txt file.
             if (path.lastIndexOf("/") < 0 && path.lastIndexOf("\\") < 0) {
                 fileName = path.substring(0 ,path.lastIndexOf(".txt"));
                 outPath = fileName+"-output.txt";
             } else {
+                // Give the output the original input name with output.txt at the end
                 fileName = path.substring(1 + path.lastIndexOf("/") + path.lastIndexOf("\\"),path.lastIndexOf(".txt"));
                 int slashIndex = path.lastIndexOf("/") > 0 ? path.lastIndexOf("/")+1 : path.lastIndexOf("\\")+1;
                 outPath = path.substring(0, slashIndex)+fileName+"-output.txt";
@@ -80,6 +109,11 @@ public class InputHandler {
         }
     }
 
+    /**
+     * This method calculate and format the result nicely to be printed in the text file.
+     * @param input The tokenized line of the input.
+     * @return The formatted string that display the calculation result.
+     */
     private static String handleCalculate(String[] input) {
         String out;
         String[] calcRearrange = {input[3], input[2], input[4]};
@@ -108,6 +142,11 @@ public class InputHandler {
         return out;
     }
 
+    /**
+     * This method convert and format the conversion according to the corresponding operation.
+     * @param input The tokenized line of the input.
+     * @return The formatted string that display the conversion result.
+     */
     private static String handleConvert(String[] input) {
         String out;
         switch (input[1]) {

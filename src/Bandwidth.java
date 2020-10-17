@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * This Bandwidth class includes the necessary methods to handle four bandwidth related operations:
+ * Data unit conversion, Download/Upload time calculator, Website bandwidth calculator, Hosting bandwidth calculator.
+ */
 public class Bandwidth {
 
     private final Scanner scanner = new Scanner(System.in);
@@ -19,6 +23,9 @@ public class Bandwidth {
                                 SECONDS_IN_HOUR = 3600,
                                 SECONDS_IN_MINUTE = 60;
 
+    /**
+     * The constructor direct the user to give input for bandwidth calculations.
+     */
     public Bandwidth() {
         selectOperation();
     }
@@ -36,14 +43,14 @@ public class Bandwidth {
 
         if (choice == 1) {
             System.out.print("Input data size and unit(b-TB): ");
-            input = scanner.nextLine().trim();
+            input = scanner.nextLine().trim();                              //Using regular expression to validate input
             String validatedInput = InputHandler.validateInput(input, "[0-9]+[\\s]?[kmgtKMGT]?[bB]");
 
             double dataSize = Double.parseDouble(validatedInput.substring(0, validatedInput.length()-2));
             String inpUnit = validatedInput.substring(validatedInput.length()-2);
             System.out.printf("%s is equivalent to any of the following:\n", validatedInput);
             String[] units = {"b", "kb", "mb", "gb", "tb", "B", "KB", "MB", "GB", "TB"};
-            for (String unit : units) {
+            for (String unit : units) {         // Convert one data unit to every other data units.
                 if (!unit.equals(inpUnit))
                     System.out.printf("\033[96;1m%f %s\033[0m\n", dataSize*unitConvert(inpUnit, unit), unit);
             }
@@ -91,6 +98,13 @@ public class Bandwidth {
         }
     }
 
+    /**
+     * This method calculates the website bandwidth and return the result in
+     * Mbit/s and GB/month along with redundancy factor.
+     * @param pageViews The amount of page view for a certain time unit.
+     * @param pageSize The average page size.
+     * @return Gives an array of results both in Mbit/s and GB/month.
+     */
     public static double[] webBandwidth(String pageViews, String pageSize) {
         String[] pgViewsTokens = pageViews.split(" ");
         String[] pgSizeToken = pageSize.split(" ");
@@ -105,6 +119,12 @@ public class Bandwidth {
         return new double[]{bandwidthMbits, bandwidthGB};
     }
 
+    /**
+     * This method computes the download/upload time using the inputs.
+     * @param fileSize The file size with data unit.
+     * @param bandwidth The bandwidth size with data unit.
+     * @return a string of the estimated download/upload time needed in the format days:hours:minutes:seconds.
+     */
     public static String DownUpTime(String fileSize, String bandwidth) {    // for file input of this, only take the first letter of the unit, lowercase, if its KMGT add b to it
         double size = Double.parseDouble(fileSize.substring(0, fileSize.length()-2));   // we cant make this assumption that unit is only 2 letter (kb, mb) data input unit will be in Bytes, Kilobytes...
         int lastIndexBW = bandwidth.matches("\\d+(?:\\.\\d+)?[\\s]?[KMGT]bit/s") ? bandwidth.lastIndexOf("b") - 1 : bandwidth.lastIndexOf("b");
@@ -121,6 +141,12 @@ public class Bandwidth {
         return String.format("%.0f d : %.0f h : %.0f m : %.0f s", days, hours, minutes, seconds);
     }
 
+    /**
+     * This method give the factor of conversion from one data unit to the other.
+     * @param from The current data unit.
+     * @param to The data unit to be converted to.
+     * @return The factor of conversion.
+     */
     public static double unitConvert(String from, String to) {
         return switch (from) {
             case "kb" -> KILOBITS_TO_BITS;
@@ -147,6 +173,13 @@ public class Bandwidth {
         };
     }
 
+    /**
+     * This method is similar to unitConvert() in that it gives
+     * the factor of conversion from one time unit to another.
+     * @param from The current time unit.
+     * @param to The time unit to be converted to.
+     * @return The factor of conversion.
+     */
     public static double timeConvert(String from, String to) {
         return switch(from) {
             case "year" -> SECONDS_IN_YEAR;

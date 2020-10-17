@@ -4,9 +4,10 @@ public class App {
     public static void main(String[] args) {
         System.out.println("\033[31m█▀▀ ▄▀█ █░░ █▀▀ █░█ █░░ ▄▀█ ▀█▀ █▀█ █▀█");           // add more eye candy ascii
         System.out.println("\033[31m█▄▄ █▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █▄█ █▀▄\033[0m");
+
         Scanner scanner = new Scanner(System.in);
         String input;
-        System.out.println("\n\n\033[1;4mPlease select from the following options: \033[0m");
+        System.out.println("\033[1;4mPlease select from the following options: \033[0m");
         System.out.println("\033[91m1\033[0m: Binary Calculator");
         System.out.println("\033[91m2\033[0m: Hex Calculator");
         System.out.println("\033[91m3\033[0m: Bandwidth Calculator");

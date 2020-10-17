@@ -1,9 +1,8 @@
 import java.util.Scanner;
 
 public class Bandwidth {
-    private final Scanner scanner = new Scanner(System.in);
-    private static final String[] units = {"b", "kb", "mb", "gb", "tb", "B", "KB", "MB", "GB", "TB"};
 
+    private final Scanner scanner = new Scanner(System.in);
     private static final double KILOBITS_TO_BITS = 1e3,
                                 MEGABITS_TO_BITS = 1e6,
                                 GIGABITS_TO_BITS = 1e9,
@@ -13,7 +12,6 @@ public class Bandwidth {
                                 MEGABYTES_TO_BITS = 8e6,
                                 GIGABYTES_TO_BITS = 8e9,
                                 TERABYTES_TO_BITS = 8e12;
-
     private static final double SECONDS_IN_YEAR = 3.15576e7,
                                 SECONDS_IN_MONTH = 2629800,
                                 SECONDS_IN_WEEK = 604800,
@@ -44,6 +42,7 @@ public class Bandwidth {
             double dataSize = Double.parseDouble(validatedInput.substring(0, validatedInput.length()-2));
             String inpUnit = validatedInput.substring(validatedInput.length()-2);
             System.out.printf("%s is equivalent to any of the following:\n", validatedInput);
+            String[] units = {"b", "kb", "mb", "gb", "tb", "B", "KB", "MB", "GB", "TB"};
             for (String unit : units) {
                 if (!unit.equals(inpUnit))
                     System.out.printf("\033[96;1m%f %s\033[0m\n", dataSize*unitConvert(inpUnit, unit), unit);

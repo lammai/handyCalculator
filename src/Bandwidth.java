@@ -41,7 +41,7 @@ public class Bandwidth {
         String input = scanner.nextLine();
         int choice = Integer.parseInt(InputHandler.validateInput(input, "[1-4]+"));
 
-        if (choice == 1) {
+        if (choice == 1) {  // Data Unit conversion
             System.out.print("Input data size and unit(b-TB): ");
             input = scanner.nextLine().trim();                              //Using regular expression to validate input
             String validatedInput = InputHandler.validateInput(input, "[0-9]+[\\s]?[kmgtKMGT]?[bB]");
@@ -54,7 +54,7 @@ public class Bandwidth {
                 if (!unit.equals(inpUnit))
                     System.out.printf("\033[96;1m%f %s\033[0m\n", dataSize*unitConvert(inpUnit, unit), unit);
             }
-        } else if (choice == 2) {
+        } else if (choice == 2) {   // Download/Upload Time
             System.out.print("Input file size and unit(B-TB): ");
             input = scanner.nextLine();
             String fileSize = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s]?[KMGT]?B");
@@ -64,7 +64,7 @@ public class Bandwidth {
             String bandwidth = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s]?[KMGT]?bit/s");
 
             System.out.println("\033[96;1m"+DownUpTime(fileSize, bandwidth)+"\033[0m");
-        } else if (choice == 3) {
+        } else if (choice == 3) {   // Website Bandwidth
             System.out.print("Input page views ([quantity] per [time unit]): ");
             input = scanner.nextLine();
             String pgViews = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s]per[\\s][a-zA-Z]+");
@@ -79,22 +79,43 @@ public class Bandwidth {
 
             double[] needBW = webBandwidth(pgViews.toLowerCase(), pgSize);
             System.out.printf("Actual bandwidth needed is \033[96;1m%f Mbits/s\033[0m or \033[96;1m%f GB/month\033[0m\n", needBW[0], needBW[1]);
-            System.out.printf("With redundancy factor of \033[96;1m%.2f\033[0m, the bandwidth needed is: \033[96;1m%f Mbits/s\033[0m or \033[96;1m%f GB/month\033[0m\n", redunFactor, redunFactor*needBW[0], redunFactor*needBW[1]);
+            System.out.printf("With redundancy factor of \033[96;1m%.2f\033[0m, the bandwidth needed is: \033[96;1m%f Mbits/s\033[0m or \033[96;1m%f GB/month\033[0m\n",
+                    redunFactor, redunFactor*needBW[0], redunFactor*needBW[1]);
 
-        } else {
-            System.out.print("Input monthly usage ([quantity] [data unit(B - TB)]): ");
+        } else {    // Hosting Bandwidth
+            String monthlyUnit = "[data unit(B - TB)]";
+            String bandUnit = "[bandwidth unit(bit/s - Tbit/s)]";                   // Implemented the ability to determine:
+            System.out.printf("Input monthly usage ([quantity] %s)\n",monthlyUnit); // If the user entered B-TB, then they want to convert Monthly usage to Bandwidth
+            System.out.printf("OR Input bandwidth  ([quantity] %s)\n",bandUnit);    // If the user entered bit/s to Tbit/s, then convert Bandwidth to Monthly usage
+            System.out.print(">>> ");
             input = scanner.nextLine();
-            String usage = InputHandler.validateInput(input.toUpperCase(), "\\d+(?:\\.\\d+)?[\\s][KMGT]?B");
+            String usage;
+            String convertTo;
+            if (input.matches("\\d+(?:\\.\\d+)?[\\s][KMGT]?B")) {       // Using regex to determine B-TB
+                usage = InputHandler.validateInput(input.toUpperCase(), "\\d+(?:\\.\\d+)?[\\s][KMGT]?B");
+                convertTo = bandUnit;
+            } else {
+                usage = InputHandler.validateInput(input, "\\d+(?:\\.\\d+)?[\\s][KMGT]?bit/s");
+                usage = usage.substring(0, usage.lastIndexOf("b")+1).toLowerCase();
+                convertTo = monthlyUnit;
+            }
             String[] usageToken = usage.split(" ");
 
-            System.out.print("Convert to? [bandwidth unit](bit/s - Tbit/s): ");
+            System.out.printf("Convert to? %s: ", convertTo);
             input = scanner.nextLine();
-            String bUnit = InputHandler.validateInput(input, "[KMGT]?bit/s");
-            String unit = bUnit.substring(0, bUnit.lastIndexOf("b")+1).toLowerCase();
-            double usageAmount = Double.parseDouble(usageToken[0]);
-            String datUnit = usageToken[1];
+            String unit = input.matches("[KMGT]?B") ?              // If input is in B-TB validate that
+                    InputHandler.validateInput(input, "[KMGT]?B") :// else validate bit/s to Tbit/s and convert it to b-tb.
+                    InputHandler.validateInput(input, "[KMGT]?bit/s").substring(0, input.lastIndexOf("b")+1).toLowerCase();
 
-            System.out.printf("\033[96;1m%.2f %s per month\033[0m is equivalent to \033[96;1m%f %s\033[0m\n",usageAmount, datUnit, usageAmount*unitConvert(datUnit, unit)/SECONDS_IN_MONTH, bUnit);
+            double usageAmount = Double.parseDouble(usageToken[0]);
+            String usageUnit = usageToken[1];
+            if (unit.matches("[KMGT]?B")) {     // Print the result along with unit accordingly
+                System.out.printf("\033[96;1m%.2f %s per second\033[0m is equivalent to \033[96;1m%f %s per month\033[0m\n",
+                        usageAmount, usageUnit, usageAmount*unitConvert(usageUnit, unit)*SECONDS_IN_MONTH, unit);
+            } else {
+                System.out.printf("\033[96;1m%.2f %s per month\033[0m is equivalent to \033[96;1m%f %s per second\033[0m\n",
+                        usageAmount, usageUnit, usageAmount*unitConvert(usageUnit, unit)/SECONDS_IN_MONTH, unit);
+            }
         }
     }
 
@@ -125,8 +146,8 @@ public class Bandwidth {
      * @param bandwidth The bandwidth size with data unit.
      * @return a string of the estimated download/upload time needed in the format days:hours:minutes:seconds.
      */
-    public static String DownUpTime(String fileSize, String bandwidth) {    // for file input of this, only take the first letter of the unit, lowercase, if its KMGT add b to it
-        double size = Double.parseDouble(fileSize.substring(0, fileSize.length()-2));   // we cant make this assumption that unit is only 2 letter (kb, mb) data input unit will be in Bytes, Kilobytes...
+    public static String DownUpTime(String fileSize, String bandwidth) {
+        double size = Double.parseDouble(fileSize.substring(0, fileSize.length()-2));
         int lastIndexBW = bandwidth.matches("\\d+(?:\\.\\d+)?[\\s]?[KMGT]bit/s") ? bandwidth.lastIndexOf("b") - 1 : bandwidth.lastIndexOf("b");
         double sizeBW = Double.parseDouble(bandwidth.substring(0, lastIndexBW));
         String unit = fileSize.substring(fileSize.length()-2);

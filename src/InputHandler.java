@@ -99,7 +99,7 @@ public class InputHandler {
                         out = handleConvert(lineArray);
                         printOutput.printf("%-69s>>> %s", line, out);
                     }
-                    default -> printOutput.printf("%s      (#_#) Error, invalid input.\n", line);   // if first word not Calculate or convert print error
+                    default -> printOutput.printf("%s      (#_#) Error, invalid input.\n", line);   // if first word not Calculate or Convert print error
                 }
             }
             System.out.println("\033[96;1mOutput generated successfully.\033[0m");
@@ -159,7 +159,7 @@ public class InputHandler {
                 out = String.format("%s value: %s\n", input[3], BinaryHex.decimal2BiHex(Double.parseDouble(input[4]), base));
             }
             case "Data" -> {
-                double data = Double.parseDouble(input[5]); // always b or bit
+                double data = Double.parseDouble(input[5]);
                 String convertToUnit;
                 if (input[4].substring(0, 1).matches("[KMGT]")) convertToUnit = input[4].charAt(0) + "B";
                 else if (input[4].substring(0, 1).matches("[kmgt]")) convertToUnit = input[4].charAt(0) + "b";
@@ -167,11 +167,15 @@ public class InputHandler {
                 out = String.format("%s bits is equivalent to %f %s\n", input[5], data*Bandwidth.unitConvert("b", convertToUnit), convertToUnit);
             }
             case "Monthly" -> {
-                double usageAmount = Double.parseDouble(input[5]);
-                String usageUnit = input[6].substring(0, 1).matches("[KMGT]") ? input[6].charAt(0) + "B" : "B";
-                String bwUnit = input[8];
-                out = String.format("%.2f %s per month is equivalent to %f %s\n", usageAmount, usageUnit,
-                        usageAmount*Bandwidth.unitConvert(usageUnit, input[8].substring(0, input[8].lastIndexOf("b")+1).toLowerCase())/2629800, bwUnit);
+                double usageAmountMonth = Double.parseDouble(input[5]);
+                String usageUnitMonth = input[6].substring(0, 1).matches("[KMGT]") ? input[6].charAt(0) + "B" : "B";
+                double usageAmountBand = Double.parseDouble(input[7]);
+                String bwUnit = input[8].substring(0, input[8].lastIndexOf("b")+1).toLowerCase();
+                String month2Sec = String.format("%.2f %s per month is equivalent to %f %s per second",
+                        usageAmountMonth, usageUnitMonth, usageAmountMonth*Bandwidth.unitConvert(usageUnitMonth, bwUnit)/2629800, bwUnit);
+                String sec2Month = String.format("%.2f %s per second is equivalent to %f %s per month", usageAmountBand, bwUnit,
+                        usageAmountBand*Bandwidth.unitConvert(bwUnit, usageUnitMonth)*2629800, usageUnitMonth);
+                out = String.format("%-60s    |   %s\n", month2Sec, sec2Month);
             }
             default -> out = "Error, invalid input.\n";
         }

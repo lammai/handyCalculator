@@ -30,7 +30,7 @@ public class BinaryHex {
         System.out.printf("\033[91m3\033[0m: Decimal to %s\n", this.type.toString());
         System.out.print(">>> ");
 
-        String input = scanner.nextLine();
+        String input = scanner.nextLine();  // Regular expressions are use across the program to validate input.
         int choice = Integer.parseInt(InputHandler.validateInput(input, "[1-3]+"));
 
         if (choice == 1) {      // Calculation
@@ -67,8 +67,8 @@ public class BinaryHex {
         } else {            // Decimal to Binary/Hex conversions
             System.out.print("Input decimal: ");
             String inp = scanner.nextLine();
-            double decimal = Double.parseDouble(InputHandler.validateInput(inp, "[-0-9]+"));        // is it a good idea to only take 16 digits like calculator.net?
-            System.out.printf("%s value: \033[96;1m%s\033[0m\n", this.type.toString(), decimal2BiHex(decimal, this.base));   // can we do better?
+            String decimal = InputHandler.validateInput(inp, "[-]?[0-9]+");
+            System.out.printf("%s value: \033[96;1m%s\033[0m\n", this.type.toString(), decimal2BiHex(Double.parseDouble(decimal), this.base));
         }
     }
 
@@ -104,7 +104,7 @@ public class BinaryHex {
      * @param base The base of the number system.
      * @return The result of the calculation in Binary or Hex.
      */
-    public static String calculation(String var1, String op, String var2, int base) {    // uses lots of conversion (4 times), can we do both hex and binary calculations without converting???
+    public static String calculation(String var1, String op, String var2, int base) {
         double firstDeci = biHex2Decimal(var1, base);
         double secondDeci = biHex2Decimal(var2, base);
         double resultDeci = 0;
@@ -141,7 +141,7 @@ public class BinaryHex {
      */
     public static String decimal2BiHex(double decimalDouble, int base) {
         StringBuilder binary = new StringBuilder();
-        long decimal = (long) decimalDouble;     // could this introduce overflow???
+        long decimal = (long)decimalDouble;
         if (decimal == 0)
             return "0";
 

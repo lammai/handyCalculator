@@ -17,7 +17,7 @@ public class App {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        System.out.println("\033[96m█▀▀ ▄▀█ █░░ █▀▀ █░█ █░░ ▄▀█ ▀█▀ █▀█ █▀█");           // add more eye candy ascii
+        System.out.println("\033[96m█▀▀ ▄▀█ █░░ █▀▀ █░█ █░░ ▄▀█ ▀█▀ █▀█ █▀█");
         System.out.println("\033[96m█▄▄ █▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █▄█ █▀▄\033[0m");
 
         Scanner scanner = new Scanner(System.in);

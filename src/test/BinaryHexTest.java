@@ -47,10 +47,10 @@ class BinaryHexTest {
      * the wrapper class results.
      */
     @Test
-    void testDecimalHex2Binary() {
+    void testDecimal2HexBinary() {
         String input1 = "0";
         String input2 = "9932822334";
-        String input3 = "2147483647214748";
+        String input3 = "9223372036854775807";
 
         assertEquals(Long.toBinaryString(Long.parseLong(input1)), BinaryHex.decimal2BiHex(Double.parseDouble(input1), 2));
         assertEquals(Long.toBinaryString(Long.parseLong(input2)), BinaryHex.decimal2BiHex(Double.parseDouble(input2), 2));

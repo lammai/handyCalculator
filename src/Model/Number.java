@@ -1,6 +1,6 @@
 package Model;
 
-public abstract class Number<T extends Number> {
+public abstract class Number<T extends Number<?>> {
     private String value;
     private int base;
 
@@ -17,9 +17,13 @@ public abstract class Number<T extends Number> {
                 '}';
     }
 
-    public abstract boolean equals(T oNum);
+    public boolean equals(T oNum) {
+        return this.getValue().equals(oNum.getValue());
+    }
 
-    public abstract int compareTo(T oNum);
+    public int compareTo(T oNum) {
+        return this.getValue().compareTo(oNum.getValue());
+    }
 
     public String getValue() {
         return value;

@@ -7,14 +7,4 @@ public class Binary extends Number<Binary> {
     public Binary(String aValue) {
         super(aValue, base);
     }
-
-    @Override
-    public boolean equals(Binary oNum) {
-        return this.getValue().equals(oNum.getValue());
-    }
-
-    @Override
-    public int compareTo(Binary oNum) {
-        return this.getValue().compareTo(oNum.getValue());
-    }
 }

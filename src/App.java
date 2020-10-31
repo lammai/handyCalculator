@@ -137,28 +137,39 @@ public class App {
         HostingBandwidthCalculator hos2 = new HostingBandwidthCalculator(new Decimal("1000"), RateUnit.Rate.GIGABIT_PER_SECOND, SizeUnit.Size.KILOBYTES);
         String resultHos2 = hos2.convert();
         System.out.println(resultHos2);
+        System.out.println();
+
+        Binary testBin = new Binary("10101011");
+        System.out.println(testBin.toString());
+        String inp = "10101";
+        performCalculation(testBin, "+", inp);
+        System.out.println(testBin.toString());
 
 
-//        Scanner scanner = new Scanner(System.in);
-//        String input;
-//        System.out.println("\033[1;4mPlease select from the following options: \033[0m");
-//        System.out.println("\033[91m1\033[0m: Binary Calculator");
-//        System.out.println("\033[91m2\033[0m: Hex Calculator");
-//        System.out.println("\033[91m3\033[0m: Bandwidth Calculator");
-//        System.out.println("\033[91m4\033[0m: Input data file");
-//        System.out.println("\033[91mq\033[0m: Quit");
-//        do {
-//            System.out.print("\033[31;1;3mMain Menu Selection >>> \033[0m");
-//            input = scanner.nextLine();
-//            String userChoice = InputHandler.validateInput(input, "[1-4q]");
-//
-//            System.out.println("\033[96m▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\033[0m");
-//            switch (userChoice) {
-//                case "1" -> new BinaryHex(NumberSystem.Binary);
-//                case "2" -> new BinaryHex(NumberSystem.Hex);
-//                case "3" -> new Bandwidth();
-//                case "4" -> InputHandler.fileIO();
-//            }
-//        }while (!input.equals("q"));
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        System.out.println("\033[1;4mPlease select from the following options: \033[0m");
+        System.out.println("\033[91m1\033[0m: Binary Calculator");
+        System.out.println("\033[91m2\033[0m: Hex Calculator");
+        System.out.println("\033[91m3\033[0m: Bandwidth Calculator");
+        System.out.println("\033[91m4\033[0m: Input data file");
+        System.out.println("\033[91mq\033[0m: Quit");
+        do {
+            System.out.print("\033[31;1;3mMain Menu Selection >>> \033[0m");
+            input = scanner.nextLine();
+            String userChoice = InputHandler.validateInput(input, "[1-4q]");
+
+            System.out.println("\033[96m▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\033[0m");
+            switch (userChoice) {
+                case "1" -> new BinaryHex(NumberSystem.Binary);
+                case "2" -> new BinaryHex(NumberSystem.Hex);
+                case "3" -> new Bandwidth();
+                case "4" -> InputHandler.fileIO();
+            }
+        }while (!input.equals("q"));
+    }
+
+    public static void performCalculation(Binary bin, String op, String var2) {
+        new BinaryCalculator(bin).add(new Binary(var2));
     }
 }

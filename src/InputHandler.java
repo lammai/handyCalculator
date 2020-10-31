@@ -127,14 +127,16 @@ public class InputHandler {
                 out = String.format("%-34s    |   %s\n", result[0], result[1]);
             }
             case "Download/Upload" -> {
-                String fileSize = input[4].substring(0, 1).matches("[KMGT]") ? input[3] + " " + input[4].charAt(0) + "B" : input[3] + " B";
+                String fileSize = input[4].substring(0, 1).matches("[KMGT]") ?
+                        input[3] + " " + input[4].charAt(0) + "B" : input[3] + " B";
                 out = Bandwidth.DownUpTime(fileSize, input[5] + input[6]) + "\n";
             }
             case "Website" -> {
                 double[] webBW = Bandwidth.webBandwidth(input[3] + " " + input[4] + " " + input[5],
                         input[7].substring(0, 1).matches("[KMGT]") ? input[6] + " " + input[7].charAt(0) + "B" : input[6] + " B");
                 String firstPart = String.format("Bandwidth needed: %f Mbits/s or %f GB/month",webBW[0], webBW[1]);
-                String secondPart = String.format("With redundancy of %s: %f Mbits/s or %f GB/month",input[8], webBW[0] * Double.parseDouble(input[8]), webBW[1] * Double.parseDouble(input[8]));
+                String secondPart = String.format("With redundancy of %s: %f Mbits/s or %f GB/month",input[8], webBW[0]
+                        * Double.parseDouble(input[8]), webBW[1] * Double.parseDouble(input[8]));
                 out = String.format("%-70s    |   %s\n", firstPart, secondPart);
             }
             default -> out = "Error, invalid input.\n";

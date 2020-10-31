@@ -26,4 +26,8 @@ public class TimeUnit extends Unit<TimeUnit.Time> {
     public double getUnitInSecs() {
         return ((Time) this.getUnit()).toSeconds;
     }
+
+    public static double timeConvert(Time from, Time to) {
+        return from.toSeconds/to.toSeconds;
+    }
 }

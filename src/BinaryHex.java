@@ -127,6 +127,7 @@ public class BinaryHex {
     public static double biHex2Decimal(String num, int base) {
         double decimal = 0.0;
         int currentPow = num.length()-1;
+        System.out.println(base);
         for (int i = 0; i < num.length(); i++, currentPow--) {
             decimal += Character.getNumericValue(num.charAt(i)) * Math.pow(base, currentPow);
         }

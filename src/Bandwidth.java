@@ -148,7 +148,8 @@ public class Bandwidth {
      */
     public static String DownUpTime(String fileSize, String bandwidth) {
         double size = Double.parseDouble(fileSize.substring(0, fileSize.length()-2));
-        int lastIndexBW = bandwidth.matches("\\d+(?:\\.\\d+)?[\\s]?[KMGT]bit/s") ? bandwidth.lastIndexOf("b") - 1 : bandwidth.lastIndexOf("b");
+        int lastIndexBW = bandwidth.matches("\\d+(?:\\.\\d+)?[\\s]?[KMGT]bit/s") ?
+                bandwidth.lastIndexOf("b") - 1 : bandwidth.lastIndexOf("b");
         double sizeBW = Double.parseDouble(bandwidth.substring(0, lastIndexBW));
         String unit = fileSize.substring(fileSize.length()-2);
         String unitBW = bandwidth.substring(lastIndexBW, lastIndexBW+2).toLowerCase();

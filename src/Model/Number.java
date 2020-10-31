@@ -2,7 +2,7 @@ package Model;
 
 public abstract class Number<T extends Number<?>> {
     private String value;
-    private int base;
+    private final int base;
 
     public Number(String aValue, int aBase) {
         this.value = aValue;
@@ -27,6 +27,10 @@ public abstract class Number<T extends Number<?>> {
 
     public String getValue() {
         return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public int getBase() {

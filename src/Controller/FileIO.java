@@ -56,11 +56,12 @@ public class FileIO {
         switch (input[1]) {
             case "Binary" -> {
                 Binary binary = new Binary(input[3]);
+                String[] remainder;
                 switch (input[2]) {
-                    case "+" -> new BinaryCalculator(binary).add(new Binary(input[4]));
-                    case "-" -> new BinaryCalculator(binary).subtract(new Binary(input[4]));
-                    case "*" -> new BinaryCalculator(binary).multiply(new Binary(input[4]));
-                    case "/" -> {new BinaryCalculator(binary).divide(new Binary(input[4])); }
+                    case "+" -> { new BinaryCalculator(binary).add(new Binary(input[4])); }     // working on generalizing outputs
+                    case "-" -> { new BinaryCalculator(binary).subtract(new Binary(input[4])); }
+                    case "*" -> { new BinaryCalculator(binary).multiply(new Binary(input[4])); }
+                    case "/" -> { new BinaryCalculator(binary).divide(new Binary(input[4])); }
                     default -> out = "Error";
                 }
 

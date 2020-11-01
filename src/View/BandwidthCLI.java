@@ -69,7 +69,6 @@ public class BandwidthCLI {
             String pgViews = validateInput(input, "\\d+(?:\\.\\d+)?[\\s]per[\\s]\\b(second|minute|hour|day|week|month|year|Second|Minute|Hour|Day|Week|Month|Year)\\b");
             String[] viewToken = pgViews.split(" ");
 
-
             System.out.print("Input average page size ([quantity] [data unit(B - TB)]): ");
             input = scanner.nextLine();
             String pgSize = validateInput(input, "\\d+(?:\\.\\d+)?[\\s][KMGT]?B");

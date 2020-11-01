@@ -25,9 +25,9 @@ public class HandyCalculator {
 
             System.out.println("\033[96m▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\033[0m");
             switch (userChoice) {
-                case "1" -> { handleBinHex(NumberSystem.Binary); }
-                case "2" -> { handleBinHex(NumberSystem.Hex); }
-                case "3" -> { handleBandwidth(); }
+                case "1" -> handleBinHex(NumberSystem.Binary);
+                case "2" -> handleBinHex(NumberSystem.Hex);
+                case "3" -> handleBandwidth();
                 case "4" -> {}
             }
         }while (!input.equals("q"));

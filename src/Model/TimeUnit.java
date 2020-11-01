@@ -1,21 +1,39 @@
 package Model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TimeUnit extends Unit<TimeUnit.Time> {
 
     public enum Time {
 
-        SECOND(1),
-        MINUTE(60),
-        HOUR(3600),
-        DAY(86400),
-        WEEK(604800),
-        MONTH(2629800),
-        YEAR(31557600);
+        SECOND(1, "second"),
+        MINUTE(60, "minute"),
+        HOUR(3600, "hour"),
+        DAY(86400, "day"),
+        WEEK(604800, "week"),
+        MONTH(2629800, "month"),
+        YEAR(31557600, "year");
 
         public final double toSeconds;
 
-        private Time(double seconds) {
+        public final String label;
+
+        private static final Map<String, Time> LABEL_LOOKUP = new HashMap<>();
+
+        private Time(double seconds, String label) {
             this.toSeconds = seconds;
+            this.label = label;
+        }
+
+        static {
+            for (Time t: values()) {
+                LABEL_LOOKUP.put(t.label, t);
+            }
+        }
+
+        public static Time valueOfLabel(String label) {
+            return LABEL_LOOKUP.get(label);
         }
     }
 

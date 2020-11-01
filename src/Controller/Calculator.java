@@ -1,7 +1,5 @@
 package Controller;
 
-import Model.Binary;
-import Model.Decimal;
 import Model.Number;
 
 import java.math.BigDecimal;
@@ -25,7 +23,13 @@ public abstract class Calculator<T extends Number<T>> implements Convertible{
     public abstract String[] divide(T oNum);
 
     public String convertTo(int base) {
-        long originalDec = Long.parseLong(new BigDecimal(this.getNum().getValue()).toPlainString());
+        long originalDec;
+        try {
+            originalDec = Long.parseLong(new BigDecimal(this.getNum().getValue()).toPlainString());
+        } catch (NumberFormatException e) {
+            System.err.println("Input " + this.getNum().getValue() +" is too big.");
+            originalDec = 0;
+        }
         long dec = originalDec;
         if (dec == 0){
             return "0";

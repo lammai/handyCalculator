@@ -1,5 +1,6 @@
 import Controller.*;
 import Model.*;
+import View.NumberSystem;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -117,7 +118,7 @@ public class App {
         System.out.println();
 
         SizeUnit size = new SizeUnit("34587923490", SizeUnit.Size.GIGABITS);
-        SizeUnit.Size units[] = SizeUnit.Size.values();
+        SizeUnit.Size[] units = SizeUnit.Size.values();
         for (SizeUnit.Size s: units) {
             System.out.println(BigDecimal.valueOf(Long.parseLong(size.getValue()) * (size.getUnitInBits() / s.toBits)).toPlainString() + " " + s.toString().toLowerCase());
         }

@@ -358,7 +358,7 @@
         <mxCell id="pEVWOKsxLj1dPR-0CNbp-92" value="+ subtract(oNum: Binary): Binary" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="pEVWOKsxLj1dPR-0CNbp-55" vertex="1">
           <mxGeometry y="156" width="250" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="pEVWOKsxLj1dPR-0CNbp-95" value="+ convertTo(type: NumberSystem): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-55" vertex="1">
+        <mxCell id="pEVWOKsxLj1dPR-0CNbp-95" value="+ convertTo(type: View.NumberSystem): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-55" vertex="1">
           <mxGeometry y="186" width="250" height="26" as="geometry" />
         </mxCell>
         <mxCell id="pEVWOKsxLj1dPR-0CNbp-59" value="" style="endArrow=classic;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pEVWOKsxLj1dPR-0CNbp-55" target="pEVWOKsxLj1dPR-0CNbp-49" edge="1">
@@ -382,10 +382,10 @@
         <mxCell id="pEVWOKsxLj1dPR-0CNbp-78" value="&lt;&lt;interface&gt;&gt;&#xa;Convertible&#xa;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-565" y="220" width="250" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="pEVWOKsxLj1dPR-0CNbp-79" value="+ convertTo(type: NumberSystem): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-78" vertex="1">
+        <mxCell id="pEVWOKsxLj1dPR-0CNbp-79" value="+ convertTo(type: View.NumberSystem): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-78" vertex="1">
           <mxGeometry y="50" width="250" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="pEVWOKsxLj1dPR-0CNbp-86" value="&lt;&lt;Enum&gt;&gt;&#xa;NumberSystem&#xa;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="pEVWOKsxLj1dPR-0CNbp-86" value="&lt;&lt;Enum&gt;&gt;&#xa;View.NumberSystem&#xa;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-280" y="70" width="170" height="128" as="geometry" />
         </mxCell>
         <mxCell id="pEVWOKsxLj1dPR-0CNbp-87" value="BINARY" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-86" vertex="1">
@@ -434,7 +434,7 @@
         <mxCell id="pEVWOKsxLj1dPR-0CNbp-101" value="+ subtract(oNum: Hex): Hex" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="pEVWOKsxLj1dPR-0CNbp-96" vertex="1">
           <mxGeometry y="156" width="250" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="pEVWOKsxLj1dPR-0CNbp-102" value="+ convertTo(type: NumberSystem): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-96" vertex="1">
+        <mxCell id="pEVWOKsxLj1dPR-0CNbp-102" value="+ convertTo(type: View.NumberSystem): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-96" vertex="1">
           <mxGeometry y="186" width="250" height="26" as="geometry" />
         </mxCell>
         <mxCell id="pEVWOKsxLj1dPR-0CNbp-103" value="DecimalCalculator" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;strokeColor=#FFFFFF;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
@@ -458,7 +458,7 @@
         <mxCell id="pEVWOKsxLj1dPR-0CNbp-108" value="+ subtract(oNum: Decimal): Decimal" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontStyle=0" parent="pEVWOKsxLj1dPR-0CNbp-103" vertex="1">
           <mxGeometry y="156" width="250" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="pEVWOKsxLj1dPR-0CNbp-109" value="+ convertTo(type: NumberSystem): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-103" vertex="1">
+        <mxCell id="pEVWOKsxLj1dPR-0CNbp-109" value="+ convertTo(type: View.NumberSystem): Number" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="pEVWOKsxLj1dPR-0CNbp-103" vertex="1">
           <mxGeometry y="186" width="250" height="26" as="geometry" />
         </mxCell>
         <mxCell id="pEVWOKsxLj1dPR-0CNbp-111" value="App" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;strokeColor=#FFFFFF;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">

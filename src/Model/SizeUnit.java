@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SizeUnit extends Unit<SizeUnit.Size> {
 
     public enum Size {
@@ -16,11 +19,24 @@ public class SizeUnit extends Unit<SizeUnit.Size> {
         TERABYTES(8e12, "TB");
 
         public final double toBits;
+
         public final String label;
+
+        private static final Map<String, Size> LABEL_LOOKUP = new HashMap<>();
 
         private Size(double bits, String label) {
             this.toBits = bits;
             this.label = label;
+        }
+
+        static {
+            for (Size s: values()) {
+                LABEL_LOOKUP.put(s.label, s);
+            }
+        }
+
+        public static Size valueOfLabel(String label) {
+            return LABEL_LOOKUP.get(label);
         }
     }
 

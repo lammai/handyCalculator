@@ -4,6 +4,10 @@ public abstract class Number<T extends Number<?>> {
     private String value;
     private final int base;
 
+    public Number() {
+        this("null", 0);
+    }
+    
     public Number(String aValue, int aBase) {
         this.value = aValue;
         this.base = aBase;

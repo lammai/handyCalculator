@@ -10,9 +10,9 @@ public class WebsiteBandwidthCalculator {
     private TimeUnit.Time viewUnit;
     private Decimal size;
     private SizeUnit.Size sizeUnit;
-    private int reFactor;
+    private double reFactor;
 
-    public WebsiteBandwidthCalculator(Decimal view, TimeUnit.Time viewUnit, Decimal size, SizeUnit.Size sizeUnit, int reFactor) {
+    public WebsiteBandwidthCalculator(Decimal view, TimeUnit.Time viewUnit, Decimal size, SizeUnit.Size sizeUnit, double reFactor) {
         this.view = view;
         this.viewUnit = viewUnit;
         this.size = size;

@@ -34,7 +34,7 @@ public class HostingBandwidthCalculator {
             return String.format("%f %s", usage * SizeUnit.unitConvert(usageUnit, bandwidthUnit) / TimeUnit.Time.MONTH.toSeconds, bandwidthUnit.label);
         } else {
             double usage = Double.parseDouble(new BigDecimal(bandwidth.getValue()).toPlainString());
-            return String.format("%f %s", usage * SizeUnit.unitConvert(bandwidthUnit, usageUnit) * TimeUnit.Time.MONTH.toSeconds, usageUnit.label);
+            return String.format("%f %s", usage * SizeUnit.unitConvert(bandwidthUnit, usageUnit) * TimeUnit.Time.MONTH.toSeconds, usageUnit.label + " per month");
         }
     }
 }

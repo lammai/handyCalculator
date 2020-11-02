@@ -24,21 +24,20 @@ public abstract class Calculator<T extends Number<T>> implements Convertible{
     public abstract String[] divide(T oNum);
 
     public String convertTo(int base) {
-
         BigDecimal ogDec = new BigDecimal(this.getNum().getValue());
         if (ogDec.compareTo(BigDecimal.ZERO) == 0) {
             return "0";
         }
-        StringBuilder bin = new StringBuilder();
+        StringBuilder num = new StringBuilder();
         while (ogDec.compareTo(BigDecimal.ZERO) != 0) {
-            int index = ogDec.abs().remainder(new BigDecimal(base+"")).intValueExact();
-            bin.insert(0, HEX_VALUES.charAt(index));
-            ogDec = ogDec.divide(new BigDecimal(base+""), RoundingMode.FLOOR);
+            int index = ogDec.abs().remainder(new BigDecimal(base+"")).intValue();
+            num.insert(0, HEX_VALUES.charAt(index));
+            ogDec = ogDec.abs().divide(new BigDecimal(base+""), RoundingMode.FLOOR);
         }
         if (new BigDecimal(this.getNum().getValue()).compareTo(BigDecimal.ZERO) < 0) {
-            bin.insert(0, '-');
+            num.insert(0, '-');
         }
-        return bin.toString();
+        return num.toString();
     }
 
     public String toDecimal() {
@@ -48,13 +47,11 @@ public abstract class Calculator<T extends Number<T>> implements Convertible{
             val = this.getNum().getValue().substring(1);
             negative = "-";
         }
-
         double dec = 0.0;
         int currentPow = val.length()-1;
         for (int i = 0; i < val.length(); i++, currentPow--) {
             dec += Character.getNumericValue(val.charAt(i)) * Math.pow(this.getNum().getBase(), currentPow);
         }
-
-        return negative+dec;
+        return negative+new BigDecimal(dec).toPlainString();
     }
 }

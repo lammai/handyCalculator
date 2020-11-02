@@ -1,10 +1,12 @@
 package Controller;
 
 import Model.Binary;
+import Model.Decimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,9 +31,29 @@ class BinaryCalculatorTest {
         assertEquals(Long.toBinaryString(new BigDecimal(inputInt1).add(new BigDecimal(inputInt2)).longValueExact()), numInt1.getValue());
     }
 
-//    @Test // in progress
-//    void subtract2Binary() {
-//        new BinaryCalculator(numInt1).subtract(numInt2);
-//        assertEquals(Long.toBinaryString(new BigDecimal(inputInt1).subtract(new BigDecimal(inputInt2)).longValueExact()), numInt1.getValue());
-//    }
+    @Test
+    void subtract2Binary() {
+        new BinaryCalculator(numInt1).subtract(numInt2);
+        assertEquals(new BigDecimal(inputInt1).subtract(new BigDecimal(inputInt2)).toPlainString(),
+                String.format("%s", new BigDecimal(new BinaryCalculator(numInt1).convertToDec().getValue()).toPlainString()));
+    }
+
+    @Test
+    void multiply2Binary() {
+        new BinaryCalculator(numInt1).multiply(numInt2);
+        assertEquals(Long.toBinaryString(new BigDecimal(inputInt1).multiply(new BigDecimal(inputInt2)).longValueExact()), numInt1.getValue());
+    }
+
+    @Test
+    void divide2Binary() {
+        String[] remainder = new BinaryCalculator(numInt1).divide(numInt2);
+        assertEquals(Long.toBinaryString(new BigDecimal(inputInt1).divide(new BigDecimal(inputInt2), RoundingMode.FLOOR).longValueExact()), numInt1.getValue());
+        assertEquals(Long.toBinaryString(new BigDecimal(inputInt1).remainder(new BigDecimal(inputInt2)).longValueExact()), remainder[1]);
+    }
+
+    @Test
+    void convert2Decimal() {
+        Decimal convertedDec = new BinaryCalculator(numInt1).convertToDec();
+        assertEquals(inputInt1+"", new BigDecimal(convertedDec.getValue()).toPlainString());
+    }
 }

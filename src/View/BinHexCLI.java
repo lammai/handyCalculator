@@ -105,7 +105,7 @@ public class BinHexCLI {
         } else if (choice == 2) {   // Binary/Hex to Decimal conversions
             System.out.printf("Input %s: ", numType.toString());
             String inp = scanner.nextLine().toUpperCase();
-            String regex = numType == NumberSystem.Binary ? "[-0-1]+" : "[-a-fA-F0-9]+";
+            String regex = numType == NumberSystem.Binary ? "[-]?[0-1]+" : "[-]?[a-fA-F0-9]+";
             String num = validateInput(inp, regex);
             if (numType == NumberSystem.Binary)
                 System.out.printf("Decimal value: \033[96;1m%s\033[0m\n", new BinaryCalculator(new Binary(num)).convertToDec().getValue());

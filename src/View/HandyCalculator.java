@@ -7,6 +7,15 @@ import java.util.Scanner;
 import static View.BandwidthCLI.handleBandwidth;
 import static View.BinHexCLI.handleBinHex;
 
+/**
+ * This Calculator program support Binary and Hexadecimal conversions as well as basic calculations.
+ * It includes a Bandwidth calculator that features data unit conversions and other bandwidth related utilities.
+ * It also enable the user to get output of multiple calculations by providing a text file.
+ *
+ * @author Lam Mai
+ * @version 2.0
+ * @since 11-1-2020
+ */
 public class HandyCalculator {
 
     private static final Scanner scanner = new Scanner(System.in);

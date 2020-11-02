@@ -100,7 +100,7 @@ public class BinHexCLI {
                 Hex num = new Hex(parseInp[0]);
                 result = performCalculation(num, parseInp[1], parseInp[2]);
             }
-            System.out.printf("%s\n%s\n", result[0], result[1]);
+            System.out.printf("\033[96m%s\n%s\n\033[0m", result[0], result[1]);
 
         } else if (choice == 2) {   // Binary/Hex to Decimal conversions
             System.out.printf("Input %s: ", numType.toString());

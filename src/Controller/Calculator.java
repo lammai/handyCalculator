@@ -41,7 +41,7 @@ public abstract class Calculator<T extends Number<T>> implements Convertible{
         return bin.toString();
     }
 
-    public String toDecimal() { // cant handle negative
+    public String toDecimal() {
         String val = this.getNum().getValue();
         String negative = "";
         if (this.getNum().getValue().charAt(0) == '-') {

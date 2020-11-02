@@ -3,6 +3,7 @@ package Controller;
 import Model.Number;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public abstract class Calculator<T extends Number<T>> implements Convertible{
 
@@ -23,35 +24,37 @@ public abstract class Calculator<T extends Number<T>> implements Convertible{
     public abstract String[] divide(T oNum);
 
     public String convertTo(int base) {
-        long originalDec;
-        try {
-            originalDec = Long.parseLong(new BigDecimal(this.getNum().getValue()).toPlainString());
-        } catch (NumberFormatException e) {
-            System.err.println("Input " + this.getNum().getValue() +" is too big.");
-            originalDec = 0;
-        }
-        long dec = originalDec;
-        if (dec == 0){
+
+        BigDecimal ogDec = new BigDecimal(this.getNum().getValue());
+        if (ogDec.compareTo(BigDecimal.ZERO) == 0) {
             return "0";
         }
         StringBuilder bin = new StringBuilder();
-        while (dec != 0) {
-            int index = (int) (Math.abs(dec) % base);
+        while (ogDec.compareTo(BigDecimal.ZERO) != 0) {
+            int index = ogDec.abs().remainder(new BigDecimal(base+"")).intValueExact();
             bin.insert(0, HEX_VALUES.charAt(index));
-            dec /= base;
+            ogDec = ogDec.divide(new BigDecimal(base+""), RoundingMode.FLOOR);
         }
-        if (originalDec < 0) {
+        if (new BigDecimal(this.getNum().getValue()).compareTo(BigDecimal.ZERO) < 0) {
             bin.insert(0, '-');
         }
         return bin.toString();
     }
 
     public String toDecimal() { // cant handle negative
-        double dec = 0.0;
-        int currentPow = this.getNum().getValue().length()-1;
-        for (int i = 0; i < this.getNum().getValue().length(); i++, currentPow--) {
-            dec += Character.getNumericValue(this.getNum().getValue().charAt(i)) * Math.pow(this.getNum().getBase(), currentPow);
+        String val = this.getNum().getValue();
+        String negative = "";
+        if (this.getNum().getValue().charAt(0) == '-') {
+            val = this.getNum().getValue().substring(1);
+            negative = "-";
         }
-        return ""+dec;
+
+        double dec = 0.0;
+        int currentPow = val.length()-1;
+        for (int i = 0; i < val.length(); i++, currentPow--) {
+            dec += Character.getNumericValue(val.charAt(i)) * Math.pow(this.getNum().getBase(), currentPow);
+        }
+
+        return negative+dec;
     }
 }

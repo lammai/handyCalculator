@@ -5,6 +5,7 @@ import Model.Decimal;
 import Model.Hex;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class DecimalCalculator extends Calculator<Decimal> {
 
@@ -14,33 +15,28 @@ public class DecimalCalculator extends Calculator<Decimal> {
 
     @Override
     public void add(Decimal oNum) {
-        double result = Double.parseDouble(new BigDecimal(this.getNum().getValue()).toPlainString())
-                + Double.parseDouble(new BigDecimal(oNum.getValue()).toPlainString());
-        this.getNum().setValue(String.format("%.0f",result));
+        BigDecimal result = new BigDecimal(this.getNum().getValue()).add(new BigDecimal(oNum.getValue()));
+        this.getNum().setValue(result.toPlainString());
     }
 
     @Override
     public void subtract(Decimal oNum) {
-        double result = Double.parseDouble(new BigDecimal(this.getNum().getValue()).toPlainString())
-                - Double.parseDouble(new BigDecimal(oNum.getValue()).toPlainString());
-        this.getNum().setValue(String.format("%.0f",result));
+        BigDecimal result = new BigDecimal(this.getNum().getValue()).subtract(new BigDecimal(oNum.getValue()));
+        this.getNum().setValue(result.toPlainString());
     }
 
     @Override
     public void multiply(Decimal oNum) {
-        double result = Double.parseDouble(new BigDecimal(this.getNum().getValue()).toPlainString())
-                * Double.parseDouble(new BigDecimal(oNum.getValue()).toPlainString());
-        this.getNum().setValue(String.format("%.0f",result));
+        BigDecimal result = new BigDecimal(this.getNum().getValue()).multiply(new BigDecimal(oNum.getValue()));
+        this.getNum().setValue(result.toPlainString());
     }
 
     @Override
     public String[] divide(Decimal oNum) {
-        double result = Double.parseDouble(new BigDecimal(this.getNum().getValue()).toPlainString())
-                / Double.parseDouble(new BigDecimal(oNum.getValue()).toPlainString());
-        double remainder = Double.parseDouble(new BigDecimal(this.getNum().getValue()).toPlainString())
-                % Double.parseDouble(new BigDecimal(oNum.getValue()).toPlainString());
-        this.getNum().setValue(String.format("%.0f", Math.floor(result)));
-        return new String[]{String.format("%.0f", remainder)};
+        BigDecimal result = new BigDecimal(this.getNum().getValue()).divide(new BigDecimal(oNum.getValue()), RoundingMode.FLOOR);
+        BigDecimal remainder = new BigDecimal(this.getNum().getValue()).remainder(new BigDecimal(oNum.getValue()));
+        this.getNum().setValue(result.toPlainString());
+        return new String[]{ remainder.toPlainString() };
     }
 
     @Override

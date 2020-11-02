@@ -24,10 +24,14 @@ public class DownloadUploadCalculator {
         double bndWidth = Double.parseDouble(this.bandwidth.getValue());
 
         double unitPerSecond = fileSize * SizeUnit.unitConvert(this.sizeUnit, this.bandwidthUnit) / bndWidth;
+        String day = String.format("%.0f days", unitPerSecond / TimeUnit.Time.DAY.toSeconds);
+        String hour = String.format("%.0f hours", (unitPerSecond % TimeUnit.Time.DAY.toSeconds)/TimeUnit.Time.HOUR.toSeconds);
+        String minute = String.format("%.0f minutes", (unitPerSecond % TimeUnit.Time.HOUR.toSeconds)/TimeUnit.Time.MINUTE.toSeconds);
+        String second = String.format("%f seconds", unitPerSecond % TimeUnit.Time.MINUTE.toSeconds);
 
-        return new String[]{String.format("%.0f days", unitPerSecond / TimeUnit.Time.DAY.toSeconds),
-                String.format("%.0f hours", (unitPerSecond % TimeUnit.Time.DAY.toSeconds)/TimeUnit.Time.HOUR.toSeconds),
-                String.format("%.0f minutes", (unitPerSecond % TimeUnit.Time.HOUR.toSeconds)/TimeUnit.Time.MINUTE.toSeconds),
-                String.format("%.0f seconds", unitPerSecond % TimeUnit.Time.MINUTE.toSeconds)};
+        if (day.equals("0 days") && hour.equals("0 hours") && minute.equals("0 minutes")) return new String[]{second};
+        else if (day.equals("0 days") && hour.equals("0 hours")) return new String[]{minute, second};
+        else if (day.equals("0 days")) return new String[]{hour, minute, second};
+        else return new String[]{day, hour, minute, second};
     }
 }

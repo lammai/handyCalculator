@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 
 public class HostingBandwidthCalculator {
 
-    private Decimal monthlyUsage;
-    private SizeUnit.Size usageUnit;
-    private Decimal bandwidth;
-    private RateUnit.Rate bandwidthUnit;
+    private final Decimal monthlyUsage;
+    private final SizeUnit.Size usageUnit;
+    private final Decimal bandwidth;
+    private final RateUnit.Rate bandwidthUnit;
 
     public HostingBandwidthCalculator(Decimal monthlyUsage, SizeUnit.Size usageUnit, RateUnit.Rate bandwidthUnit) {
         this.monthlyUsage = monthlyUsage;
@@ -31,10 +31,14 @@ public class HostingBandwidthCalculator {
     public String convert() {
         if (bandwidth.getValue().matches("[0]+")) {
             double usage = Double.parseDouble(new BigDecimal(monthlyUsage.getValue()).toPlainString());
-            return String.format("%f %s", usage * SizeUnit.unitConvert(usageUnit, bandwidthUnit) / TimeUnit.Time.MONTH.toSeconds, bandwidthUnit.label);
+            String result = String.format("%f", usage * SizeUnit.unitConvert(usageUnit, bandwidthUnit) / TimeUnit.Time.MONTH.toSeconds);
+            result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result;
+            return String.format("%s %s", result, bandwidthUnit.label);
         } else {
             double usage = Double.parseDouble(new BigDecimal(bandwidth.getValue()).toPlainString());
-            return String.format("%f %s", usage * SizeUnit.unitConvert(bandwidthUnit, usageUnit) * TimeUnit.Time.MONTH.toSeconds, usageUnit.label + " per month");
+            String result = String.format("%f", usage * SizeUnit.unitConvert(bandwidthUnit, usageUnit) * TimeUnit.Time.MONTH.toSeconds);
+            result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result;
+            return String.format("%s %s", result, usageUnit.label + " per month");
         }
     }
 }

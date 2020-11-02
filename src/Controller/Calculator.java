@@ -46,7 +46,7 @@ public abstract class Calculator<T extends Number<T>> implements Convertible{
         return bin.toString();
     }
 
-    public String toDecimal() {
+    public String toDecimal() { // cant handle negative
         double dec = 0.0;
         int currentPow = this.getNum().getValue().length()-1;
         for (int i = 0; i < this.getNum().getValue().length(); i++, currentPow--) {

@@ -6,11 +6,11 @@ import Model.TimeUnit;
 
 public class WebsiteBandwidthCalculator {
 
-    private Decimal view;
-    private TimeUnit.Time viewUnit;
-    private Decimal size;
-    private SizeUnit.Size sizeUnit;
-    private double reFactor;
+    private final Decimal view;
+    private final TimeUnit.Time viewUnit;
+    private final Decimal size;
+    private final SizeUnit.Size sizeUnit;
+    private final double reFactor;
 
     public WebsiteBandwidthCalculator(Decimal view, TimeUnit.Time viewUnit, Decimal size, SizeUnit.Size sizeUnit, double reFactor) {
         this.view = view;
@@ -24,12 +24,12 @@ public class WebsiteBandwidthCalculator {
         double pgView = Double.parseDouble(this.view.getValue());
         double pgSize = Double.parseDouble(this.size.getValue());
 
-        double bandwidthMbits = (pgView/viewUnit.toSeconds) * (pgSize*SizeUnit.unitConvert(sizeUnit, SizeUnit.Size.MEGABITS));
+        double bandwidthMbits = (pgView / viewUnit.toSeconds) * (pgSize * SizeUnit.unitConvert(sizeUnit, SizeUnit.Size.MEGABITS));
         double bandwidthGB = (pgView/ TimeUnit.timeConvert(viewUnit, TimeUnit.Time.MONTH)) * (pgSize*SizeUnit.unitConvert(sizeUnit, SizeUnit.Size.GIGABYTES));
 
-        return new String[]{String.format("%.12f Mbits/s", bandwidthMbits),
-                            String.format("%.12f GB per month", bandwidthGB),
-                            String.format("%.12f Mbits/s", bandwidthMbits*this.reFactor),
-                            String.format("%.12f GB per month", bandwidthGB*this.reFactor)};
+        return new String[]{String.format("%.10f Mbits/s", bandwidthMbits),
+                            String.format("%.10f GB per month", bandwidthGB),
+                            String.format("%.10f Mbits/s", bandwidthMbits*this.reFactor),
+                            String.format("%.10f GB per month", bandwidthGB*this.reFactor)};
     }
 }

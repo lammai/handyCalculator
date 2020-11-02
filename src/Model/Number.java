@@ -21,14 +21,6 @@ public abstract class Number<T extends Number<?>> {
                 '}';
     }
 
-    public boolean equals(T oNum) {
-        return this.getValue().equals(oNum.getValue());
-    }
-
-    public int compareTo(T oNum) {
-        return this.getValue().compareTo(oNum.getValue());
-    }
-
     public String getValue() {
         return value;
     }

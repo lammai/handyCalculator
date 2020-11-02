@@ -38,8 +38,11 @@ public class BandwidthCLI {
             System.out.printf("%s is equivalent to any of the following:\n", validatedInput);
             SizeUnit.Size[] units = SizeUnit.Size.values();
             for (SizeUnit.Size unit : units) {         // Convert one data unit to every other data units.
-                if (unit != size.getUnit())
-                    System.out.printf("\033[96;1m%f %s\033[0m\n", Long.parseLong(size.getValue()) * (size.getUnitInBits() / unit.toBits), unit.toString().toLowerCase());
+                if (unit != size.getUnit()) {
+                    String result = String.format("%f", Double.parseDouble(size.getValue()) * (size.getUnitInBits() / unit.toBits));
+                    result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result; // Remove 0s trails
+                    System.out.printf("\033[96;1m%s %s\033[0m\n", result, unit.toString().toLowerCase());
+                }
             }
 
         } else if (choice == 2) {   // Download/Upload Time
@@ -61,7 +64,7 @@ public class BandwidthCLI {
                                                     new Decimal(bandwidth), RateUnit.Rate.valueOfLabel(unitBW));
 
             String[] results = downUpCalc.calculate();
-            System.out.println("\033[96;1m"+Arrays.toString(results)+"\033[0m");
+            System.out.println("\033[96;1mDownload or upload time needed is: "+Arrays.toString(results)+"\033[0m");
 
         } else if (choice == 3) {   // Website Bandwidth
             System.out.print("Input page views ([quantity] per [time unit]): ");

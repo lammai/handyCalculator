@@ -36,25 +36,33 @@ public class BinHexCLI {
     public static String[] performCalculation(Binary num, String op, String var) {
         String[] remainder = new String[2];
         switch (op) {
-            case "+" -> {new BinaryCalculator(num).add(new Binary(var));}
-            case "-" -> {new BinaryCalculator(num).subtract(new Binary(var));}
-            case "*" -> {new BinaryCalculator(num).multiply(new Binary(var));}
-            case "/" -> {remainder = new BinaryCalculator(num).divide(new Binary(var));}
-            default -> {}
+            case "+" -> new BinaryCalculator(num).add(new Binary(var));
+            case "-" -> new BinaryCalculator(num).subtract(new Binary(var));
+            case "*" -> new BinaryCalculator(num).multiply(new Binary(var));
+            case "/" -> remainder = new BinaryCalculator(num).divide(new Binary(var));
+            default -> System.err.println("Calculation Error.");
         }
-        return remainder;
+        if (remainder[0] == null) {
+            return new String[]{ "Binary value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new BinaryCalculator(num).convertToDec().getValue())) };
+        }
+        return new String[]{ String.format("Binary value: %s    Remainder: %s", num.getValue(), remainder[1]),
+                String.format("Decimal value: %.0f    Remainder: %s", Double.parseDouble(new BinaryCalculator(num).convertToDec().getValue()), remainder[0])};
     }
 
     public static String[] performCalculation(Hex num, String op, String var) {
         String[] remainder = new String[2];
         switch (op) {
-            case "+" -> {new HexCalculator(num).add(new Hex(var));}
-            case "-" -> {new HexCalculator(num).subtract(new Hex(var));}
-            case "*" -> {new HexCalculator(num).multiply(new Hex(var));}
-            case "/" -> {remainder = new HexCalculator(num).divide(new Hex(var));}
-            default -> {}
+            case "+" -> new HexCalculator(num).add(new Hex(var));
+            case "-" -> new HexCalculator(num).subtract(new Hex(var));
+            case "*" -> new HexCalculator(num).multiply(new Hex(var));
+            case "/" -> remainder = new HexCalculator(num).divide(new Hex(var));
+            default -> System.err.println("Calculation Error.");
         }
-        return remainder;
+        if (remainder[0] == null) {
+            return new String[]{ "Hex value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new HexCalculator(num).convertToDec().getValue())) };
+        }
+        return new String[]{ String.format("Hex value: %s    Hex remainder: %s", num.getValue(), remainder[1]),
+                String.format("Decimal value: %.0f    Decimal remainder: %s", Double.parseDouble(new HexCalculator(num).convertToDec().getValue()), remainder[0])};
     }
 
     public static void handleBinHex(NumberSystem numType) {
@@ -88,25 +96,16 @@ public class BinHexCLI {
             if (numType == NumberSystem.Binary) {
                 Binary num = new Binary(parseInp[0]);
                 result = performCalculation(num, parseInp[1], parseInp[2]);
-
-                System.out.printf("Binary value: %s\n", num.getValue());
-                System.out.printf("Decimal value: %s\n", new BinaryCalculator(num).convertToDec().getValue());
             } else {
                 Hex num = new Hex(parseInp[0]);
                 result = performCalculation(num, parseInp[1], parseInp[2]);
-
-                System.out.printf("Hex value: %s\n", num.getValue());
-                System.out.printf("Decimal value: %s\n", new HexCalculator(num).convertToDec().getValue());
             }
-            if (result[1] != null) {
-                System.out.printf("%s Remainder: %s    ", numType.toString(),result[1]);
-                System.out.printf("Decimal Remainder: %s\n", result[0]);
-            }
+            System.out.printf("%s\n%s\n", result[0], result[1]);
 
         } else if (choice == 2) {   // Binary/Hex to Decimal conversions
             System.out.printf("Input %s: ", numType.toString());
             String inp = scanner.nextLine().toUpperCase();
-            String regex = numType == NumberSystem.Binary ? "[0-1]+" : "[A-F0-9]+";
+            String regex = numType == NumberSystem.Binary ? "[0-1]+" : "[a-fA-F0-9]+";
             String num = validateInput(inp, regex);
             if (numType == NumberSystem.Binary)
                 System.out.printf("Decimal value: \033[96;1m%s\033[0m\n", new BinaryCalculator(new Binary(num)).convertToDec().getValue());

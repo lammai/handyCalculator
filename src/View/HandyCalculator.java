@@ -1,5 +1,7 @@
 package View;
 
+import Controller.FileIO;
+
 import java.util.Scanner;
 
 import static View.BandwidthCLI.handleBandwidth;
@@ -10,27 +12,40 @@ public class HandyCalculator {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-
+        System.out.println("\033[96m<---------Handy Calculator--------->\033[0m");
         String input;
-        System.out.println("\033[1;4mPlease select from the following options: \033[0m");
-        System.out.println("\033[91m1\033[0m: Binary Calculator");
-        System.out.println("\033[91m2\033[0m: Hex Calculator");
-        System.out.println("\033[91m3\033[0m: Bandwidth Calculator");
-        System.out.println("\033[91m4\033[0m: Input data file");
-        System.out.println("\033[91mq\033[0m: Quit");
+        String userChoice;
+        displayMainMenu();
         do {
             System.out.print("\n\033[31;1;3mMain Menu Selection >>> \033[0m");
             input = scanner.nextLine();
-            String userChoice = validateInput(input, "[1-4q]");
+            userChoice = validateInput(input, "[1-4QHqh]").toLowerCase();
 
             System.out.println("\033[96m▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\033[0m");
             switch (userChoice) {
                 case "1" -> handleBinHex(NumberSystem.Binary);
                 case "2" -> handleBinHex(NumberSystem.Hex);
                 case "3" -> handleBandwidth();
-                case "4" -> {}
+                case "4" -> {
+                    System.out.print("Enter path of your file: ");
+                    String path = scanner.nextLine();
+                    String outPath;
+                    String fileName;
+                    if (path.lastIndexOf("/") < 0 && path.lastIndexOf("\\") < 0) {
+                        fileName = path.substring(0 ,path.lastIndexOf(".txt"));
+                        outPath = fileName+"-output.txt";
+                    } else {
+                        // Give the output the original input name with output.txt at the end
+                        fileName = path.substring(1 + path.lastIndexOf("/") + path.lastIndexOf("\\"),path.lastIndexOf(".txt"));
+                        int slashIndex = path.lastIndexOf("/") > 0 ? path.lastIndexOf("/")+1 : path.lastIndexOf("\\")+1;
+                        outPath = path.substring(0, slashIndex)+fileName+"-output.txt";
+                    }
+                    FileIO fileIO = new FileIO(path, outPath);
+                    fileIO.processFile();
+                }
+                case "h" -> displayMainMenu();
             }
-        }while (!input.equals("q"));
+        }while (!userChoice.equals("q"));
 
     }
 
@@ -57,5 +72,15 @@ public class HandyCalculator {
             input = scanner.nextLine();
         }
         return input;
+    }
+
+    private static void displayMainMenu() {
+        System.out.println("\033[1;4mPlease select from the following options: \033[0m");
+        System.out.println("\033[91m1\033[0m: Binary Calculator");
+        System.out.println("\033[91m2\033[0m: Hex Calculator");
+        System.out.println("\033[91m3\033[0m: Bandwidth Calculator");
+        System.out.println("\033[91m4\033[0m: Input data file");
+        System.out.println("\033[91mh\033[0m: Display this menu");
+        System.out.println("\033[91mq\033[0m: Quit");
     }
 }

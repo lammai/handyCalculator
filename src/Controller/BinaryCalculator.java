@@ -36,7 +36,7 @@ public class BinaryCalculator extends Calculator<Binary> {
     @Override
     public String[] divide(Binary oNum) {
         Decimal bin = this.convertToDec();
-        String[] remainder = new String[2];
+        String[] remainder = new String[2];             // Remainder[0] = Decimal remainder     Remainder[1] = Binary remainder
         remainder[0] = new DecimalCalculator(bin).divide(new BinaryCalculator(oNum).convertToDec())[0]; // if these 2 swap result in error
         remainder[1] = new DecimalCalculator(new Decimal(remainder[0])).convertToBin().getValue();
         this.getNum().setValue(new DecimalCalculator(bin).convertToBin().getValue());

@@ -4,7 +4,6 @@ import Model.Decimal;
 import Model.Hex;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;

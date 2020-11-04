@@ -39,14 +39,14 @@ public class BandwidthCLI {
             input = scanner.nextLine().trim();                              //Using regular expression to validate input
             String validatedInput = validateInput(input, "[0-9]+[\\s]?[kmgtKMGT]?[bB]");
 
-            SizeUnit.Size inputUnit = SizeUnit.Size.valueOfLabel(validatedInput.substring(validatedInput.length()-2));
+            SizeUnit.Size inputUnit = SizeUnit.Size.valueOfLabel(validatedInput.substring(validatedInput.length()-2).trim());
             SizeUnit size = new SizeUnit(validatedInput.substring(0, validatedInput.length()-2).trim(), inputUnit);
 
             System.out.printf("%s is equivalent to any of the following:\n", validatedInput);
             SizeUnit.Size[] units = SizeUnit.Size.values();
             for (SizeUnit.Size unit : units) {         // Convert one data unit to every other data units.
                 if (unit != size.getUnit()) {
-                    String result = String.format("%f", Double.parseDouble(size.getValue()) * (size.getUnit().toBits / unit.toBits));
+                    String result = ""+((Double.parseDouble(size.getValue()) * (size.getUnit().toBits / unit.toBits)));
                     result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result; // Remove 0s trails
                     System.out.printf("\033[96;1m%s %s\033[0m\n", result, unit.toString().toLowerCase());
                 }
@@ -67,8 +67,8 @@ public class BandwidthCLI {
             String bandwidth = bandwidthInput.substring(0, lastIndexBW);
             String unitBW = bandwidthInput.substring(lastIndexBW);
 
-            DownloadUploadCalculator downUpCalc = new DownloadUploadCalculator(new SizeUnit(fileSize, SizeUnit.Size.valueOfLabel(sizeUnit)),
-                    new RateUnit(bandwidth, RateUnit.Rate.valueOfLabel(unitBW)));
+            DownloadUploadCalculator downUpCalc = new DownloadUploadCalculator(new SizeUnit(fileSize, SizeUnit.Size.valueOfLabel(sizeUnit.trim())),
+                    new RateUnit(bandwidth.trim(), RateUnit.Rate.valueOfLabel(unitBW)));
 
             String[] results = downUpCalc.calculate();
             System.out.println("\033[96;1mDownload or upload time needed is: "+Arrays.toString(results)+"\033[0m");
@@ -76,7 +76,7 @@ public class BandwidthCLI {
         } else if (choice == 3) {   // Website Bandwidth
             System.out.print("Input page views ([quantity] per [time unit]): ");
             input = scanner.nextLine();
-            String pgViews = validateInput(input, "\\d+(?:\\.\\d+)?[\\s]per[\\s]\\b(second|minute|hour|day|week|month|year|Second|Minute|Hour|Day|Week|Month|Year)\\b");
+            String pgViews = validateInput(input.toLowerCase(), "\\d+(?:\\.\\d+)?[\\s]per[\\s]\\b(second|minute|hour|day|week|month|year)\\b");
             String[] viewToken = pgViews.split(" ");
 
             System.out.print("Input average page size ([quantity] [data unit(B - TB)]): ");

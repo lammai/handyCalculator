@@ -1,11 +1,23 @@
 package Model;
 
-public class Binary extends Number<Binary> {
+/**
+ * This class defines a representation of
+ * a Binary number
+ */
+public class Binary extends Number{
 
     private static final int base = 2;
 
-    public Binary() {super();}
+    /**
+     * The default constructor set value to null.
+     */
+    public Binary() {super(null, base);}
 
+    /**
+     * This full constructor set the value and base of
+     * a number.
+     * @param aValue The String value to be set as the number's value.
+     */
     public Binary(String aValue) {
         super(aValue, base);
     }

@@ -1,9 +1,7 @@
 package View;
 
 import Controller.FileIO;
-
 import java.util.Scanner;
-
 import static View.BandwidthCLI.handleBandwidth;
 import static View.BinHexCLI.handleBinHex;
 
@@ -26,7 +24,7 @@ public class HandyCalculator {
         String userChoice;
         displayMainMenu();
         do {
-            System.out.print("\n\033[31;1;3mMain Menu Selection >>> \033[0m");
+            System.out.print("\n\033[31;1;3mMain Menu Selection\n (Press h to display menu) >>> \033[0m");
             input = scanner.nextLine();
             userChoice = validateInput(input, "[1-4QHqh]").toLowerCase();
 
@@ -89,7 +87,6 @@ public class HandyCalculator {
         System.out.println("\033[91m2\033[0m: Hex Calculator");
         System.out.println("\033[91m3\033[0m: Bandwidth Calculator");
         System.out.println("\033[91m4\033[0m: Input data file");
-        System.out.println("\033[91mh\033[0m: Display this menu");
         System.out.println("\033[91mq\033[0m: Quit");
     }
 }

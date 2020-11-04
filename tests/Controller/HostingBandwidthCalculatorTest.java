@@ -15,8 +15,9 @@ class HostingBandwidthCalculatorTest {
     @BeforeEach
     void setUp() {
         Decimal input = new Decimal("238090239845");
-        hostCalc1 = new HostingBandwidthCalculator(input, SizeUnit.Size.GIGABYTES, RateUnit.Rate.KILOBIT_PER_SECOND);
-        hostCalc2 = new HostingBandwidthCalculator(input, RateUnit.Rate.KILOBIT_PER_SECOND, SizeUnit.Size.GIGABYTES);
+
+        hostCalc1 = new HostingBandwidthCalculator(new SizeUnit("238090239845", SizeUnit.Size.GIGABYTES), RateUnit.Rate.KILOBIT_PER_SECOND);
+        hostCalc2 = new HostingBandwidthCalculator(new RateUnit("238090239845", RateUnit.Rate.KILOBIT_PER_SECOND), SizeUnit.Size.GIGABYTES);
     }
 
     @Test

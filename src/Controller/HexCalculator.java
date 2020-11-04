@@ -4,8 +4,17 @@ import Model.Binary;
 import Model.Decimal;
 import Model.Hex;
 
+/**
+ * This class provides the functionalities of a calculator that can handle
+ * basic Hex calculations as well as conversions.
+ */
 public class HexCalculator extends Calculator<Hex> {
 
+    /**
+     * The constructor set the Hex object
+     * to perform calculation/conversion on.
+     * @param num The Hex object.
+     */
     public HexCalculator(Hex num) {
         super(num);
     }
@@ -34,7 +43,7 @@ public class HexCalculator extends Calculator<Hex> {
     @Override
     public String[] divide(Hex oNum) {
         Decimal hex = this.convertToDec();
-        String[] remainder = new String[2];
+        String[] remainder = new String[2];     // Remainder[0] = Decimal remainder     Remainder[1] = Hex remainder
         remainder[0] = new DecimalCalculator(hex).divide(new HexCalculator(oNum).convertToDec())[0];
         remainder[1] = new DecimalCalculator(new Decimal(remainder[0])).convertToHex().getValue();
         this.getNum().setValue(new DecimalCalculator(hex).convertToHex().getValue());

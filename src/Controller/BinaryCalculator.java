@@ -4,11 +4,18 @@ import Model.Binary;
 import Model.Decimal;
 import Model.Hex;
 
+/**
+ * This class provides the functionalities of a calculator that can handle
+ * basic Binary calculations as well as conversions.
+ */
 public class BinaryCalculator extends Calculator<Binary> {
 
-    public BinaryCalculator(Binary value) {
-        super(value);
-    }
+    /**
+     * The constructor set the Binary object
+     * to perform calculation/conversion on.
+     * @param num The Binary object.
+     */
+    public BinaryCalculator(Binary num) { super(num); }
 
     @Override
     public void add(Binary oNum) {

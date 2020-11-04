@@ -6,11 +6,13 @@ import Controller.HexCalculator;
 import Model.Binary;
 import Model.Decimal;
 import Model.Hex;
-
 import java.util.Scanner;
-
 import static View.HandyCalculator.validateInput;
 
+/**
+ * This class defines the CLI for both Binary and Hex operations.
+ * It also contains methods useful for performing calculation in both CLI and text file environment.
+ */
 public class BinHexCLI {
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -33,22 +35,38 @@ public class BinHexCLI {
         return parseInp;
     }
 
+    /**
+     * This method determine the calculation operator from the user input
+     * and perform the corresponding Binary calculation.
+     * @param num The Binary number that represent the first variable.
+     * @param op The calculation operator (+,-,*,/).
+     * @param var The String value of the second variable.
+     * @return A String array with results in both Binary and Decimal, as well as remainder if any.
+     */
     public static String[] performCalculation(Binary num, String op, String var) {
-        String[] remainder = new String[2];
+        String[] results = new String[2];
         switch (op) {
             case "+" -> new BinaryCalculator(num).add(new Binary(var));
             case "-" -> new BinaryCalculator(num).subtract(new Binary(var));
             case "*" -> new BinaryCalculator(num).multiply(new Binary(var));
-            case "/" -> remainder = new BinaryCalculator(num).divide(new Binary(var));
+            case "/" -> results = new BinaryCalculator(num).divide(new Binary(var));
             default -> System.err.println("Calculation Error.");
         }
-        if (remainder[0] == null) {
+        if (results[0] == null) {
             return new String[]{ "Binary value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new BinaryCalculator(num).convertToDec().getValue())) };
         }
-        return new String[]{ String.format("Binary value: %s    Remainder: %s", num.getValue(), remainder[1]),
-                String.format("Decimal value: %.0f    Remainder: %s", Double.parseDouble(new BinaryCalculator(num).convertToDec().getValue()), remainder[0])};
+        return new String[]{ String.format("Binary value: %s    Remainder: %s", num.getValue(), results[1]),
+                String.format("Decimal value: %.0f    Remainder: %s", Double.parseDouble(new BinaryCalculator(num).convertToDec().getValue()), results[0])};
     }
 
+    /**
+     * This method determine the calculation operator from the user input
+     * and perform the corresponding Hexadecimal calculation.
+     * @param num The Hexadecimal number that represent the first variable.
+     * @param op The calculation operator (+,-,*,/).
+     * @param var The String value of the second variable.
+     * @return A String array with results in both Hexadecimal and Decimal, as well as remainder if any.
+     */
     public static String[] performCalculation(Hex num, String op, String var) {
         String[] remainder = new String[2];
         switch (op) {
@@ -65,6 +83,11 @@ public class BinHexCLI {
                 String.format("Decimal value: %.0f    Decimal remainder: %s", Double.parseDouble(new HexCalculator(num).convertToDec().getValue()), remainder[0])};
     }
 
+    /**
+     * This method handle taking inputs from the user and displaying results for the corresponding
+     * number system.
+     * @param numType The type of number system (Binary or Hex).
+     */
     public static void handleBinHex(NumberSystem numType) {
         System.out.printf("\n\n\033[1;4mSelect which %s operation to perform: \033[0m\n", numType.toString());
         System.out.printf("\033[91m1\033[0m: %s calculation\n", numType.toString());

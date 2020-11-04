@@ -3,19 +3,26 @@ package View;
 import Controller.DownloadUploadCalculator;
 import Controller.HostingBandwidthCalculator;
 import Controller.WebsiteBandwidthCalculator;
-import Model.Decimal;
 import Model.RateUnit;
 import Model.SizeUnit;
 import Model.TimeUnit;
 import java.util.Arrays;
 import java.util.Scanner;
-
 import static View.HandyCalculator.validateInput;
 
+/**
+ * This class defines the CLI for Bandwidth related operations.
+ * It mostly deals with taking user inputs feed it to the the controller package.
+ */
 public class BandwidthCLI {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * This method displays the bandwidth menu,
+     * process user inputs and perform validation if necessary,
+     * then perform calculation and display the results.
+     */
     public static void handleBandwidth() {
         System.out.println("\n\n\033[1;4mSelect which Bandwidth calculation to perform:\033[0m");
         System.out.println("\033[91m1\033[0m. Data unit converter:");
@@ -39,7 +46,7 @@ public class BandwidthCLI {
             SizeUnit.Size[] units = SizeUnit.Size.values();
             for (SizeUnit.Size unit : units) {         // Convert one data unit to every other data units.
                 if (unit != size.getUnit()) {
-                    String result = String.format("%f", Double.parseDouble(size.getValue()) * (size.getUnitInBits() / unit.toBits));
+                    String result = String.format("%f", Double.parseDouble(size.getValue()) * (size.getUnit().toBits / unit.toBits));
                     result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result; // Remove 0s trails
                     System.out.printf("\033[96;1m%s %s\033[0m\n", result, unit.toString().toLowerCase());
                 }
@@ -60,8 +67,8 @@ public class BandwidthCLI {
             String bandwidth = bandwidthInput.substring(0, lastIndexBW);
             String unitBW = bandwidthInput.substring(lastIndexBW);
 
-            DownloadUploadCalculator downUpCalc = new DownloadUploadCalculator(new Decimal(fileSize), SizeUnit.Size.valueOfLabel(sizeUnit),
-                                                    new Decimal(bandwidth), RateUnit.Rate.valueOfLabel(unitBW));
+            DownloadUploadCalculator downUpCalc = new DownloadUploadCalculator(new SizeUnit(fileSize, SizeUnit.Size.valueOfLabel(sizeUnit)),
+                    new RateUnit(bandwidth, RateUnit.Rate.valueOfLabel(unitBW)));
 
             String[] results = downUpCalc.calculate();
             System.out.println("\033[96;1mDownload or upload time needed is: "+Arrays.toString(results)+"\033[0m");
@@ -81,8 +88,8 @@ public class BandwidthCLI {
             input = scanner.nextLine();
             double redunFactor = Double.parseDouble(validateInput(input, "\\d+(?:\\.\\d+)?"));
 
-            WebsiteBandwidthCalculator webCalc = new WebsiteBandwidthCalculator(new Decimal(viewToken[0]), TimeUnit.Time.valueOfLabel(viewToken[2].toLowerCase()),
-                                                new Decimal(sizeToken[0]), SizeUnit.Size.valueOfLabel(sizeToken[1]), redunFactor);
+            WebsiteBandwidthCalculator webCalc = new WebsiteBandwidthCalculator(new TimeUnit(viewToken[0], TimeUnit.Time.valueOfLabel(viewToken[2].toLowerCase())),
+                    new SizeUnit(sizeToken[0], SizeUnit.Size.valueOfLabel(sizeToken[1])), redunFactor);
 
             String[] result = webCalc.calculate();
 
@@ -117,10 +124,10 @@ public class BandwidthCLI {
 
             HostingBandwidthCalculator hostCalc;
             if (convertTo.equals(bandUnit)) {
-                hostCalc = new HostingBandwidthCalculator(new Decimal(usageToken[0]), SizeUnit.Size.valueOfLabel(usageToken[1]), RateUnit.Rate.valueOfLabel(unit));
+                hostCalc = new HostingBandwidthCalculator(new SizeUnit(usageToken[0], SizeUnit.Size.valueOfLabel(usageToken[1])), RateUnit.Rate.valueOfLabel(unit));
                 usageToken[1] = usageToken[1] + " per month";
             } else {
-                hostCalc = new HostingBandwidthCalculator(new Decimal(usageToken[0]), RateUnit.Rate.valueOfLabel(usageToken[1]), SizeUnit.Size.valueOfLabel(unit));
+                hostCalc = new HostingBandwidthCalculator(new RateUnit(usageToken[0], RateUnit.Rate.valueOfLabel(usageToken[1])), SizeUnit.Size.valueOfLabel(unit));
             }
 
             String result = hostCalc.convert();

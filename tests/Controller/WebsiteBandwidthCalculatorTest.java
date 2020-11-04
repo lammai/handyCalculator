@@ -16,9 +16,9 @@ class WebsiteBandwidthCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        Decimal pageView = new Decimal("92273");
-        Decimal pageSize = new Decimal("22");
-        webCalc = new WebsiteBandwidthCalculator(pageView, TimeUnit.Time.YEAR, pageSize, SizeUnit.Size.TERABYTES, 2);
+        TimeUnit pageView = new TimeUnit("92273", TimeUnit.Time.YEAR);
+        SizeUnit pageSize = new SizeUnit("22", SizeUnit.Size.TERABYTES);
+        webCalc = new WebsiteBandwidthCalculator(pageView, pageSize, 2);
     }
 
     @Test

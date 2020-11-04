@@ -3,12 +3,20 @@ package Controller;
 import Model.Binary;
 import Model.Decimal;
 import Model.Hex;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * This class provides the functionalities of a calculator that can handle
+ * basic Decimal calculations as well as conversions.
+ */
 public class DecimalCalculator extends Calculator<Decimal> {
 
+    /**
+     * The constructor set the Decimal object
+     * to perform calculation/conversion on.
+     * @param num The Decimal object.
+     */
     public DecimalCalculator(Decimal num) {
         super(num);
     }

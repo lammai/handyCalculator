@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Decimal;
 import Model.RateUnit;
 import Model.SizeUnit;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +13,6 @@ class HostingBandwidthCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        Decimal input = new Decimal("238090239845");
-
         hostCalc1 = new HostingBandwidthCalculator(new SizeUnit("238090239845", SizeUnit.Size.GIGABYTES), RateUnit.Rate.KILOBIT_PER_SECOND);
         hostCalc2 = new HostingBandwidthCalculator(new RateUnit("238090239845", RateUnit.Rate.KILOBIT_PER_SECOND), SizeUnit.Size.GIGABYTES);
     }

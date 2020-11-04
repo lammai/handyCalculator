@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Decimal;
 import Model.RateUnit;
 import Model.SizeUnit;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,6 @@ class DownloadUploadCalculatorTest {
 
     private SizeUnit size;
     private RateUnit bandwidth;
-    private DownloadUploadCalculator downloadUploadCalculator, downloadUploadCalculator1, downloadUploadCalculator2;
 
     @BeforeEach
     void setUp() {

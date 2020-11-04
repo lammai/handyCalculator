@@ -9,11 +9,6 @@ public class Binary extends Number{
     private static final int base = 2;
 
     /**
-     * The default constructor set value to null.
-     */
-    public Binary() {super(null, base);}
-
-    /**
      * This full constructor set the value and base of
      * a number.
      * @param aValue The String value to be set as the number's value.

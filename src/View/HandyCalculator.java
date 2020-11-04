@@ -62,8 +62,8 @@ public class HandyCalculator {
      * @param regex The regular expression to match the input with.
      * @return A truth value base on the given input.
      */
-    public static boolean isGoodInput(String input, String regex) {
-        return input != null && input.matches(regex);
+    public static boolean isBadInput(String input, String regex) {
+        return (input==null || !input.matches(regex));
     }
 
     /**
@@ -73,7 +73,7 @@ public class HandyCalculator {
      * @return The validated input.
      */
     public static String validateInput(String input, String regex) {
-        while (!isGoodInput(input, regex)) {
+        while (isBadInput(input, regex)) {
             System.out.println("\033[31mInvalid\033[0m input, please try again:");
             System.out.print(">>> ");
             input = scanner.nextLine();

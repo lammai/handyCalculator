@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
 import static View.BinHexCLI.performCalculation;
-import static View.HandyCalculator.isGoodInput;
+import static View.HandyCalculator.isBadInput;
 
 /**
  * This class responsible for handling the file reading and writing.
@@ -73,21 +73,21 @@ public class FileIO {
         try {
             switch (input[1]) {
                 case "Binary" -> {
-                    if (!isGoodInput(input[3], "[0-1]+") || !isGoodInput(input[2], "[-+*/]") || !isGoodInput(input[4], "[0-1]+"))
+                    if (isBadInput(input[3], "[0-1]+") || isBadInput(input[2], "[-+*/]") || isBadInput(input[4], "[0-1]+"))
                         throw new IllegalArgumentException();
                     String[] result = performCalculation(new Binary(input[3]), input[2], input[4]);
                     out = String.format("%-34s    |   %s\n", result[0], result[1]);
                 }
                 case "Hexadecimal" -> {
-                    if (!isGoodInput(input[3], "[a-fA-F0-9]+") || !isGoodInput(input[2], "[-+*/]") || !isGoodInput(input[4], "[a-fA-F0-9]+"))
+                    if (isBadInput(input[3], "[a-fA-F0-9]+") || isBadInput(input[2], "[-+*/]") || isBadInput(input[4], "[a-fA-F0-9]+"))
                         throw new IllegalArgumentException();
                     String[] result = performCalculation(new Hex(input[3]), input[2], input[4]);
                     out = String.format("%-34s    |   %s\n", result[0], result[1]);
                 }
                 case "Download/Upload" -> {
-                    if (!input[2].equals("Time") || !isGoodInput(input[3], "[0-9]+")
-                            || !isGoodInput(input[4], "\\b(Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes)\\b") || !isGoodInput(input[5], "[0-1]+")
-                            || !isGoodInput(input[6], "[KMGT]?bit/s"))
+                    if (!input[2].equals("Time") || isBadInput(input[3], "[0-9]+")
+                            || isBadInput(input[4], "\\b(Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes)\\b") || isBadInput(input[5], "[0-1]+")
+                            || isBadInput(input[6], "[KMGT]?bit/s"))
                         throw new IllegalArgumentException();
 
                     String[] result = new DownloadUploadCalculator(new SizeUnit(input[3],
@@ -96,10 +96,10 @@ public class FileIO {
                     out = String.format("Time needed: %s\n", Arrays.toString(result));
                 }
                 case "Website" -> {
-                    if (!input[2].equals("Bandwidth") || !isGoodInput(input[3], "[0-9]+") || !input[4].equals("per")
-                            || !isGoodInput(input[5], "\\b(second|minute|hour|day|week|month|year|Second|Minute|Hour|Day|Week|Month|Year)\\b")
-                            || !isGoodInput(input[6], "[0-9]+") || !isGoodInput(input[7], "\\b(Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes)\\b")
-                            || !isGoodInput(input[8], "[0-9]+"))
+                    if (!input[2].equals("Bandwidth") || isBadInput(input[3], "[0-9]+") || !input[4].equals("per")
+                            || isBadInput(input[5], "\\b(second|minute|hour|day|week|month|year|Second|Minute|Hour|Day|Week|Month|Year)\\b")
+                            || isBadInput(input[6], "[0-9]+") || isBadInput(input[7], "\\b(Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes)\\b")
+                            || isBadInput(input[8], "[0-9]+"))
                         throw new IllegalArgumentException();
 
                     String[] results = new WebsiteBandwidthCalculator(new TimeUnit(input[3], TimeUnit.Time.valueOfLabel(input[5].toLowerCase())), // Adjust Size unit to be in the form
@@ -122,17 +122,17 @@ public class FileIO {
         try {
             switch (input[1]) {
                 case "Binary" -> {
-                    if (!input[2].equals("to") || !input[3].equals("Decimal") || !isGoodInput(input[4], "[0-9]+"))
+                    if (!input[2].equals("to") || !input[3].equals("Decimal") || isBadInput(input[4], "[0-9]+"))
                         throw new IllegalArgumentException();
                     out = String.format("Decimal value: %.0f\n", new BigDecimal(new BinaryCalculator(new Binary(input[4])).convertToDec().getValue()));
                 }
                 case "Hexadecimal" -> {
-                    if (!input[2].equals("to") || !input[3].equals("Decimal") || !isGoodInput(input[4], "[0-9]+"))
+                    if (!input[2].equals("to") || !input[3].equals("Decimal") || isBadInput(input[4], "[0-9]+"))
                         throw new IllegalArgumentException();
                     out = String.format("Decimal value: %.0f\n", new BigDecimal(new HexCalculator(new Hex(input[4])).convertToDec().getValue()));
                 }
                 case "Decimal" -> {
-                    if (!input[2].equals("to") || !isGoodInput(input[3], "\\b(Binary|Hexadecimal)\\b") || !isGoodInput(input[4], "[0-9]+"))
+                    if (!input[2].equals("to") || isBadInput(input[3], "\\b(Binary|Hexadecimal)\\b") || isBadInput(input[4], "[0-9]+"))
                         throw new IllegalArgumentException();
                     if (input[3].equals("Binary"))
                         out = String.format("Binary value: %s\n", new DecimalCalculator(new Decimal(input[4])).convertToBin().getValue());
@@ -141,8 +141,8 @@ public class FileIO {
                 }
                 case "Data" -> {
                     if (!input[2].equals("Unit") || !input[3].equals("to")
-                            || !isGoodInput(input[4], "\\b(bits|kilobits|megabits|gigabits|terabits|Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes)\\b")
-                            || !isGoodInput(input[5], "[0-9]+"))
+                            || isBadInput(input[4], "\\b(bits|kilobits|megabits|gigabits|terabits|Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes)\\b")
+                            || isBadInput(input[5], "[0-9]+"))
                         throw new IllegalArgumentException();
 
                     String convertToUnit;
@@ -156,9 +156,9 @@ public class FileIO {
                             SizeUnit.Size.valueOfLabel(convertToUnit).label);
                 }
                 case "Monthly" -> {
-                    if (!input[2].equals("Usage") || !input[3].equals("to") || !input[4].equals("Bandwidth") || !isGoodInput(input[5], "[0-9]+")
-                            || !isGoodInput(input[6], "\\b(Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes)\\b") || !isGoodInput(input[7], "[0-9]+")
-                            || !isGoodInput(input[8], "[KMGT]?bit/s"))
+                    if (!input[2].equals("Usage") || !input[3].equals("to") || !input[4].equals("Bandwidth") || isBadInput(input[5], "[0-9]+")
+                            || isBadInput(input[6], "\\b(Bytes|Kilobytes|Megabytes|Gigabytes|Terabytes)\\b") || isBadInput(input[7], "[0-9]+")
+                            || isBadInput(input[8], "[KMGT]?bit/s"))
                         throw new IllegalArgumentException();
 
                     String usageUnit = input[6].substring(0, 1).matches("[KMGT]") ? input[6].charAt(0) + "B" : "B";

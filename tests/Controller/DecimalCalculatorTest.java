@@ -5,9 +5,7 @@ import Model.Decimal;
 import Model.Hex;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;
@@ -58,8 +56,8 @@ class DecimalCalculatorTest {
 
     @Test
     void convert2Binary() {
-        Binary num1Bin = new DecimalCalculator(numInt1).convertToBin();
-        Binary num2Bin = new DecimalCalculator(numInt2).convertToBin();
+        Binary num1Bin = new DecimalCalculator(numInt1).toBinary();
+        Binary num2Bin = new DecimalCalculator(numInt2).toBinary();
 
         assertEquals(Long.toBinaryString(inputInt1), num1Bin.getValue());
         assertEquals(Long.toBinaryString(inputInt2), num2Bin.getValue());
@@ -67,8 +65,8 @@ class DecimalCalculatorTest {
 
     @Test
     void convert2Hex() {
-       Hex num1Hex = new DecimalCalculator(numInt1).convertToHex();
-       Hex num2Hex = new DecimalCalculator(numInt2).convertToHex();
+       Hex num1Hex = new DecimalCalculator(numInt1).toHex();
+       Hex num2Hex = new DecimalCalculator(numInt2).toHex();
 
         assertEquals(Long.toHexString(inputInt1).toUpperCase(), num1Hex.getValue());
         assertEquals(Long.toHexString(inputInt2).toUpperCase(), num2Hex.getValue());

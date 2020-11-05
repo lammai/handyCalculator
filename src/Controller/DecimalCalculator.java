@@ -48,17 +48,17 @@ public class DecimalCalculator extends Calculator<Decimal> {
     }
 
     @Override
-    public Decimal convertToDec() {
+    public Decimal toDecimal() {
         return this.getNum();
     }
 
     @Override
-    public Binary convertToBin() {
+    public Binary toBinary() {
         return new Binary(convertTo(2));
     }
 
     @Override
-    public Hex convertToHex() {
+    public Hex toHex() {
         return new Hex(convertTo(16));
     }
 }

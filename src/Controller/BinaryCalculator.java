@@ -19,49 +19,49 @@ public class BinaryCalculator extends Calculator<Binary> {
 
     @Override
     public void add(Binary oNum) {
-        Decimal bin = this.convertToDec();
-        new DecimalCalculator(bin).add(new BinaryCalculator(oNum).convertToDec());
-        this.getNum().setValue(new DecimalCalculator(bin).convertToBin().getValue());
+        Decimal bin = this.toDecimal();
+        new DecimalCalculator(bin).add(new BinaryCalculator(oNum).toDecimal());
+        this.getNum().setValue(new DecimalCalculator(bin).toBinary().getValue());
     }
 
     @Override
     public void subtract(Binary oNum) {
-        Decimal bin = this.convertToDec();
-        new DecimalCalculator(bin).subtract(new BinaryCalculator(oNum).convertToDec());
-        this.getNum().setValue(new DecimalCalculator(bin).convertToBin().getValue());
+        Decimal bin = this.toDecimal();
+        new DecimalCalculator(bin).subtract(new BinaryCalculator(oNum).toDecimal());
+        this.getNum().setValue(new DecimalCalculator(bin).toBinary().getValue());
     }
 
     @Override
     public void multiply(Binary oNum) {
-        Decimal bin = this.convertToDec();
-        new DecimalCalculator(bin).multiply(new BinaryCalculator(oNum).convertToDec());
-        this.getNum().setValue(new DecimalCalculator(bin).convertToBin().getValue());
+        Decimal bin = this.toDecimal();
+        new DecimalCalculator(bin).multiply(new BinaryCalculator(oNum).toDecimal());
+        this.getNum().setValue(new DecimalCalculator(bin).toBinary().getValue());
     }
 
     @Override
     public String[] divide(Binary oNum) {
-        Decimal bin = this.convertToDec();
+        Decimal bin = this.toDecimal();
         String[] remainder = new String[2];             // Remainder[0] = Decimal remainder     Remainder[1] = Binary remainder
-        remainder[0] = new DecimalCalculator(bin).divide(new BinaryCalculator(oNum).convertToDec())[0];
-        remainder[1] = new DecimalCalculator(new Decimal(remainder[0])).convertToBin().getValue();
-        this.getNum().setValue(new DecimalCalculator(bin).convertToBin().getValue());
+        remainder[0] = new DecimalCalculator(bin).divide(new BinaryCalculator(oNum).toDecimal())[0];
+        remainder[1] = new DecimalCalculator(new Decimal(remainder[0])).toBinary().getValue();
+        this.getNum().setValue(new DecimalCalculator(bin).toBinary().getValue());
         return remainder;
     }
 
     @Override
-    public Decimal convertToDec() {
-        return new Decimal(toDecimal());
+    public Decimal toDecimal() {
+        return new Decimal(convertToDecimal());
     }
 
     @Override
-    public Binary convertToBin() {
+    public Binary toBinary() {
         return this.getNum();
     }
 
     @Override
-    public Hex convertToHex() {
-        Decimal dec = this.convertToDec();
+    public Hex toHex() {
+        Decimal dec = this.toDecimal();
         DecimalCalculator decCalc = new DecimalCalculator(dec);
-        return decCalc.convertToHex();
+        return decCalc.toHex();
     }
 }

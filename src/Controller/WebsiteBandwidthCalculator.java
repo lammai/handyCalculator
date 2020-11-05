@@ -35,8 +35,8 @@ public class WebsiteBandwidthCalculator {
     public String[] calculate() {
         double pgView = Double.parseDouble(this.view.getValue());
         double pgSize = Double.parseDouble(this.size.getValue());
-        double bandwidthMbits = (pgView / view.getUnit().toSeconds) * (pgSize * SizeUnit.unitConvert(size.getUnit(), SizeUnit.Size.MEGABITS));
-        double bandwidthGB = (pgView/ TimeUnit.timeConvert(view.getUnit(), TimeUnit.Time.MONTH)) * (pgSize*SizeUnit.unitConvert(size.getUnit(), SizeUnit.Size.GIGABYTES));
+        double bandwidthMbits = (pgView / view.getUnit().toSeconds) * (pgSize * SizeUnit.getConversionFactor(size.getUnit(), SizeUnit.Size.MEGABITS));
+        double bandwidthGB = (pgView/ TimeUnit.timeConversionFactor(view.getUnit(), TimeUnit.Time.MONTH)) * (pgSize*SizeUnit.getConversionFactor(size.getUnit(), SizeUnit.Size.GIGABYTES));
 
         return new String[]{String.format("%.10f Mbits/s", bandwidthMbits),
                             String.format("%.10f GB per month", bandwidthGB),

@@ -33,7 +33,7 @@ public class DownloadUploadCalculator {
         double fileSize = Double.parseDouble(this.sizeU.getValue());
         double bndWidth = Double.parseDouble(this.rate.getValue());
 
-        double unitPerSecond = fileSize * SizeUnit.unitConvert(this.sizeU.getUnit(), this.rate.getUnit()) / bndWidth;
+        double unitPerSecond = fileSize * SizeUnit.getConversionFactor(this.sizeU.getUnit(), this.rate.getUnit()) / bndWidth;
         String day = String.format("%.0f days", Math.floor(unitPerSecond / TimeUnit.Time.DAY.toSeconds));
         String hour = String.format("%.0f hours", Math.floor((unitPerSecond % TimeUnit.Time.DAY.toSeconds)/TimeUnit.Time.HOUR.toSeconds));
         String minute = String.format("%.0f minutes", Math.floor((unitPerSecond % TimeUnit.Time.HOUR.toSeconds)/TimeUnit.Time.MINUTE.toSeconds));

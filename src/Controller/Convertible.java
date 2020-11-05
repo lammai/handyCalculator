@@ -14,17 +14,17 @@ public interface Convertible {
      * This method should return the Decimal object after conversion.
      * @return The converted Decimal.
      */
-    Decimal convertToDec();
+    Decimal toDecimal();
 
     /**
      * This method should return the Binary object after conversion.
      * @return The converted Binary.
      */
-    Binary convertToBin();
+    Binary toBinary();
 
     /**
      * This method should return the Hex object after conversion.
      * @return The converted Hex.
      */
-    Hex convertToHex();
+    Hex toHex();
 }

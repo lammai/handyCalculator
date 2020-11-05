@@ -82,7 +82,7 @@ public class TimeUnit extends Unit<TimeUnit.Time> {
      * @param to The Time unit to convert to.
      * @return The conversion factor.
      */
-    public static double timeConvert(Time from, Time to) {
+    public static double timeConversionFactor(Time from, Time to) {
         return from.toSeconds/to.toSeconds;
     }
 }

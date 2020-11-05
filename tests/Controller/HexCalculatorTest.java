@@ -53,7 +53,7 @@ class HexCalculatorTest {
 
     @Test
     void convert2Decimal() {
-        Decimal convertedDec = new HexCalculator(num1).convertToDec();
+        Decimal convertedDec = new HexCalculator(num1).toDecimal();
         assertEquals(input1+"", new BigDecimal(convertedDec.getValue()).toPlainString());
     }
 }

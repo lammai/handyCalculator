@@ -1,8 +1,6 @@
 package View;
 
 import Controller.FileIO;
-import Model.SizeUnit;
-
 import java.util.Scanner;
 import static View.BandwidthCLI.handleBandwidth;
 import static View.BinHexCLI.handleBinHex;

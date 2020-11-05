@@ -89,7 +89,7 @@ public abstract class Calculator<T extends Number> implements Convertible{
      * This method handle the conversion of a Binary or Hex number to a Decimal.
      * @return The converted decimal value in the form of a String.
      */
-    public String toDecimal() {
+    public String convertToDecimal() {
         String val = this.getNum().getValue();
         String negative = "";
         if (this.getNum().getValue().charAt(0) == '-') {

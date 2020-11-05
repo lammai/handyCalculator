@@ -124,20 +124,20 @@ public class FileIO {
                 case "Binary" -> {
                     if (!input[2].equals("to") || !input[3].equals("Decimal") || isBadInput(input[4], "[0-9]+"))
                         throw new IllegalArgumentException();
-                    out = String.format("Decimal value: %.0f\n", new BigDecimal(new BinaryCalculator(new Binary(input[4])).convertToDec().getValue()));
+                    out = String.format("Decimal value: %.0f\n", new BigDecimal(new BinaryCalculator(new Binary(input[4])).toDecimal().getValue()));
                 }
                 case "Hexadecimal" -> {
                     if (!input[2].equals("to") || !input[3].equals("Decimal") || isBadInput(input[4], "[0-9]+"))
                         throw new IllegalArgumentException();
-                    out = String.format("Decimal value: %.0f\n", new BigDecimal(new HexCalculator(new Hex(input[4])).convertToDec().getValue()));
+                    out = String.format("Decimal value: %.0f\n", new BigDecimal(new HexCalculator(new Hex(input[4])).toDecimal().getValue()));
                 }
                 case "Decimal" -> {
                     if (!input[2].equals("to") || isBadInput(input[3], "\\b(Binary|Hexadecimal)\\b") || isBadInput(input[4], "[0-9]+"))
                         throw new IllegalArgumentException();
                     if (input[3].equals("Binary"))
-                        out = String.format("Binary value: %s\n", new DecimalCalculator(new Decimal(input[4])).convertToBin().getValue());
+                        out = String.format("Binary value: %s\n", new DecimalCalculator(new Decimal(input[4])).toBinary().getValue());
                     else
-                        out = String.format("Hexadecimal value: %s\n", new DecimalCalculator(new Decimal(input[4])).convertToHex().getValue());
+                        out = String.format("Hexadecimal value: %s\n", new DecimalCalculator(new Decimal(input[4])).toHex().getValue());
                 }
                 case "Data" -> {
                     if (!input[2].equals("Unit") || !input[3].equals("to")

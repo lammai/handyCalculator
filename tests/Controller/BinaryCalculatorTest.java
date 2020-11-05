@@ -33,7 +33,7 @@ class BinaryCalculatorTest {
     void subtract2Binary() {
         new BinaryCalculator(numInt1).subtract(numInt2);
         assertEquals(new BigDecimal(inputInt1).subtract(new BigDecimal(inputInt2)).toPlainString(),
-                String.format("%s", new BigDecimal(new BinaryCalculator(numInt1).convertToDec().getValue()).toPlainString()));
+                String.format("%s", new BigDecimal(new BinaryCalculator(numInt1).toDecimal().getValue()).toPlainString()));
     }
 
     @Test
@@ -51,7 +51,7 @@ class BinaryCalculatorTest {
 
     @Test
     void convert2Decimal() {
-        Decimal convertedDec = new BinaryCalculator(numInt1).convertToDec();
+        Decimal convertedDec = new BinaryCalculator(numInt1).toDecimal();
         assertEquals(inputInt1+"", new BigDecimal(convertedDec.getValue()).toPlainString());
     }
 }

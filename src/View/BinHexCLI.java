@@ -53,10 +53,10 @@ public class BinHexCLI {
             default -> System.err.println("Calculation Error.");
         }
         if (results[0] == null) {
-            return new String[]{ "Binary value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new BinaryCalculator(num).convertToDec().getValue())) };
+            return new String[]{ "Binary value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new BinaryCalculator(num).toDecimal().getValue())) };
         }
         return new String[]{ String.format("Binary value: %s    Remainder: %s", num.getValue(), results[1]),
-                String.format("Decimal value: %.0f    Remainder: %s", Double.parseDouble(new BinaryCalculator(num).convertToDec().getValue()), results[0])};
+                String.format("Decimal value: %.0f    Remainder: %s", Double.parseDouble(new BinaryCalculator(num).toDecimal().getValue()), results[0])};
     }
 
     /**
@@ -77,10 +77,10 @@ public class BinHexCLI {
             default -> System.err.println("Calculation Error.");
         }
         if (remainder[0] == null) {
-            return new String[]{ "Hex value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new HexCalculator(num).convertToDec().getValue())) };
+            return new String[]{ "Hex value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new HexCalculator(num).toDecimal().getValue())) };
         }
         return new String[]{ String.format("Hex value: %s    Hex remainder: %s", num.getValue(), remainder[1]),
-                String.format("Decimal value: %.0f    Decimal remainder: %s", Double.parseDouble(new HexCalculator(num).convertToDec().getValue()), remainder[0])};
+                String.format("Decimal value: %.0f    Decimal remainder: %s", Double.parseDouble(new HexCalculator(num).toDecimal().getValue()), remainder[0])};
     }
 
     /**
@@ -131,18 +131,18 @@ public class BinHexCLI {
             String regex = numType == NumberSystem.Binary ? "[-]?[0-1]+" : "[-]?[a-fA-F0-9]+";
             String num = validateInput(inp, regex);
             if (numType == NumberSystem.Binary)
-                System.out.printf("Decimal value: \033[96;1m%s\033[0m\n", new BinaryCalculator(new Binary(num)).convertToDec().getValue());
+                System.out.printf("Decimal value: \033[96;1m%s\033[0m\n", new BinaryCalculator(new Binary(num)).toDecimal().getValue());
             else
-                System.out.printf("Decimal value: \033[96;1m%s\033[0m\n", new HexCalculator(new Hex(num)).convertToDec().getValue());
+                System.out.printf("Decimal value: \033[96;1m%s\033[0m\n", new HexCalculator(new Hex(num)).toDecimal().getValue());
 
         } else {            // Decimal to Binary/Hex conversions
             System.out.print("Input decimal: ");
             String inp = scanner.nextLine();
             String decimal = validateInput(inp, "[-]?[0-9]+");
             if (numType == NumberSystem.Binary)
-                System.out.printf("%s value: \033[96;1m%s\033[0m\n", numType.toString(), new DecimalCalculator(new Decimal(decimal)).convertToBin().getValue());
+                System.out.printf("%s value: \033[96;1m%s\033[0m\n", numType.toString(), new DecimalCalculator(new Decimal(decimal)).toBinary().getValue());
             else
-                System.out.printf("%s value: \033[96;1m%s\033[0m\n", numType.toString(), new DecimalCalculator(new Decimal(decimal)).convertToHex().getValue());
+                System.out.printf("%s value: \033[96;1m%s\033[0m\n", numType.toString(), new DecimalCalculator(new Decimal(decimal)).toHex().getValue());
 
         }
     }

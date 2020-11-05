@@ -85,7 +85,7 @@ public class SizeUnit extends Unit<SizeUnit.Size> {
      * @param to The Size unit to convert to.
      * @return The conversion factor.
      */
-    public static double unitConvert(Size from, Size to) { return from.toBits/to.toBits; }
+    public static double getConversionFactor(Size from, Size to) { return from.toBits/to.toBits; }
 
     /**
      * This method allows for conversion of Size unit to a Rate unit.
@@ -93,7 +93,7 @@ public class SizeUnit extends Unit<SizeUnit.Size> {
      * @param to The Rate unit to convert to.
      * @return The conversion factor.
      */
-    public static double unitConvert(Size from, RateUnit.Rate to) { return from.toBits/to.toBits; }
+    public static double getConversionFactor(Size from, RateUnit.Rate to) { return from.toBits/to.toBits; }
 
     /**
      * This method allows for conversion of Rate unit to a Size unit.
@@ -101,5 +101,5 @@ public class SizeUnit extends Unit<SizeUnit.Size> {
      * @param to The Size unit to convert to.
      * @return The conversion factor.
      */
-    public static double unitConvert(RateUnit.Rate from, Size to) { return from.toBits/to.toBits; }
+    public static double getConversionFactor(RateUnit.Rate from, Size to) { return from.toBits/to.toBits; }
 }

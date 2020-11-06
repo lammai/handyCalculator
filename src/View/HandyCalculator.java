@@ -19,7 +19,8 @@ public class HandyCalculator {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("\033[96m<---------Handy Calculator--------->\033[0m");
+        System.out.println("\033[96m█▀▀ ▄▀█ █░░ █▀▀ █░█ █░░ ▄▀█ ▀█▀ █▀█ █▀█\n" +
+                                   "█▄▄ █▀█ █▄▄ █▄▄ █▄█ █▄▄ █▀█ ░█░ █▄█ █▀▄\033[0m");
         String input;
         String userChoice;
         displayMainMenu();

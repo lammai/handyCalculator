@@ -6,6 +6,8 @@ import Controller.HexCalculator;
 import Model.Binary;
 import Model.Decimal;
 import Model.Hex;
+
+import java.util.Arrays;
 import java.util.Scanner;
 import static View.HandyCalculator.validateInput;
 
@@ -29,7 +31,7 @@ public class BinHexCLI {
         if (calcNumbers.length == 2) {
             parseInp[0] = calcNumbers[0].trim();
             parseInp[1] = String.valueOf(calculation.charAt(calcNumbers[0].length()));
-            parseInp[2] = calcNumbers[1].trim();
+            parseInp[2] = calcNumbers[1].trim().matches("0+") ? null : calcNumbers[1].trim();
         }
 
         return parseInp;
@@ -106,7 +108,7 @@ public class BinHexCLI {
 
             calculation = validateInput(input, regex);
             String[] parseInp = splitCalculation(calculation);
-
+            System.out.println(Arrays.toString(parseInp));
             while (parseInp[0] == null || parseInp[1] == null || parseInp[2] == null) {   // calculation input validation loop
                 System.out.println("\033[31mPlease input valid calculation.\033[0m");
                 System.out.print(">>> ");

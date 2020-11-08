@@ -1,0 +1,60 @@
+Calculate Binary + 1010 1010
+Calculate Binary - 1010 1010
+Calculate Binary * 1010 1010
+Calculate Binary / 1010 1010
+Calculate Hexadecimal + DAD DAD
+Calculate Hexadecimal - DaD DAD
+Calculate Hexadecimal * DAD DAd
+Calculate Hexadecimal / dad dAD
+Convert Binary to Decimal 0
+Convert Binary to Decimal 1111111111111111
+Convert Decimal to Binary 0
+Convert Decimal to Binary 65535
+Convert Hexadecimal to Decimal 0
+Convert Headecimal to Decimal DADA
+Convert Decimal to Hexadecimal 0
+Convert Decimal to Hexadecimal 65535
+Convert Data Unit to bits 1
+Convert Data Unit to kilobits 223
+Convert Data Unit to megabits 345
+Convert Data Unit to gigabits 1000
+Convert Data Unit to terabits 1
+Convert Data Unit to Bytes 1000
+Convert Data Unit to Kilobytes 188
+Convert Data Unit to Megabytes 134
+Convert Data Unit to Gigabytes 165
+Convert Data Unit to Terabytes 1000
+Calculate Download/Upload Time 1 Bytes 1000 bit/s
+Calculate Download/Upload Time 1 Kilobytes 1000 Kbit/s
+Calculate Download/Upload Time 1 Megabytes 1000 Mbit/s
+Calculate Download/Upload Time 1 Gigabytes 1000 Gbit/s
+Calculate Download/Upload Time 1 Terabytes 1000 Tbit/s
+Calculate Download/Upload Time 1000 Bytes 1 Tbit/s
+Calculate Download/Upload Time 1000 Kilobytes 1 Mbit/s
+Calculate Download/Upload Time 1000 Megabytes 1 Gbit/s
+Calculate Download/Upload Time 1000 Gigabytes 1 Kbit/s
+Calculate Download/Upload Time 1000 Terabytes 1 bit/s
+Calculate Website Bandwidth 1 per second 1 Bytes 1
+Calculate Website Bandwidth 1000 per second 1024 Bytes 10
+Calculate Website Bandwidth 1 per minute 1 Kilobytes 1
+Calculate Website Bandwidth 1000 per minute 1024 Kilobytes 10
+Calculate Website Bandwidth 1 per hour 1 Megabytes 1
+Calculate Website Bandwidth 1000 per hour 1024 Megabytes 10
+Calculate Website Bandwidth 1 per day 1 Gigabytes 1
+Calculate Website Bandwidth 1000 per day 1024 Gigabytes 10
+Calculate Website Bandwidth 1 per week 1 Gigabytes 1
+Calculate Website Bandwidth 1000 per week 1024 Gigabytes 10
+Calculate Website Bandwidth 1 per month 1 Terabytes 1
+Calculate Website Bandwidth 1000 per month 1024 Terabytes 10
+Calculate Website Bandwidth 1 per year 1 Kilobytes 1
+Calculate Website Bandwidth 1000 per year 1024 Kilobytes 10
+Convert Monthly Usage to Bandwidth 1 Bytes 1 bit/s
+Convert Monthly Usage to Bandwidth 1 Kilobytes 1 Kbit/s
+Convert Monthly Usage to Bandwidth 1 Megabytes 1 Mbit/s
+Convert Monthly Usage to Bandwidth 1 Gigabytes 1 Gbit/s
+Convert Monthly Usage to Bandwidth 1 Terabytes 1 Tbit/s
+Convert Monthly Usage to Bandwidth 1000 Bytes 1 bit/s
+Convert Monthly Usage to Bandwidth 1 Kilobytes 1000 Kbit/s
+Convert Monthly Usage to Bandwidth 1000 Megabytes 1 Mbit/s
+Convert Monthly Usage to Bandwidth 1 Gigabytes 1000 Gbit/s
+Convert Monthly Usage to Bandwidth 1000 Terabytes 1 Tbit/s

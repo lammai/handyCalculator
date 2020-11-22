@@ -28,6 +28,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     public CalculatorGUI() {
         initComponents();
+        jScrollPane1.setBorder(null);
         cardLayout = (CardLayout)(calcMainPane.getLayout());
     }
 
@@ -531,9 +532,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
         dec2BinHeader1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         resultArea.setEditable(false);
+        resultArea.setBackground(new java.awt.Color(51, 51, 51));
         resultArea.setColumns(20);
+        resultArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        resultArea.setForeground(new java.awt.Color(255, 255, 255));
         resultArea.setRows(5);
-        resultArea.setSelectionColor(new java.awt.Color(102, 102, 102));
+        resultArea.setBorder(null);
+        resultArea.setSelectionColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(resultArea);
 
         javax.swing.GroupLayout resultPaneLayout = new javax.swing.GroupLayout(resultPane);
@@ -889,12 +894,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Metal".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Metal".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(CalculatorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

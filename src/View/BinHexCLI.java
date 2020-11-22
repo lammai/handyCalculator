@@ -31,7 +31,7 @@ public class BinHexCLI {
         if (calcNumbers.length == 2) {
             parseInp[0] = calcNumbers[0].trim();
             parseInp[1] = String.valueOf(calculation.charAt(calcNumbers[0].length()));
-            parseInp[2] = calcNumbers[1].trim().matches("0+") ? null : calcNumbers[1].trim();
+            parseInp[2] = calcNumbers[1].trim().matches("0+") && parseInp[1].equals("/") ? null : calcNumbers[1].trim();
         }
 
         return parseInp;

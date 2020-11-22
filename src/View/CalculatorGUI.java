@@ -300,6 +300,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         calculationEntry.setText("1010 + 1010");
         calculationEntry.setPreferredSize(new java.awt.Dimension(300, 30));
+        calculationEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
         calculationEntry.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 calculationEntryFocusGained(evt);
@@ -796,13 +797,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
             resetTabColor(fileIOTab);
     }
 
-    private static final char[] allowedBinaryChars = {'0','1',' '}; //should this include space char?
+    private static final char[] allowedBinaryChars = {'0','1'};
     private static final char[] allowedOperators = {'+','-','*','/'};
     private void calculationEntryKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         // Not allowing any keys besides 0s and 1s, space, and operators
         char c = evt.getKeyChar();
-        if (new String(allowedBinaryChars).indexOf(c) == -1 && new String(allowedOperators).indexOf(c) == -1) {
+        if (new String(allowedBinaryChars).indexOf(c) == -1 && new String(allowedOperators).indexOf(c) == -1 && c != ' ') {
             evt.consume();
         }
     }
@@ -900,7 +901,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 //                    break;
 //                }
 //            }
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(CalculatorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

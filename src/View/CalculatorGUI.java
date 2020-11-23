@@ -5,7 +5,10 @@
  */
 package View;
 
+import Controller.BinaryCalculator;
+import Controller.DecimalCalculator;
 import Model.Binary;
+import Model.Decimal;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -80,10 +83,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
         decValueEntry = new javax.swing.JTextField();
         equalDec2Bin = new javax.swing.JLabel();
         clearDec2Bin = new javax.swing.JLabel();
+        decimalBinInvalidText = new javax.swing.JLabel();
         resultPane = new javax.swing.JPanel();
         dec2BinHeader1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        resultArea = new javax.swing.JTextArea();
+        binResultArea = new javax.swing.JTextArea();
         hexPane = new javax.swing.JPanel();
         hexText = new javax.swing.JLabel();
         bandwidthPane = new javax.swing.JPanel();
@@ -344,22 +348,21 @@ public class CalculatorGUI extends javax.swing.JFrame {
                         .addGroup(binCalcPaneLayout.createSequentialGroup()
                                 .addGroup(binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(binCalcPaneLayout.createSequentialGroup()
-                                                .addGap(60, 60, 60)
-                                                .addGroup(binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addContainerGap()
+                                                .addComponent(binaryCalculationHeader))
+                                        .addGroup(binCalcPaneLayout.createSequentialGroup()
+                                                .addGap(45, 45, 45)
+                                                .addComponent(calcEntryText)
+                                                .addGap(5, 5, 5)
+                                                .addGroup(binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                         .addGroup(binCalcPaneLayout.createSequentialGroup()
-                                                                .addGap(150,150,150)
+                                                                .addGap(0, 0, 0)
                                                                 .addComponent(calcInvalidText)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(equalButton)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(clearButton))
-                                                        .addGroup(binCalcPaneLayout.createSequentialGroup()
-                                                                .addComponent(calcEntryText)
-                                                                .addGap(5, 5, 5)
-                                                                .addComponent(calculationEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGroup(binCalcPaneLayout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .addComponent(binaryCalculationHeader)))
+                                                        .addComponent(calculationEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(70, Short.MAX_VALUE))
         );
         binCalcPaneLayout.setVerticalGroup(
@@ -409,8 +412,18 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         equalBin2Dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalBin2Dec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                equalBin2DecMouseClicked(evt);
+            }
+        });
 
         clearBin2Dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearBin2Dec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearBin2DecMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout binToDecPaneLayout = new javax.swing.GroupLayout(binToDecPane);
         binToDecPane.setLayout(binToDecPaneLayout);
@@ -479,8 +492,22 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         equalDec2Bin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalDec2Bin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                equalDec2BinMouseClicked(evt);
+            }
+        });
 
         clearDec2Bin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearDec2Bin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearDec2BinMouseClicked(evt);
+            }
+        });
+
+        decimalBinInvalidText.setForeground(new java.awt.Color(255, 51, 51));
+        decimalBinInvalidText.setText("Invalid input!");
+        decimalBinInvalidText.setVisible(false);
 
         javax.swing.GroupLayout decToBinPaneLayout = new javax.swing.GroupLayout(decToBinPane);
         decToBinPane.setLayout(decToBinPaneLayout);
@@ -492,15 +519,16 @@ public class CalculatorGUI extends javax.swing.JFrame {
                                 .addContainerGap(72, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decToBinPaneLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(decValueText)
+                                .addGap(5, 5, 5)
+                                .addGroup(decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(decToBinPaneLayout.createSequentialGroup()
+                                                .addComponent(decimalBinInvalidText)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(equalDec2Bin)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(clearDec2Bin))
-                                        .addGroup(decToBinPaneLayout.createSequentialGroup()
-                                                .addComponent(decValueText)
-                                                .addGap(5, 5, 5)
-                                                .addComponent(decValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(decValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(101, 101, 101))
         );
         decToBinPaneLayout.setVerticalGroup(
@@ -514,10 +542,15 @@ public class CalculatorGUI extends javax.swing.JFrame {
                                                 .addGap(8, 8, 8)
                                                 .addComponent(decValueText))
                                         .addComponent(decValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(equalDec2Bin)
-                                        .addComponent(clearDec2Bin))
+                                        .addGroup(decToBinPaneLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(equalDec2Bin)
+                                                        .addComponent(clearDec2Bin)))
+                                        .addGroup(decToBinPaneLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(decimalBinInvalidText)))
                                 .addGap(16, 16, 16))
         );
 
@@ -532,38 +565,36 @@ public class CalculatorGUI extends javax.swing.JFrame {
         dec2BinHeader1.setText("Result");
         dec2BinHeader1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        resultArea.setEditable(false);
-        resultArea.setBackground(new java.awt.Color(51, 51, 51));
-        resultArea.setColumns(20);
-        resultArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        resultArea.setForeground(new java.awt.Color(255, 255, 255));
-        resultArea.setRows(5);
-        resultArea.setBorder(null);
-        resultArea.setSelectionColor(new java.awt.Color(0, 0, 0));
-        jScrollPane1.setViewportView(resultArea);
+        binResultArea.setEditable(false);
+        binResultArea.setBackground(new java.awt.Color(51, 51, 51));
+        binResultArea.setColumns(20);
+        binResultArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        binResultArea.setForeground(new java.awt.Color(255, 255, 255));
+        binResultArea.setRows(5);
+        binResultArea.setBorder(null);
+        binResultArea.setSelectionColor(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setViewportView(binResultArea);
 
         javax.swing.GroupLayout resultPaneLayout = new javax.swing.GroupLayout(resultPane);
         resultPane.setLayout(resultPaneLayout);
         resultPaneLayout.setHorizontalGroup(
                 resultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(resultPaneLayout.createSequentialGroup()
-                                .addContainerGap(60, Short.MAX_VALUE)
-                                .addGroup(resultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPaneLayout.createSequentialGroup()
-                                                .addComponent(dec2BinHeader1)
-                                                .addGap(69, 69, 69))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPaneLayout.createSequentialGroup()
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(61, 61, 61))))
+                                .addContainerGap(123, Short.MAX_VALUE)
+                                .addComponent(dec2BinHeader1)
+                                .addGap(69, 69, 69))
+                        .addGroup(resultPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1)
+                                .addContainerGap())
         );
         resultPaneLayout.setVerticalGroup(
                 resultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(resultPaneLayout.createSequentialGroup()
                                 .addGap(0, 0, 0)
                                 .addComponent(dec2BinHeader1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, 0)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
         );
 
         binaryPane.add(resultPane);
@@ -705,6 +736,15 @@ public class CalculatorGUI extends javax.swing.JFrame {
         System.exit(0);
     }
 
+    private void fileIOTabMousePressed(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        cardLayout.show(calcMainPane, "fileCard");
+        setTabColor(fileIOTab);
+        resetTabColor(binaryTab);
+        resetTabColor(hexTab);
+        resetTabColor(bandwidthTab);
+    }
+
     private void bandwidthTabMousePressed(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         cardLayout.show(calcMainPane, "bandwidthCard");
@@ -730,15 +770,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
         resetTabColor(hexTab);
         resetTabColor(bandwidthTab);
         resetTabColor(fileIOTab);
-    }
-
-    private void fileIOTabMousePressed(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-        cardLayout.show(calcMainPane, "fileCard");
-        setTabColor(fileIOTab);
-        resetTabColor(binaryTab);
-        resetTabColor(hexTab);
-        resetTabColor(bandwidthTab);
     }
 
     private void binaryTabMouseEntered(java.awt.event.MouseEvent evt) {
@@ -808,18 +839,22 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private boolean firstFocus = true;
+    private boolean firstFocusCalc = true;
     private void calculationEntryFocusGained(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-        if (firstFocus) {
+        if (firstFocusCalc) {
             calculationEntry.setText("");   //Careful: if user never focus on textField, getText() will return the default String: "1010 + 1010"
-            firstFocus = false;
+            firstFocusCalc = false;
         }
     }
 
+    private boolean firstFocusBin = true;
     private void binValueEntryFocusGained(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-        binValueEntry.setText("");
+        if (firstFocusBin) {
+            binValueEntry.setText("");
+            firstFocusBin = false;
+        }
     }
 
     private void binValueEntryKeyTyped(java.awt.event.KeyEvent evt) {
@@ -830,23 +865,26 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
+    private boolean firstFocusDecB = true;
     private void decValueEntryFocusGained(java.awt.event.FocusEvent evt) {
         // TODO add your handling code here:
-        decValueEntry.setText("");
+        if (firstFocusDecB) {
+            decValueEntry.setText("");
+            firstFocusDecB = false;
+        }
     }
 
     private static final char[] allowedDecimalChars = {'2','3','4','5','6','7','8','9'};
     private void decValueEntryKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (new String(allowedBinaryChars).indexOf(c) == -1 && new String(allowedDecimalChars).indexOf(c) == -1) {
+        if (new String(allowedBinaryChars).indexOf(c) == -1 && new String(allowedDecimalChars).indexOf(c) == -1 && c != '-') {
             evt.consume();
         }
     }
 
     private void clearButtonMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        System.out.println("Clear button pressed");
         calculationEntry.setText("");
     }
 
@@ -863,10 +901,41 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 calcInvalidText.setVisible(true);
             } else {
                 String[] result = performCalculation(num1, calculation[1], calculation[2]);
-                resultArea.append(String.format("%s %s %s =\n%s\n%s\n-----------------------------\n", calculation[0],calculation[1],calculation[2], result[0], result[1]));
+                binResultArea.append(String.format("%s %s %s =\n%s\n%s\n-----------------------------\n", calculation[0],calculation[1],calculation[2], result[0], result[1]));
             }
         } else {
             calcInvalidText.setVisible(true);
+        }
+    }
+
+    private void clearBin2DecMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        binValueEntry.setText("");
+    }
+
+    private void equalBin2DecMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add Binary to Decimal conversion:
+        if (!binValueEntry.getText().equals("")) {
+            String convertedDec = new BinaryCalculator(new Binary(binValueEntry.getText())).toDecimal().getValue();
+            binResultArea.append(String.format("Binary: %s\nDecimal: %s\n-----------------------------\n", binValueEntry.getText(), convertedDec));
+        }
+    }
+
+    private void clearDec2BinMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        decValueEntry.setText("");
+    }
+
+    private void equalDec2BinMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        String regex = "[-]?[0-9]+";
+        if (decValueEntry.getText().matches(regex)) {
+            decimalBinInvalidText.setVisible(false);
+            String convertedBin = new DecimalCalculator(new Decimal(decValueEntry.getText())).toBinary().getValue();
+            binResultArea.append(String.format("Decimal: %s\nBinary: %s\n-----------------------------\n", decValueEntry.getText(), convertedBin));
+        } else {
+            //show invalid text label
+            decimalBinInvalidText.setVisible(true);
         }
     }
 
@@ -950,6 +1019,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JPanel decToBinPane;
     private javax.swing.JTextField decValueEntry;
     private javax.swing.JLabel decValueText;
+    private javax.swing.JLabel decimalBinInvalidText;
     private javax.swing.JLabel designedBy;
     private javax.swing.JLabel equalBin2Dec;
     private javax.swing.JLabel equalButton;
@@ -962,7 +1032,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel hexText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea resultArea;
+    private javax.swing.JTextArea binResultArea;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel minimizeButton;
     private javax.swing.JPanel resultPane;

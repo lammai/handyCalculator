@@ -39,7 +39,12 @@ public class BandwidthCLI {
             input = scanner.nextLine().trim();                              //Using regular expression to validate input
             String validatedInput = validateInput(input, "[0-9]+[\\s]?[kmgtKMGT]?[bB]");
 
-            SizeUnit.Size inputUnit = SizeUnit.Size.valueOfLabel(validatedInput.substring(validatedInput.length()-2).trim());
+            String getUnit = validatedInput.substring(validatedInput.length() - 2);
+            String generalUnit = Character.isUpperCase(validatedInput.charAt(validatedInput.length()-2)) ?
+                    getUnit.toUpperCase().trim() :
+                    getUnit.toLowerCase().trim();
+
+            SizeUnit.Size inputUnit = SizeUnit.Size.valueOfLabel(generalUnit);
             SizeUnit size = new SizeUnit(validatedInput.substring(0, validatedInput.length()-2).trim(), inputUnit);
 
             System.out.printf("%s is equivalent to any of the following:\n", validatedInput);
@@ -48,7 +53,7 @@ public class BandwidthCLI {
                 if (unit != size.getUnit()) {
                     String result = ""+((Double.parseDouble(size.getValue()) * (size.getUnit().toBits / unit.toBits)));
                     result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result; // Remove 0s trails
-                    System.out.printf("\033[96;1m%s %s\033[0m\n", result, unit.toString().toLowerCase());
+                    System.out.printf("\033[96;1m%s %s\033[0m\n", result, unit.toString());
                 }
             }
 

@@ -48,12 +48,12 @@ public class HostingBandwidthCalculator {
             double usage = Double.parseDouble(new BigDecimal(monthlyUsage.getValue()).toPlainString());
             String result = String.format("%f", usage * SizeUnit.getConversionFactor(monthlyUsage.getUnit(), bandwidth.getUnit()) / TimeUnit.Time.MONTH.toSeconds);
             result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result;
-            return String.format("%s %s", result, bandwidth.getUnit().label);
+            return String.format("%s %s", result, bandwidth.getUnit());
         } else {
             double usage = Double.parseDouble(new BigDecimal(bandwidth.getValue()).toPlainString());
             String result = String.format("%f", usage * SizeUnit.getConversionFactor(bandwidth.getUnit(), monthlyUsage.getUnit()) * TimeUnit.Time.MONTH.toSeconds);
             result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result;
-            return String.format("%s %s", result, monthlyUsage.getUnit().label + " per month");
+            return String.format("%s %s", result, monthlyUsage.getUnit() + " per month");
         }
     }
 }

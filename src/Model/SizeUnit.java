@@ -18,16 +18,16 @@ public class SizeUnit extends Unit<SizeUnit.Size> {
      */
     public enum Size {
 
-        BITS(1, "b"),
-        KILOBITS(1e3, "kb"),
-        MEGABITS(1e6, "mb"),
-        GIGABITS(1e9, "gb"),
-        TERABITS(1e12, "tb"),
-        BYTES(8, "B"),
-        KILOBYTES(8e3, "KB"),
-        MEGABYTES(8e6, "MB"),
-        GIGABYTES(8e9, "GB"),
-        TERABYTES(8e12, "TB");
+        BITS(1, "b", "bits (b)"),
+        KILOBITS(1e3, "kb", "kilobits (kb)"),
+        MEGABITS(1e6, "mb", "megabits (mb)"),
+        GIGABITS(1e9, "gb", "gigabits (gb)"),
+        TERABITS(1e12, "tb", "terabits (tb)"),
+        BYTES(8, "B", "Bytes (B)"),
+        KILOBYTES(8e3, "KB", "Kilobytes (KB)"),
+        MEGABYTES(8e6, "MB", "Megabytes (MB)"),
+        GIGABYTES(8e9, "GB", "Gigabytes (GB)"),
+        TERABYTES(8e12, "TB", "Terabytes (TB)");
 
         /**
          * The bits value of this unit.
@@ -39,6 +39,11 @@ public class SizeUnit extends Unit<SizeUnit.Size> {
          */
         public final String label;
 
+        /**
+         * The text use to display this data unit in full.
+         */
+        public final String displayText;
+
         private static final Map<String, Size> LABEL_LOOKUP = new HashMap<>();
 
         /**
@@ -47,9 +52,10 @@ public class SizeUnit extends Unit<SizeUnit.Size> {
          * @param bits The bits value to attach to the enum.
          * @param label The shorten label to be attached to the enum.
          */
-        Size(double bits, String label) {
+        Size(double bits, String label, String displayText) {
             this.toBits = bits;
             this.label = label;
+            this.displayText = displayText;
         }
 
         static {
@@ -66,6 +72,12 @@ public class SizeUnit extends Unit<SizeUnit.Size> {
          */
         public static Size valueOfLabel(String label) {
             return LABEL_LOOKUP.get(label);
+        }
+
+
+        @Override
+        public String toString() {
+            return this.displayText;
         }
     }
 

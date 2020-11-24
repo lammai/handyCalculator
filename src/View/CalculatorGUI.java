@@ -5,17 +5,13 @@
  */
 package View;
 
-import Controller.BinaryCalculator;
-import Controller.DecimalCalculator;
-import Controller.HexCalculator;
-import Model.Binary;
-import Model.Decimal;
-import Model.Hex;
+import Controller.*;
+import Model.*;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.util.Arrays;
+import javax.swing.*;
 
 import static View.BinHexCLI.performCalculation;
 import static View.BinHexCLI.splitCalculation;
@@ -35,6 +31,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         initComponents();
         jScrollPane1.setBorder(null);
         hexResultScroll.setBorder(null);
+        bandwidthResultScroll.setBorder(null);
         cardLayout = (CardLayout)(calcMainPane.getLayout());
     }
 
@@ -56,7 +53,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         bandwidthTab = new javax.swing.JPanel();
         bandwidthLabel = new javax.swing.JLabel();
         fileIOTab = new javax.swing.JPanel();
-        bandwidthLabel1 = new javax.swing.JLabel();
+        fileIOlabel = new javax.swing.JLabel();
         topLogo = new javax.swing.JLabel();
         closeButton = new javax.swing.JLabel();
         minimizeButton = new javax.swing.JLabel();
@@ -117,9 +114,47 @@ public class CalculatorGUI extends javax.swing.JFrame {
         hexResultScroll = new javax.swing.JScrollPane();
         hexResultArea = new javax.swing.JTextArea();
         bandwidthPane = new javax.swing.JPanel();
+        bandwidthActionPane = new javax.swing.JPanel();
+        dataConvertPane = new javax.swing.JPanel();
+        dataText = new javax.swing.JLabel();
+        dataEntry = new javax.swing.JTextField();
+        dataUnitCombo = new JComboBox<>();
+        dataEqualButton = new javax.swing.JLabel();
+        dataClearButton = new javax.swing.JLabel();
+        downUpPane = new javax.swing.JPanel();
+        fileSizeText = new javax.swing.JLabel();
+        fileSizeEntry = new javax.swing.JTextField();
+        fileSizeUnit = new JComboBox<>();
+        downUpEqual = new javax.swing.JLabel();
+        downUpClear = new javax.swing.JLabel();
         bandwidthText = new javax.swing.JLabel();
+        bandwidthEntry = new javax.swing.JTextField();
+        bandwidthUnit = new JComboBox<>();
+        webBandwidthPane = new javax.swing.JPanel();
+        pageViewText = new javax.swing.JLabel();
+        pageViewEntry = new javax.swing.JTextField();
+        pageViewUnit = new JComboBox<>();
+        webBandwidthEqual = new javax.swing.JLabel();
+        webBandwidthClear = new javax.swing.JLabel();
+        avgPageSizeText = new javax.swing.JLabel();
+        avgPageSizeEntry = new javax.swing.JTextField();
+        avgPageSizeUnit = new JComboBox<>();
+        redunFactorEntry = new javax.swing.JTextField();
+        redunFactorText = new javax.swing.JLabel();
+        hostBandwidthPane = new javax.swing.JPanel();
+        monthlyUseEntry = new javax.swing.JTextField();
+        monthlyUseText = new javax.swing.JLabel();
+        monthlyUseUnit = new JComboBox<>();
+        bandwidthHostingText = new javax.swing.JLabel();
+        bandwidthHostingEntry = new javax.swing.JTextField();
+        bandwidthHostingUnit = new JComboBox<>();
+        hostingEqual = new javax.swing.JLabel();
+        hostingClear = new javax.swing.JLabel();
+        bothWaysConvertIcon = new javax.swing.JLabel();
+        bandwidthResultHeader = new javax.swing.JLabel();
+        bandwidthResultScroll = new javax.swing.JScrollPane();
+        bandwidthResultArea = new javax.swing.JTextArea();
         filePane = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -216,11 +251,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
             }
         });
 
-        bandwidthLabel1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        bandwidthLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        bandwidthLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_txt_25px.png"))); // NOI18N
-        bandwidthLabel1.setText("File I/O");
-        fileIOTab.add(bandwidthLabel1);
+        fileIOlabel.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+        fileIOlabel.setForeground(new java.awt.Color(255, 255, 255));
+        fileIOlabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_txt_25px.png"))); // NOI18N
+        fileIOlabel.setText("File I/O");
+        fileIOTab.add(fileIOlabel);
 
         topLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/calcLogo.png"))); // NOI18N
 
@@ -426,6 +461,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         binValueEntry.setText("1000001");
         binValueEntry.setPreferredSize(new java.awt.Dimension(300, 30));
+        binValueEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
         binValueEntry.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 binValueEntryFocusGained(evt);
@@ -506,6 +542,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         decValueEntry.setText("12345");
         decValueEntry.setPreferredSize(new java.awt.Dimension(300, 30));
+        decValueEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
         decValueEntry.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 decValueEntryFocusGained(evt);
@@ -732,6 +769,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         hexValueEntry.setText("1F1F1F");
         hexValueEntry.setPreferredSize(new java.awt.Dimension(300, 30));
+        hexValueEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
         hexValueEntry.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 hexValueEntryFocusGained(evt);
@@ -812,6 +850,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         decValueEntry1.setText("12345");
         decValueEntry1.setPreferredSize(new java.awt.Dimension(300, 30));
+        decValueEntry1.setSelectionColor(new java.awt.Color(204, 204, 204));
         decValueEntry1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 decValueEntry1FocusGained(evt);
@@ -931,48 +970,469 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         bandwidthPane.setBackground(new java.awt.Color(51, 51, 51));
 
+        bandwidthActionPane.setBackground(new java.awt.Color(51, 51, 51));
+        bandwidthActionPane.setLayout(new java.awt.GridLayout(2, 2));
+
+        dataConvertPane.setBackground(new java.awt.Color(51, 51, 51));
+        dataConvertPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Data Unit Converter"), "Data Unit Converter", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Corbel Light", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        dataText.setForeground(new java.awt.Color(255, 255, 255));
+        dataText.setText("Data Value:");
+
+        dataEntry.setText("500");
+        dataEntry.setPreferredSize(new java.awt.Dimension(7, 24));
+        dataEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                dataEntryFocusGained(evt);
+            }
+        });
+        dataEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dataEntryKeyTyped(evt);
+            }
+        });
+
+        dataUnitCombo.setModel(new DefaultComboBoxModel<>(SizeUnit.Size.values()));
+        dataUnitCombo.setSelectedIndex(7);  // set default selection to Megabytes (MB)
+
+        dataEqualButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        dataEqualButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dataEqualButtonMouseClicked(evt);
+            }
+        });
+
+        dataClearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        dataClearButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dataClearButtonMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dataConvertPaneLayout = new javax.swing.GroupLayout(dataConvertPane);
+        dataConvertPane.setLayout(dataConvertPaneLayout);
+        dataConvertPaneLayout.setHorizontalGroup(
+                dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataConvertPaneLayout.createSequentialGroup()
+                                .addGroup(dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(dataConvertPaneLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(dataEqualButton)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(dataClearButton))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dataConvertPaneLayout.createSequentialGroup()
+                                                .addComponent(dataEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(dataUnitCombo, 0, 116, Short.MAX_VALUE))
+                                        .addComponent(dataText, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, 0))
+        );
+        dataConvertPaneLayout.setVerticalGroup(
+                dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(dataConvertPaneLayout.createSequentialGroup()
+                                .addComponent(dataText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(dataEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dataUnitCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(dataEqualButton)
+                                        .addComponent(dataClearButton))
+                                .addGap(0, 67, Short.MAX_VALUE))
+        );
+
+        bandwidthActionPane.add(dataConvertPane);
+
+        downUpPane.setBackground(new java.awt.Color(51, 51, 51));
+        downUpPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Download/Upload Time Calculator", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Corbel Light", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        fileSizeText.setForeground(new java.awt.Color(255, 255, 255));
+        fileSizeText.setText("File Size:");
+
+        fileSizeEntry.setText("500");
+        fileSizeEntry.setPreferredSize(new java.awt.Dimension(7, 24));
+        fileSizeEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fileSizeEntryFocusGained(evt);
+            }
+        });
+        fileSizeEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                fileSizeEntryKeyTyped(evt);
+            }
+        });
+
+        SizeUnit.Size[] units = SizeUnit.Size.values();
+        for (int i = 5; i < units.length; i++) {    // Only add Bytes to Terabytes to the combo box
+            fileSizeUnit.addItem(units[i]);
+            avgPageSizeUnit.addItem(units[i]);
+            monthlyUseUnit.addItem(units[i]);
+        }
+        fileSizeUnit.setSelectedIndex(2);   // set default selection to Megabytes (MB)
+        avgPageSizeUnit.setSelectedIndex(1);   // set default selection to Kilobytes (KB)
+
+        downUpEqual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        downUpEqual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                downUpEqualMouseClicked(evt);
+            }
+        });
+
+        downUpClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        downUpClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                downUpClearMouseClicked(evt);
+            }
+        });
+
         bandwidthText.setForeground(new java.awt.Color(255, 255, 255));
-        bandwidthText.setText("Bandwidth Panel");
+        bandwidthText.setText("Bandwidth:");
+
+        bandwidthEntry.setText("5");
+        bandwidthEntry.setPreferredSize(new java.awt.Dimension(7, 24));
+        bandwidthEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bandwidthEntryFocusGained(evt);
+            }
+        });
+        bandwidthEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                bandwidthEntryKeyTyped(evt);
+            }
+        });
+
+        bandwidthUnit.setModel(new javax.swing.DefaultComboBoxModel<>(RateUnit.Rate.values()));
+        bandwidthUnit.setSelectedIndex(2);  // Set default selection to Mbit/s
+
+        javax.swing.GroupLayout downUpPaneLayout = new javax.swing.GroupLayout(downUpPane);
+        downUpPane.setLayout(downUpPaneLayout);
+        downUpPaneLayout.setHorizontalGroup(
+                downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, downUpPaneLayout.createSequentialGroup()
+                                .addGroup(downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(downUpPaneLayout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(downUpEqual)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(downUpClear))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, downUpPaneLayout.createSequentialGroup()
+                                                .addComponent(fileSizeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(fileSizeUnit, 0, 120, Short.MAX_VALUE))
+                                        .addComponent(fileSizeText, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, downUpPaneLayout.createSequentialGroup()
+                                                .addComponent(bandwidthEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(bandwidthUnit, 0, 120, Short.MAX_VALUE))
+                                        .addComponent(bandwidthText, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, 0))
+        );
+        downUpPaneLayout.setVerticalGroup(
+                downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(downUpPaneLayout.createSequentialGroup()
+                                .addComponent(fileSizeText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(fileSizeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(fileSizeUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                .addComponent(bandwidthText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(bandwidthEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bandwidthUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(downUpEqual)
+                                        .addComponent(downUpClear))
+                                .addContainerGap())
+        );
+
+        bandwidthActionPane.add(downUpPane);
+
+        webBandwidthPane.setBackground(new java.awt.Color(51, 51, 51));
+        webBandwidthPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Website Bandwidth Calculator", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Corbel Light", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        pageViewText.setForeground(new java.awt.Color(255, 255, 255));
+        pageViewText.setText("Page Views:");
+
+        pageViewEntry.setText("5000");
+        pageViewEntry.setPreferredSize(new java.awt.Dimension(7, 24));
+        pageViewEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pageViewEntryFocusGained(evt);
+            }
+        });
+        pageViewEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pageViewEntryKeyTyped(evt);
+            }
+        });
+
+        pageViewUnit.setModel(new javax.swing.DefaultComboBoxModel<>(TimeUnit.Time.values()));
+        pageViewUnit.setSelectedIndex(3);
+
+        webBandwidthEqual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        webBandwidthEqual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                webBandwidthEqualMouseClicked(evt);
+            }
+        });
+
+        webBandwidthClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        webBandwidthClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                webBandwidthClearMouseClicked(evt);
+            }
+        });
+
+        avgPageSizeText.setForeground(new java.awt.Color(255, 255, 255));
+        avgPageSizeText.setText("Average Page Size:");
+
+        avgPageSizeEntry.setText("500");
+        avgPageSizeEntry.setPreferredSize(new java.awt.Dimension(7, 24));
+        avgPageSizeEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                avgPageSizeEntryFocusGained(evt);
+            }
+        });
+        avgPageSizeEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                avgPageSizeEntryKeyTyped(evt);
+            }
+        });
+
+        redunFactorEntry.setText("2");
+        redunFactorEntry.setPreferredSize(new java.awt.Dimension(7, 24));
+        redunFactorEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                redunFactorEntryFocusGained(evt);
+            }
+        });
+        redunFactorEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                redunFactorEntryKeyTyped(evt);
+            }
+        });
+
+        redunFactorText.setForeground(new java.awt.Color(255, 255, 255));
+        redunFactorText.setText("Redundancy Factor:");
+
+        javax.swing.GroupLayout webBandwidthPaneLayout = new javax.swing.GroupLayout(webBandwidthPane);
+        webBandwidthPane.setLayout(webBandwidthPaneLayout);
+        webBandwidthPaneLayout.setHorizontalGroup(
+                webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(webBandwidthPaneLayout.createSequentialGroup()
+                                .addComponent(pageViewEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pageViewUnit, 0, 120, Short.MAX_VALUE))
+                        .addGroup(webBandwidthPaneLayout.createSequentialGroup()
+                                .addComponent(avgPageSizeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(avgPageSizeUnit, 0, 120, Short.MAX_VALUE))
+                        .addGroup(webBandwidthPaneLayout.createSequentialGroup()
+                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(pageViewText, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(avgPageSizeText, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(webBandwidthPaneLayout.createSequentialGroup()
+                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(redunFactorText)
+                                        .addComponent(redunFactorEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(webBandwidthEqual)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(webBandwidthClear))
+        );
+        webBandwidthPaneLayout.setVerticalGroup(
+                webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(webBandwidthPaneLayout.createSequentialGroup()
+                                .addComponent(pageViewText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(pageViewEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(pageViewUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(webBandwidthPaneLayout.createSequentialGroup()
+                                                .addComponent(avgPageSizeText)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(avgPageSizeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(avgPageSizeUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(redunFactorText)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(redunFactorEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(webBandwidthEqual)
+                                                .addComponent(webBandwidthClear)))
+                                .addGap(23, 23, 23))
+        );
+
+        bandwidthActionPane.add(webBandwidthPane);
+
+        hostBandwidthPane.setBackground(new java.awt.Color(51, 51, 51));
+        hostBandwidthPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hosting Bandwidth Converter", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Corbel Light", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        monthlyUseEntry.setText("1000");
+        monthlyUseEntry.setPreferredSize(new java.awt.Dimension(7, 24));
+        monthlyUseEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                monthlyUseEntryFocusGained(evt);
+            }
+        });
+        monthlyUseEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                monthlyUseEntryKeyTyped(evt);
+            }
+        });
+
+        monthlyUseText.setForeground(new java.awt.Color(255, 255, 255));
+        monthlyUseText.setText("Monthly Usage:");
+
+        bandwidthHostingText.setForeground(new java.awt.Color(255, 255, 255));
+        bandwidthHostingText.setText("Bandwidth:");
+
+        bandwidthHostingEntry.setPreferredSize(new java.awt.Dimension(7, 24));
+        bandwidthHostingEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bandwidthHostingEntryFocusGained(evt);
+            }
+        });
+        bandwidthHostingEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                bandwidthHostingEntryKeyTyped(evt);
+            }
+        });
+
+        bandwidthHostingUnit.setModel(new javax.swing.DefaultComboBoxModel<>(RateUnit.Rate.values()));
+
+        hostingEqual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        hostingEqual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hostingEqualMouseClicked(evt);
+            }
+        });
+
+        hostingClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        hostingClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hostingClearMouseClicked(evt);
+            }
+        });
+
+        bothWaysConvertIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_up_down_arrow_36px.png"))); // NOI18N
+
+        javax.swing.GroupLayout hostBandwidthPaneLayout = new javax.swing.GroupLayout(hostBandwidthPane);
+        hostBandwidthPane.setLayout(hostBandwidthPaneLayout);
+        hostBandwidthPaneLayout.setHorizontalGroup(
+                hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hostBandwidthPaneLayout.createSequentialGroup()
+                                .addComponent(bandwidthHostingEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bandwidthHostingUnit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
+                                                .addComponent(monthlyUseEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hostBandwidthPaneLayout.createSequentialGroup()
+                                                .addComponent(bothWaysConvertIcon)
+                                                .addGap(56, 56, 56)))
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
+                                                .addComponent(hostingEqual)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(hostingClear)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(monthlyUseUnit, 0, 120, Short.MAX_VALUE)))
+                        .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(monthlyUseText)
+                                        .addComponent(bandwidthHostingText))
+                                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        hostBandwidthPaneLayout.setVerticalGroup(
+                hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
+                                .addComponent(monthlyUseText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(monthlyUseEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(monthlyUseUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(hostingEqual)
+                                        .addComponent(hostingClear)
+                                        .addComponent(bothWaysConvertIcon))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bandwidthHostingText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(bandwidthHostingEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bandwidthHostingUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())
+        );
+
+        bandwidthActionPane.add(hostBandwidthPane);
+
+        bandwidthResultHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
+        bandwidthResultHeader.setForeground(new java.awt.Color(255, 255, 255));
+        bandwidthResultHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        bandwidthResultHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        bandwidthResultHeader.setText("Result");
+        bandwidthResultHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        bandwidthResultArea.setEditable(false);
+        bandwidthResultArea.setBackground(new java.awt.Color(51, 51, 51));
+        bandwidthResultArea.setColumns(20);
+        bandwidthResultArea.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        bandwidthResultArea.setForeground(new java.awt.Color(255, 255, 255));
+        bandwidthResultArea.setRows(5);
+        bandwidthResultArea.setBorder(null);
+        bandwidthResultArea.setSelectionColor(new java.awt.Color(0, 0, 0));
+        bandwidthResultScroll.setViewportView(bandwidthResultArea);
 
         javax.swing.GroupLayout bandwidthPaneLayout = new javax.swing.GroupLayout(bandwidthPane);
         bandwidthPane.setLayout(bandwidthPaneLayout);
         bandwidthPaneLayout.setHorizontalGroup(
                 bandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(bandwidthPaneLayout.createSequentialGroup()
-                                .addGap(229, 229, 229)
-                                .addComponent(bandwidthText)
-                                .addContainerGap(277, Short.MAX_VALUE))
+                        .addComponent(bandwidthActionPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bandwidthPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(bandwidthResultScroll)
+                                .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bandwidthPaneLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bandwidthResultHeader)
+                                .addGap(65, 65, 65))
         );
         bandwidthPaneLayout.setVerticalGroup(
                 bandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(bandwidthPaneLayout.createSequentialGroup()
-                                .addGap(263, 263, 263)
-                                .addComponent(bandwidthText)
-                                .addContainerGap(298, Short.MAX_VALUE))
+                                .addComponent(bandwidthActionPane, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bandwidthResultHeader)
+                                .addGap(0, 0, 0)
+                                .addComponent(bandwidthResultScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addGap(0, 0, 0))
         );
 
         calcMainPane.add(bandwidthPane, "bandwidthCard");
 
         filePane.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("File IO Panel");
-
         javax.swing.GroupLayout filePaneLayout = new javax.swing.GroupLayout(filePane);
         filePane.setLayout(filePaneLayout);
         filePaneLayout.setHorizontalGroup(
                 filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(filePaneLayout.createSequentialGroup()
-                                .addGap(235, 235, 235)
-                                .addComponent(jLabel1)
-                                .addContainerGap(290, Short.MAX_VALUE))
+                        .addGap(0, 600, Short.MAX_VALUE)
         );
         filePaneLayout.setVerticalGroup(
                 filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(filePaneLayout.createSequentialGroup()
-                                .addGap(253, 253, 253)
-                                .addComponent(jLabel1)
-                                .addContainerGap(308, Short.MAX_VALUE))
+                        .addGap(0, 575, Short.MAX_VALUE)
         );
 
         calcMainPane.add(filePane, "fileCard");
@@ -1133,13 +1593,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     // --------------------Binary calculator-----------------------
-    private static final char[] allowedBinaryChars = {'0','1'};
-    private static final char[] allowedOperators = {'+','-','*','/'};
     private void calculationEntryKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         // Not allowing any keys besides 0s and 1s, space, and operators
         char c = evt.getKeyChar();
-        if (new String(allowedBinaryChars).indexOf(c) == -1 && new String(allowedOperators).indexOf(c) == -1 && c != ' ') {
+        if ("01+-*/ ".indexOf(c) == -1) {
             evt.consume();
         }
     }
@@ -1165,7 +1623,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private void binValueEntryKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (new String(allowedBinaryChars).indexOf(c) == -1) {
+        if ("01".indexOf(c) == -1) {
             evt.consume();
         }
     }
@@ -1179,11 +1637,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private static final char[] allowedDecimalChars = {'2','3','4','5','6','7','8','9'};
     private void decValueEntryKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if (new String(allowedBinaryChars).indexOf(c) == -1 && new String(allowedDecimalChars).indexOf(c) == -1 && c != '-') {
+        if ("-0123456789".indexOf(c) == -1) {
             evt.consume();
         }
     }
@@ -1219,7 +1676,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void equalBin2DecMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add Binary to Decimal conversion:
-        if (!binValueEntry.getText().equals("")) {
+        if (!binValueEntry.getText().isEmpty()) {
             String convertedDec = new BinaryCalculator(new Binary(binValueEntry.getText())).toDecimal().getValue();
             binResultArea.append(String.format("Binary: %s\nDecimal: %s\n-----------------------------\n", binValueEntry.getText(), convertedDec));
         }
@@ -1257,7 +1714,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private void hexCalcEntryKeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        if ("0123456789ABCDEFabcdef".indexOf(c) == -1 && "+-*/".indexOf(c) == -1 && c != ' ') {
+        if ("0123456789ABCDEFabcdef+-*/ ".indexOf(c) == -1) {
             evt.consume();
         }
     }
@@ -1305,7 +1762,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void equalHex2DecMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        if (!hexValueEntry.getText().equals("")) {
+        if (!hexValueEntry.getText().isEmpty()) {
             String convertedDec = new HexCalculator(new Hex(hexValueEntry.getText())).toDecimal().getValue();
             hexResultArea.append(String.format("Hex: %s\nDecimal: %s\n-----------------------------\n", hexValueEntry.getText(), convertedDec));
         }
@@ -1327,10 +1784,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private void decValueEntry1KeyTyped(java.awt.event.KeyEvent evt) {
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if ("0123456789".indexOf(c) == -1) {
-            evt.consume();
-        }
+        onlyPositiveNumbers(evt);
     }
 
     private void equalDec2HexMouseClicked(java.awt.event.MouseEvent evt) {
@@ -1351,6 +1805,224 @@ public class CalculatorGUI extends javax.swing.JFrame {
         decValueEntry1.setText("");
     }
     //--------------------END of Hex calculator-----------------------
+
+
+    //--------------------Bandwidth calculator-----------------------
+    private boolean firstFocusData = true;
+    private void dataEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusData) {
+            dataEntry.setText("");
+            firstFocusData = false;
+        }
+    }
+
+    private void dataEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        onlyPositiveNumbers(evt);
+    }
+
+    private void dataEqualButtonMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        if (!dataEntry.getText().isEmpty()) {
+            SizeUnit.Size valueUnit = (SizeUnit.Size) dataUnitCombo.getSelectedItem();
+            SizeUnit data = new SizeUnit(dataEntry.getText(), valueUnit);
+
+            SizeUnit.Size[] units = SizeUnit.Size.values();
+            bandwidthResultArea.append(String.format("%s %s is equivalent to any of the following:\n",data.getValue(), data.getUnit().label));
+            for (SizeUnit.Size unit : units) {         // Convert one data unit to every other data units.
+                if (unit != data.getUnit()) {
+                    String result = ""+((Double.parseDouble(data.getValue()) * (data.getUnit().toBits / unit.toBits)));
+                    result = result.contains(".") ? result.replaceAll("0*$","").replaceAll("\\.$","") : result; // Remove 0s trails
+                    bandwidthResultArea.append(String.format("%s %s\n", result, unit.toString()));
+                }
+            }
+            bandwidthResultArea.append("-----------------------------\n");
+        }
+    }
+
+    private void dataClearButtonMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        dataEntry.setText("");
+    }
+
+    private boolean firstFocusFileSize = true;
+    private void fileSizeEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusFileSize) {
+            fileSizeEntry.setText("");
+            firstFocusFileSize = false;
+        }
+    }
+
+    private void fileSizeEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        onlyPositiveNumbers(evt);
+    }
+
+    private boolean firstFocusDUBandwidth = true;
+    private void bandwidthEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusDUBandwidth) {
+            bandwidthEntry.setText("");
+            firstFocusDUBandwidth = false;
+        }
+    }
+
+    private void bandwidthEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        onlyPositiveNumbers(evt);
+    }
+
+    private void downUpEqualMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        if (!fileSizeEntry.getText().isEmpty() && !bandwidthEntry.getText().isEmpty()) {
+            String fileSize = fileSizeEntry.getText();
+            SizeUnit.Size fileSizeU = (SizeUnit.Size)fileSizeUnit.getSelectedItem();
+            String bandwidth = bandwidthEntry.getText();
+            RateUnit.Rate bandwidthU = (RateUnit.Rate)bandwidthUnit.getSelectedItem();
+
+            DownloadUploadCalculator downUp = new DownloadUploadCalculator(new SizeUnit(fileSize, fileSizeU),
+                    new RateUnit(bandwidth, bandwidthU));
+            String[] results = downUp.calculate();
+            bandwidthResultArea.append("Download or upload time needed is:\n" + Arrays.toString(results) + "\n-----------------------------\n");
+        }
+    }
+
+    private void downUpClearMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        fileSizeEntry.setText("");
+        bandwidthEntry.setText("");
+    }
+
+    private boolean firstFocusPgVw = true;
+    private void pageViewEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusPgVw) {
+            pageViewEntry.setText("");
+            firstFocusPgVw = false;
+        }
+    }
+
+    private void pageViewEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        onlyPositiveNumbers(evt);
+    }
+
+    private boolean firstFocusAvgPg = true;
+    private void avgPageSizeEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusAvgPg) {
+            avgPageSizeEntry.setText("");
+            firstFocusAvgPg = false;
+        }
+    }
+
+    private void avgPageSizeEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        onlyPositiveNumbers(evt);
+    }
+
+    private boolean firstFocusRedun = true;
+    private void redunFactorEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusRedun) {
+            redunFactorEntry.setText("");
+            firstFocusRedun = false;
+        }
+    }
+
+    private void redunFactorEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        onlyPositiveNumbers(evt);
+    }
+
+    private void webBandwidthEqualMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        if (!pageViewEntry.getText().isEmpty() && !avgPageSizeEntry.getText().isEmpty() && !redunFactorEntry.getText().isEmpty()) {
+            String pageView = pageViewEntry.getText();
+            TimeUnit.Time pageViewU = (TimeUnit.Time)pageViewUnit.getSelectedItem();
+            String avgPgSize = avgPageSizeEntry.getText();
+            SizeUnit.Size avgPgSizeU = (SizeUnit.Size)avgPageSizeUnit.getSelectedItem();
+            double redunFactor = Double.parseDouble(redunFactorEntry.getText());
+
+            WebsiteBandwidthCalculator webCalc = new WebsiteBandwidthCalculator(new TimeUnit(pageView, pageViewU),
+                    new SizeUnit(avgPgSize, avgPgSizeU), redunFactor);
+            String[] result = webCalc.calculate();
+            bandwidthResultArea.append(String.format("Actual bandwidth needed is:\n %s or %s\n", result[0], result[1]));
+            bandwidthResultArea.append(String.format("With redundancy factor of %.2f, the bandwidth needed is:\n %s or %s\n-----------------------------\n",
+                    redunFactor, result[2], result[3]));
+        }
+    }
+
+    private void webBandwidthClearMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        pageViewEntry.setText("");
+        avgPageSizeEntry.setText("");
+        redunFactorEntry.setText("");
+    }
+
+    private boolean firstFocusMonthly = true;
+    private void monthlyUseEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusMonthly) {
+            monthlyUseEntry.setText("");
+            firstFocusMonthly = false;
+        }
+    }
+
+    private void monthlyUseEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        onlyPositiveNumbers(evt);
+    }
+
+    private boolean firstFocusBWHosting = true;
+    private void bandwidthHostingEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusBWHosting) {
+            bandwidthHostingEntry.setText("");
+            firstFocusBWHosting = false;
+        }
+    }
+
+    private void bandwidthHostingEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        onlyPositiveNumbers(evt);
+    }
+
+    private void hostingEqualMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        HostingBandwidthCalculator hostCalc;
+        if (!monthlyUseEntry.getText().isEmpty() && !bandwidthHostingEntry.getText().isEmpty() ||
+            !monthlyUseEntry.getText().isEmpty() && bandwidthHostingEntry.getText().isEmpty()) {
+            String monthlyUsage = monthlyUseEntry.getText();
+            SizeUnit.Size monthlyUsageU = (SizeUnit.Size)monthlyUseUnit.getSelectedItem();
+            RateUnit.Rate bandwidthRateU = (RateUnit.Rate)bandwidthHostingUnit.getSelectedItem();
+            hostCalc = new HostingBandwidthCalculator(new SizeUnit(monthlyUsage, monthlyUsageU), bandwidthRateU);
+            bandwidthResultArea.append(String.format("%s %s is equivalent to %s\n-----------------------------\n", monthlyUsage, (monthlyUsageU != null ? monthlyUsageU.label : "?") +" per month", hostCalc.convert()));
+        } else if (monthlyUseEntry.getText().isEmpty() && !bandwidthHostingEntry.getText().isEmpty()) {
+            String bandwidth = bandwidthHostingEntry.getText();
+            RateUnit.Rate bandwidthU = (RateUnit.Rate)bandwidthHostingUnit.getSelectedItem();
+            SizeUnit.Size monthlyUseU = (SizeUnit.Size)monthlyUseUnit.getSelectedItem();
+            hostCalc = new HostingBandwidthCalculator(new RateUnit(bandwidth, bandwidthU), monthlyUseU);
+            bandwidthResultArea.append(String.format("%s %s is equivalent to %s\n-----------------------------\n", bandwidth, bandwidthU != null ? bandwidthU.label : "?", hostCalc.convert()));
+        }
+    }
+
+    private void hostingClearMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        monthlyUseEntry.setText("");
+        bandwidthHostingEntry.setText("");
+    }
+    //--------------------END of Bandwidth calculator-----------------------
+
+
+    private void onlyPositiveNumbers(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if ("0123456789".indexOf(c) == -1) {
+            evt.consume();
+        }
+    }
 
     //Setting tab color when selected
     private void setTabColor(JPanel panel) {
@@ -1405,11 +2077,23 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     private int xx, yy; // for moving window
     // Variables declaration - do not modify
+    private javax.swing.JTextField avgPageSizeEntry;
+    private javax.swing.JLabel avgPageSizeText;
+    private JComboBox<SizeUnit.Size> avgPageSizeUnit;
+    private javax.swing.JPanel bandwidthActionPane;
+    private javax.swing.JTextField bandwidthEntry;
+    private javax.swing.JTextField bandwidthHostingEntry;
+    private javax.swing.JLabel bandwidthHostingText;
+    private JComboBox<RateUnit.Rate> bandwidthHostingUnit;
     private javax.swing.JLabel bandwidthLabel;
-    private javax.swing.JLabel bandwidthLabel1;
+    private javax.swing.JLabel fileIOlabel;
     private javax.swing.JPanel bandwidthPane;
+    private javax.swing.JTextArea bandwidthResultArea;
+    private javax.swing.JLabel bandwidthResultHeader;
+    private javax.swing.JScrollPane bandwidthResultScroll;
     private javax.swing.JPanel bandwidthTab;
     private javax.swing.JLabel bandwidthText;
+    private JComboBox<RateUnit.Rate> bandwidthUnit;
     private javax.swing.JLabel bin2DecHeader;
     private javax.swing.JPanel binCalcPane;
     private javax.swing.JPanel binToDecPane;
@@ -1419,6 +2103,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel binaryLabel;
     private javax.swing.JPanel binaryPane;
     private javax.swing.JPanel binaryTab;
+    private javax.swing.JLabel bothWaysConvertIcon;
     private javax.swing.JLabel calcEntryText;
     private javax.swing.JLabel calcInvalidText;
     private javax.swing.JPanel calcMainPane;
@@ -1429,6 +2114,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel clearDec2Hex;
     private javax.swing.JLabel clearHex2Dec;
     private javax.swing.JLabel closeButton;
+    private javax.swing.JLabel dataClearButton;
+    private javax.swing.JPanel dataConvertPane;
+    private javax.swing.JTextField dataEntry;
+    private javax.swing.JLabel dataEqualButton;
+    private javax.swing.JLabel dataText;
+    private JComboBox<SizeUnit.Size> dataUnitCombo;
     private javax.swing.JLabel dec2BinHeader;
     private javax.swing.JLabel dec2BinHeader1;
     private javax.swing.JLabel dec2HexHeader;
@@ -1441,6 +2132,9 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel decValueText1;
     private javax.swing.JLabel decimalBinInvalidText;
     private javax.swing.JLabel designedBy;
+    private javax.swing.JLabel downUpClear;
+    private javax.swing.JLabel downUpEqual;
+    private javax.swing.JPanel downUpPane;
     private javax.swing.JLabel equalBin2Dec;
     private javax.swing.JLabel equalButton;
     private javax.swing.JLabel equalDec2Bin;
@@ -1448,6 +2142,9 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel equalHex2Dec;
     private javax.swing.JPanel fileIOTab;
     private javax.swing.JPanel filePane;
+    private javax.swing.JTextField fileSizeEntry;
+    private javax.swing.JLabel fileSizeText;
+    private JComboBox<SizeUnit.Size> fileSizeUnit;
     private javax.swing.JLabel hex2DecHeader;
     private javax.swing.JLabel hexCalcClear;
     private javax.swing.JTextField hexCalcEntry;
@@ -1466,16 +2163,29 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JPanel hexToDecPane;
     private javax.swing.JTextField hexValueEntry;
     private javax.swing.JLabel hexValueText;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel hostBandwidthPane;
+    private javax.swing.JLabel hostingClear;
+    private javax.swing.JLabel hostingEqual;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel minimizeButton;
+    private javax.swing.JTextField monthlyUseEntry;
+    private javax.swing.JLabel monthlyUseText;
+    private JComboBox<SizeUnit.Size> monthlyUseUnit;
+    private javax.swing.JTextField pageViewEntry;
+    private javax.swing.JLabel pageViewText;
+    private JComboBox<TimeUnit.Time> pageViewUnit;
+    private javax.swing.JTextField redunFactorEntry;
+    private javax.swing.JLabel redunFactorText;
     private javax.swing.JTextArea binResultArea;
     private javax.swing.JPanel resultPane;
     private javax.swing.JPanel rootPane;
     private javax.swing.JPanel selectionPane;
     private javax.swing.JLabel topLogo;
     private javax.swing.JLabel underLine;
+    private javax.swing.JLabel webBandwidthClear;
+    private javax.swing.JLabel webBandwidthEqual;
+    private javax.swing.JPanel webBandwidthPane;
     private javax.swing.JPanel welcomePane;
     private javax.swing.JLabel welcomeText;
     // End of variables declaration

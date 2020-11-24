@@ -18,13 +18,13 @@ public class TimeUnit extends Unit<TimeUnit.Time> {
      */
     public enum Time {
 
-        SECOND(1, "second"),
-        MINUTE(60, "minute"),
-        HOUR(3600, "hour"),
-        DAY(86400, "day"),
-        WEEK(604800, "week"),
-        MONTH(2629800, "month"),
-        YEAR(31557600, "year");
+        SECOND(1, "second", "Per Second"),
+        MINUTE(60, "minute", "Per Minute"),
+        HOUR(3600, "hour", "Per Hour"),
+        DAY(86400, "day", "Per Day"),
+        WEEK(604800, "week", "Per Week"),
+        MONTH(2629800, "month", "Per Month"),
+        YEAR(31557600, "year", "Per Year");
 
         /**
          * The seconds value of this unit.
@@ -36,6 +36,11 @@ public class TimeUnit extends Unit<TimeUnit.Time> {
          */
         public final String label;
 
+        /**
+         * The display text add the word "per" in order to make it clear for the user.
+         */
+        public final String displayText;
+
         private static final Map<String, Time> LABEL_LOOKUP = new HashMap<>();
 
         /**
@@ -44,9 +49,10 @@ public class TimeUnit extends Unit<TimeUnit.Time> {
          * @param seconds The seconds value to attach to the enum.
          * @param label The label to be attached to the enum.
          */
-        Time(double seconds, String label) {
+        Time(double seconds, String label, String displayText) {
             this.toSeconds = seconds;
             this.label = label;
+            this.displayText = displayText;
         }
 
         static {
@@ -63,6 +69,12 @@ public class TimeUnit extends Unit<TimeUnit.Time> {
          */
         public static Time valueOfLabel(String label) {
             return LABEL_LOOKUP.get(label);
+        }
+
+
+        @Override
+        public String toString() {
+            return this.displayText;
         }
     }
 

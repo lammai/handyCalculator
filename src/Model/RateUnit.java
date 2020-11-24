@@ -62,6 +62,12 @@ public class RateUnit extends Unit<RateUnit.Rate> {
         public static Rate valueOfLabel(String label) {
             return LABEL_LOOKUP.get(label);
         }
+
+
+        @Override
+        public String toString() {
+            return this.label;
+        }
     }
 
     /**

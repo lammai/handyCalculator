@@ -7,8 +7,10 @@ package View;
 
 import Controller.BinaryCalculator;
 import Controller.DecimalCalculator;
+import Controller.HexCalculator;
 import Model.Binary;
 import Model.Decimal;
+import Model.Hex;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -32,6 +34,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     public CalculatorGUI() {
         initComponents();
         jScrollPane1.setBorder(null);
+        hexResultScroll.setBorder(null);
         cardLayout = (CardLayout)(calcMainPane.getLayout());
     }
 
@@ -89,7 +92,30 @@ public class CalculatorGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         binResultArea = new javax.swing.JTextArea();
         hexPane = new javax.swing.JPanel();
-        hexText = new javax.swing.JLabel();
+        hexCalcPane = new javax.swing.JPanel();
+        hexCalcText = new javax.swing.JLabel();
+        hexCalcEntry = new javax.swing.JTextField();
+        hexCalcEqual = new javax.swing.JLabel();
+        hexCalcClear = new javax.swing.JLabel();
+        hexCalcHeader = new javax.swing.JLabel();
+        hexCalcInvalid = new javax.swing.JLabel();
+        hexToDecPane = new javax.swing.JPanel();
+        hex2DecHeader = new javax.swing.JLabel();
+        hexValueText = new javax.swing.JLabel();
+        hexValueEntry = new javax.swing.JTextField();
+        equalHex2Dec = new javax.swing.JLabel();
+        clearHex2Dec = new javax.swing.JLabel();
+        decToHexPane = new javax.swing.JPanel();
+        dec2HexHeader = new javax.swing.JLabel();
+        decValueText1 = new javax.swing.JLabel();
+        decValueEntry1 = new javax.swing.JTextField();
+        equalDec2Hex = new javax.swing.JLabel();
+        clearDec2Hex = new javax.swing.JLabel();
+        decHexInvalid = new javax.swing.JLabel();
+        hexResultPane = new javax.swing.JPanel();
+        hexResultHeader = new javax.swing.JLabel();
+        hexResultScroll = new javax.swing.JScrollPane();
+        hexResultArea = new javax.swing.JTextArea();
         bandwidthPane = new javax.swing.JPanel();
         bandwidthText = new javax.swing.JLabel();
         filePane = new javax.swing.JPanel();
@@ -602,26 +628,304 @@ public class CalculatorGUI extends javax.swing.JFrame {
         calcMainPane.add(binaryPane, "binaryCard");
 
         hexPane.setBackground(new java.awt.Color(51, 51, 51));
+        hexPane.setLayout(new java.awt.GridLayout(4,1));
 
-        hexText.setForeground(new java.awt.Color(255, 255, 255));
-        hexText.setText("Hex Panel");
+        hexCalcPane.setBackground(new java.awt.Color(51, 51, 51));
 
-        javax.swing.GroupLayout hexPaneLayout = new javax.swing.GroupLayout(hexPane);
-        hexPane.setLayout(hexPaneLayout);
-        hexPaneLayout.setHorizontalGroup(
-                hexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(hexPaneLayout.createSequentialGroup()
-                                .addGap(236, 236, 236)
-                                .addComponent(hexText)
-                                .addContainerGap(301, Short.MAX_VALUE))
+        hexCalcText.setForeground(new java.awt.Color(255, 255, 255));
+        hexCalcText.setText("Input Hex Calculation:");
+
+        hexCalcEntry.setText("EA + BAD");
+        hexCalcEntry.setPreferredSize(new java.awt.Dimension(300, 30));
+        hexCalcEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
+        hexCalcEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                hexCalcEntryFocusGained(evt);
+            }
+        });
+        hexCalcEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                hexCalcEntryKeyTyped(evt);
+            }
+        });
+
+        hexCalcEqual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        hexCalcEqual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hexCalcEqualMouseClicked(evt);
+            }
+        });
+
+        hexCalcClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        hexCalcClear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hexCalcClearMouseClicked(evt);
+            }
+        });
+
+        hexCalcHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
+        hexCalcHeader.setForeground(new java.awt.Color(255, 255, 255));
+        hexCalcHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        hexCalcHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        hexCalcHeader.setText("Hex Calculation");
+        hexCalcHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        hexCalcInvalid.setForeground(new java.awt.Color(255, 51, 51));
+        hexCalcInvalid.setText("Invalid input!");
+        hexCalcInvalid.setVisible(false);
+
+        javax.swing.GroupLayout hexCalcPaneLayout = new javax.swing.GroupLayout(hexCalcPane);
+        hexCalcPane.setLayout(hexCalcPaneLayout);
+        hexCalcPaneLayout.setHorizontalGroup(
+                hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(hexCalcPaneLayout.createSequentialGroup()
+                                .addGroup(hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(hexCalcPaneLayout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(hexCalcHeader))
+                                        .addGroup(hexCalcPaneLayout.createSequentialGroup()
+                                                .addGap(45, 45, 45)
+                                                .addComponent(hexCalcText)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addGroup(hexCalcPaneLayout.createSequentialGroup()
+                                                                .addComponent(hexCalcInvalid)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(hexCalcEqual)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(hexCalcClear))
+                                                        .addComponent(hexCalcEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(95, Short.MAX_VALUE))
         );
-        hexPaneLayout.setVerticalGroup(
-                hexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(hexPaneLayout.createSequentialGroup()
-                                .addGap(255, 255, 255)
-                                .addComponent(hexText)
-                                .addContainerGap(306, Short.MAX_VALUE))
+        hexCalcPaneLayout.setVerticalGroup(
+                hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hexCalcPaneLayout.createSequentialGroup()
+                                .addContainerGap(19, Short.MAX_VALUE)
+                                .addComponent(hexCalcHeader)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(hexCalcPaneLayout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addComponent(hexCalcText))
+                                        .addComponent(hexCalcEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(hexCalcEqual)
+                                        .addComponent(hexCalcClear)
+                                        .addComponent(hexCalcInvalid))
+                                .addContainerGap())
         );
+
+        hexPane.add(hexCalcPane);
+
+        hexToDecPane.setBackground(new java.awt.Color(51, 51, 51));
+
+        hex2DecHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
+        hex2DecHeader.setForeground(new java.awt.Color(255, 255, 255));
+        hex2DecHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        hex2DecHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        hex2DecHeader.setText("Hex to Decimal");
+        hex2DecHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        hexValueText.setForeground(new java.awt.Color(255, 255, 255));
+        hexValueText.setText("Hex value:");
+
+        hexValueEntry.setText("1F1F1F");
+        hexValueEntry.setPreferredSize(new java.awt.Dimension(300, 30));
+        hexValueEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                hexValueEntryFocusGained(evt);
+            }
+        });
+        hexValueEntry.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                hexValueEntryKeyTyped(evt);
+            }
+        });
+
+        equalHex2Dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalHex2Dec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                equalHex2DecMouseClicked(evt);
+            }
+        });
+
+        clearHex2Dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearHex2Dec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearHex2DecMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout hexToDecPaneLayout = new javax.swing.GroupLayout(hexToDecPane);
+        hexToDecPane.setLayout(hexToDecPaneLayout);
+        hexToDecPaneLayout.setHorizontalGroup(
+                hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(hexToDecPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(hex2DecHeader)
+                                .addContainerGap(97, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hexToDecPaneLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(hexToDecPaneLayout.createSequentialGroup()
+                                                .addComponent(equalHex2Dec)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(clearHex2Dec))
+                                        .addGroup(hexToDecPaneLayout.createSequentialGroup()
+                                                .addComponent(hexValueText)
+                                                .addGap(5, 5, 5)
+                                                .addComponent(hexValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(101, 101, 101))
+        );
+        hexToDecPaneLayout.setVerticalGroup(
+                hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hexToDecPaneLayout.createSequentialGroup()
+                                .addContainerGap(19, Short.MAX_VALUE)
+                                .addComponent(hex2DecHeader)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(hexToDecPaneLayout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addComponent(hexValueText))
+                                        .addComponent(hexValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(equalHex2Dec)
+                                        .addComponent(clearHex2Dec))
+                                .addGap(16, 16, 16))
+        );
+
+        hexPane.add(hexToDecPane);
+
+        decToHexPane.setBackground(new java.awt.Color(51, 51, 51));
+
+        dec2HexHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
+        dec2HexHeader.setForeground(new java.awt.Color(255, 255, 255));
+        dec2HexHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        dec2HexHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        dec2HexHeader.setText("Decimal to Hex");
+        dec2HexHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        decValueText1.setForeground(new java.awt.Color(255, 255, 255));
+        decValueText1.setText("Decimal value:");
+
+        decValueEntry1.setText("12345");
+        decValueEntry1.setPreferredSize(new java.awt.Dimension(300, 30));
+        decValueEntry1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                decValueEntry1FocusGained(evt);
+            }
+        });
+        decValueEntry1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                decValueEntry1KeyTyped(evt);
+            }
+        });
+
+        equalDec2Hex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalDec2Hex.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                equalDec2HexMouseClicked(evt);
+            }
+        });
+
+        clearDec2Hex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearDec2Hex.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearDec2HexMouseClicked(evt);
+            }
+        });
+
+        decHexInvalid.setForeground(new java.awt.Color(255, 51, 51));
+        decHexInvalid.setText("Invalid input!");
+        decHexInvalid.setVisible(false);
+
+        javax.swing.GroupLayout decToHexPaneLayout = new javax.swing.GroupLayout(decToHexPane);
+        decToHexPane.setLayout(decToHexPaneLayout);
+        decToHexPaneLayout.setHorizontalGroup(
+                decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(decToHexPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(dec2HexHeader)
+                                .addContainerGap(97, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decToHexPaneLayout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(decValueText1)
+                                .addGap(5, 5, 5)
+                                .addGroup(decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(decToHexPaneLayout.createSequentialGroup()
+                                                .addComponent(decHexInvalid)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(equalDec2Hex)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(clearDec2Hex))
+                                        .addComponent(decValueEntry1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(101, 101, 101))
+        );
+        decToHexPaneLayout.setVerticalGroup(
+                decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decToHexPaneLayout.createSequentialGroup()
+                                .addContainerGap(19, Short.MAX_VALUE)
+                                .addComponent(dec2HexHeader)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(decToHexPaneLayout.createSequentialGroup()
+                                                .addGap(8, 8, 8)
+                                                .addComponent(decValueText1))
+                                        .addComponent(decValueEntry1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(equalDec2Hex)
+                                        .addComponent(clearDec2Hex)
+                                        .addComponent(decHexInvalid))
+                                .addGap(16, 16, 16))
+        );
+
+        hexPane.add(decToHexPane);
+
+        hexResultPane.setBackground(new java.awt.Color(51, 51, 51));
+
+        hexResultHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
+        hexResultHeader.setForeground(new java.awt.Color(255, 255, 255));
+        hexResultHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        hexResultHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        hexResultHeader.setText("Result");
+        hexResultHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        hexResultArea.setEditable(false);
+        hexResultArea.setBackground(new java.awt.Color(51, 51, 51));
+        hexResultArea.setColumns(20);
+        hexResultArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        hexResultArea.setForeground(new java.awt.Color(255, 255, 255));
+        hexResultArea.setRows(5);
+        hexResultArea.setBorder(null);
+        hexResultArea.setSelectionColor(new java.awt.Color(0, 0, 0));
+        hexResultScroll.setViewportView(hexResultArea);
+
+        javax.swing.GroupLayout hexResultPaneLayout = new javax.swing.GroupLayout(hexResultPane);
+        hexResultPane.setLayout(hexResultPaneLayout);
+        hexResultPaneLayout.setHorizontalGroup(
+                hexResultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(hexResultPaneLayout.createSequentialGroup()
+                                .addContainerGap(123, Short.MAX_VALUE)
+                                .addComponent(hexResultHeader)
+                                .addGap(69, 69, 69))
+                        .addGroup(hexResultPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(hexResultScroll)
+                                .addContainerGap())
+        );
+        hexResultPaneLayout.setVerticalGroup(
+                hexResultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(hexResultPaneLayout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(hexResultHeader)
+                                .addGap(0, 0, 0)
+                                .addComponent(hexResultScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+        );
+
+        hexPane.add(hexResultPane);
 
         calcMainPane.add(hexPane, "hexCard");
 
@@ -828,6 +1132,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
             resetTabColor(fileIOTab);
     }
 
+    // --------------------Binary calculator-----------------------
     private static final char[] allowedBinaryChars = {'0','1'};
     private static final char[] allowedOperators = {'+','-','*','/'};
     private void calculationEntryKeyTyped(java.awt.event.KeyEvent evt) {
@@ -888,7 +1193,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
         calculationEntry.setText("");
     }
 
-    // Binary Calculation should be done here
     private void equalButtonMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         String input = calculationEntry.getText();
@@ -938,6 +1242,115 @@ public class CalculatorGUI extends javax.swing.JFrame {
             decimalBinInvalidText.setVisible(true);
         }
     }
+    // --------------------END of Binary calculator-----------------------
+
+    // --------------------Hex calculator-----------------------
+    private boolean firstFocusHexCalc = true;
+    private void hexCalcEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusHexCalc) {
+            hexCalcEntry.setText("");
+            firstFocusHexCalc = false;
+        }
+    }
+
+    private void hexCalcEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ("0123456789ABCDEFabcdef".indexOf(c) == -1 && "+-*/".indexOf(c) == -1 && c != ' ') {
+            evt.consume();
+        }
+    }
+
+    private void hexCalcEqualMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        String input = hexCalcEntry.getText().toUpperCase();
+        String regex = "[0-9A-F]+[\\s]*[-+*/][\\s]*[0-9A-F]+";
+        if (input.matches(regex)) {
+            hexCalcInvalid.setVisible(false);
+            String[] calculation = splitCalculation(input);     // 0 - first variable, 1 - operator, 2 - second variable
+            Hex num1 = new Hex(calculation[0]);
+            if (calculation[2] == null) {
+                hexCalcInvalid.setVisible(true);
+            } else {
+                String[] result = performCalculation(num1, calculation[1], calculation[2]);
+                hexResultArea.append(String.format("%s %s %s =\n%s\n%s\n-----------------------------\n", calculation[0],calculation[1],calculation[2], result[0], result[1]));
+            }
+        } else {
+            hexCalcInvalid.setVisible(true);
+        }
+    }
+
+    private void hexCalcClearMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        hexCalcEntry.setText("");
+    }
+
+    private boolean firstFocusHex = true;
+    private void hexValueEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusHex) {
+            hexValueEntry.setText("");
+            firstFocusHex = false;
+        }
+    }
+
+    private void hexValueEntryKeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ("0123456789ABCDEFabcdef".indexOf(c) == -1) {
+            evt.consume();
+        }
+    }
+
+    private void equalHex2DecMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        if (!hexValueEntry.getText().equals("")) {
+            String convertedDec = new HexCalculator(new Hex(hexValueEntry.getText())).toDecimal().getValue();
+            hexResultArea.append(String.format("Hex: %s\nDecimal: %s\n-----------------------------\n", hexValueEntry.getText(), convertedDec));
+        }
+    }
+
+    private void clearHex2DecMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        hexValueEntry.setText("");
+    }
+
+    private boolean firstFocusDecH = true;
+    private void decValueEntry1FocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusDecH) {
+            decValueEntry1.setText("");
+            firstFocusDecH = false;
+        }
+    }
+
+    private void decValueEntry1KeyTyped(java.awt.event.KeyEvent evt) {
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ("0123456789".indexOf(c) == -1) {
+            evt.consume();
+        }
+    }
+
+    private void equalDec2HexMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        String regex = "[-]?[0-9]+";
+        if (decValueEntry1.getText().matches(regex)) {
+            decHexInvalid.setVisible(false);
+            String convertedHex = new DecimalCalculator(new Decimal(decValueEntry1.getText())).toHex().getValue();
+            hexResultArea.append(String.format("Decimal: %s\nHex: %s\n-----------------------------\n", decValueEntry1.getText(), convertedHex));
+        } else {
+            //show invalid text label
+            decHexInvalid.setVisible(true);
+        }
+    }
+
+    private void clearDec2HexMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        decValueEntry1.setText("");
+    }
+    //--------------------END of Hex calculator-----------------------
 
     //Setting tab color when selected
     private void setTabColor(JPanel panel) {
@@ -1013,28 +1426,51 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel clearBin2Dec;
     private javax.swing.JLabel clearButton;
     private javax.swing.JLabel clearDec2Bin;
+    private javax.swing.JLabel clearDec2Hex;
+    private javax.swing.JLabel clearHex2Dec;
     private javax.swing.JLabel closeButton;
     private javax.swing.JLabel dec2BinHeader;
     private javax.swing.JLabel dec2BinHeader1;
+    private javax.swing.JLabel dec2HexHeader;
+    private javax.swing.JLabel decHexInvalid;
     private javax.swing.JPanel decToBinPane;
+    private javax.swing.JPanel decToHexPane;
     private javax.swing.JTextField decValueEntry;
+    private javax.swing.JTextField decValueEntry1;
     private javax.swing.JLabel decValueText;
+    private javax.swing.JLabel decValueText1;
     private javax.swing.JLabel decimalBinInvalidText;
     private javax.swing.JLabel designedBy;
     private javax.swing.JLabel equalBin2Dec;
     private javax.swing.JLabel equalButton;
     private javax.swing.JLabel equalDec2Bin;
+    private javax.swing.JLabel equalDec2Hex;
+    private javax.swing.JLabel equalHex2Dec;
     private javax.swing.JPanel fileIOTab;
     private javax.swing.JPanel filePane;
+    private javax.swing.JLabel hex2DecHeader;
+    private javax.swing.JLabel hexCalcClear;
+    private javax.swing.JTextField hexCalcEntry;
+    private javax.swing.JLabel hexCalcEqual;
+    private javax.swing.JLabel hexCalcHeader;
+    private javax.swing.JLabel hexCalcInvalid;
+    private javax.swing.JPanel hexCalcPane;
+    private javax.swing.JLabel hexCalcText;
     private javax.swing.JLabel hexLabel;
     private javax.swing.JPanel hexPane;
+    private javax.swing.JTextArea hexResultArea;
+    private javax.swing.JLabel hexResultHeader;
+    private javax.swing.JPanel hexResultPane;
+    private javax.swing.JScrollPane hexResultScroll;
     private javax.swing.JPanel hexTab;
-    private javax.swing.JLabel hexText;
+    private javax.swing.JPanel hexToDecPane;
+    private javax.swing.JTextField hexValueEntry;
+    private javax.swing.JLabel hexValueText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea binResultArea;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel minimizeButton;
+    private javax.swing.JTextArea binResultArea;
     private javax.swing.JPanel resultPane;
     private javax.swing.JPanel rootPane;
     private javax.swing.JPanel selectionPane;

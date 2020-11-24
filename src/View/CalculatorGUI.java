@@ -10,8 +10,10 @@ import Model.*;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.io.File;
 import java.util.Arrays;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import static View.BinHexCLI.performCalculation;
 import static View.BinHexCLI.splitCalculation;
@@ -32,6 +34,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
         hexResultScroll.setBorder(null);
         bandwidthResultScroll.setBorder(null);
+        outputDetailScroll.setBorder(null);
+        browseFile = new javax.swing.JFileChooser();
+        browseFile.setCurrentDirectory(new File("C:\\"));
+        browseFile.setFileFilter(new FileNameExtensionFilter("TEXT FILES", "txt", "text"));
         cardLayout = (CardLayout)(calcMainPane.getLayout());
     }
 
@@ -155,6 +161,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
         bandwidthResultScroll = new javax.swing.JScrollPane();
         bandwidthResultArea = new javax.swing.JTextArea();
         filePane = new javax.swing.JPanel();
+        browseButton = new javax.swing.JButton();
+        fileIOheader = new javax.swing.JLabel();
+        outputDetailScroll = new javax.swing.JScrollPane();
+        outputDetailArea = new javax.swing.JTextArea();
+        pathEntry = new javax.swing.JTextField();
+        pathText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -1424,15 +1436,79 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         filePane.setBackground(new java.awt.Color(51, 51, 51));
 
+        fileIOheader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
+        fileIOheader.setForeground(new java.awt.Color(255, 255, 255));
+        fileIOheader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        fileIOheader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        fileIOheader.setText("Batch Operation");
+        fileIOheader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        pathText.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        pathText.setForeground(new java.awt.Color(255, 255, 255));
+        pathText.setText("Path to Text File:");
+
+        pathEntry.setText("C:\\Users\\ExampleUser\\Desktop\\exampleFile.txt");
+        pathEntry.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pathEntryFocusGained(evt);
+            }
+        });
+
+        browseButton.setText("Browse...");
+        browseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseButtonActionPerformed(evt);
+            }
+        });
+
+        outputDetailScroll.setToolTipText("");
+
+        outputDetailArea.setEditable(false);
+        outputDetailArea.setBackground(new java.awt.Color(51, 51, 51));
+        outputDetailArea.setColumns(20);
+        outputDetailArea.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        outputDetailArea.setForeground(new java.awt.Color(255, 255, 255));
+        outputDetailArea.setRows(5);
+        outputDetailArea.setBorder(null);
+        outputDetailArea.setSelectionColor(new java.awt.Color(0, 0, 0));
+        outputDetailScroll.setViewportView(outputDetailArea);
+
         javax.swing.GroupLayout filePaneLayout = new javax.swing.GroupLayout(filePane);
         filePane.setLayout(filePaneLayout);
         filePaneLayout.setHorizontalGroup(
                 filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 600, Short.MAX_VALUE)
+                        .addGroup(filePaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(filePaneLayout.createSequentialGroup()
+                                                .addComponent(outputDetailScroll)
+                                                .addContainerGap())
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
+                                                .addGap(0, 33, Short.MAX_VALUE)
+                                                .addGroup(filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
+                                                                .addGroup(filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(pathText)
+                                                                        .addComponent(fileIOheader))
+                                                                .addGap(66, 66, 66))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
+                                                                .addComponent(pathEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(browseButton)
+                                                                .addGap(48, 48, 48))))))
         );
         filePaneLayout.setVerticalGroup(
                 filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 575, Short.MAX_VALUE)
+                        .addGroup(filePaneLayout.createSequentialGroup()
+                                .addComponent(fileIOheader)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pathText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(pathEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(browseButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(outputDetailScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
         );
 
         calcMainPane.add(filePane, "fileCard");
@@ -2016,7 +2092,42 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
     //--------------------END of Bandwidth calculator-----------------------
 
+    //--------------------FILE IO---------------------------
+    private boolean firstFocusPath = true;
+    private void pathEntryFocusGained(java.awt.event.FocusEvent evt) {
+        // TODO add your handling code here:
+        if (firstFocusPath) {
+            pathEntry.setText("");
+            firstFocusPath = false;
+        }
+    }
 
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        int returnVal = browseFile.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            String path = browseFile.getSelectedFile().getPath();
+            pathEntry.setText(path);
+            String outPath;
+            String fileName;
+            if (path.lastIndexOf("/") < 0 && path.lastIndexOf("\\") < 0) {
+                fileName = path.substring(0 ,path.lastIndexOf(".txt"));
+                outPath = fileName+"-output.txt";
+            } else {
+                // Give the output the original input name with output.txt at the end
+                fileName = path.substring(1 + path.lastIndexOf("/") + path.lastIndexOf("\\"),path.lastIndexOf(".txt"));
+                int slashIndex = path.lastIndexOf("/") > 0 ? path.lastIndexOf("/")+1 : path.lastIndexOf("\\")+1;
+                outPath = path.substring(0, slashIndex)+fileName+"-output.txt";
+            }
+            FileIO fileIO = new FileIO(path, outPath);
+            fileIO.processFile();
+            outputDetailArea.append("Output file generated:\n");
+            outputDetailArea.append(outPath+"\n");
+        } else {
+            pathEntry.setText("");
+        }
+    }
+    //--------------------END of FILE IO---------------------------
     private void onlyPositiveNumbers(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
         if ("0123456789".indexOf(c) == -1) {
@@ -2076,6 +2187,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private int xx, yy; // for moving window
+    private final javax.swing.JFileChooser browseFile;
     // Variables declaration - do not modify
     private javax.swing.JTextField avgPageSizeEntry;
     private javax.swing.JLabel avgPageSizeText;
@@ -2104,6 +2216,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JPanel binaryPane;
     private javax.swing.JPanel binaryTab;
     private javax.swing.JLabel bothWaysConvertIcon;
+    private javax.swing.JButton browseButton;
     private javax.swing.JLabel calcEntryText;
     private javax.swing.JLabel calcInvalidText;
     private javax.swing.JPanel calcMainPane;
@@ -2141,6 +2254,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel equalDec2Hex;
     private javax.swing.JLabel equalHex2Dec;
     private javax.swing.JPanel fileIOTab;
+    private javax.swing.JLabel fileIOheader;
     private javax.swing.JPanel filePane;
     private javax.swing.JTextField fileSizeEntry;
     private javax.swing.JLabel fileSizeText;
@@ -2172,9 +2286,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
     private javax.swing.JTextField monthlyUseEntry;
     private javax.swing.JLabel monthlyUseText;
     private JComboBox<SizeUnit.Size> monthlyUseUnit;
+    private javax.swing.JTextArea outputDetailArea;
+    private javax.swing.JScrollPane outputDetailScroll;
     private javax.swing.JTextField pageViewEntry;
     private javax.swing.JLabel pageViewText;
     private JComboBox<TimeUnit.Time> pageViewUnit;
+    private javax.swing.JTextField pathEntry;
+    private javax.swing.JLabel pathText;
     private javax.swing.JTextField redunFactorEntry;
     private javax.swing.JLabel redunFactorText;
     private javax.swing.JTextArea binResultArea;

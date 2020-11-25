@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.*;
+
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -17,6 +19,7 @@ public class FileIO {
 
     private final String inputPath;
     private final String outputPath;
+    private final JTextArea displayDetails;
 
     /**
      * The constructor take in the path for the input text file,
@@ -27,6 +30,20 @@ public class FileIO {
     public FileIO(String inputPath, String outputPath) {
         this.inputPath = inputPath;
         this.outputPath = outputPath;
+        this.displayDetails = null;
+    }
+
+    /**
+     * The constructor take in the path for the input text file,
+     * the path of the output file as well as the text area for GUI, and set them up accordingly.
+     * @param inputPath The path of the input file.
+     * @param outputPath The path of the output file.
+     * @param displayDetails The text area to display detailed output on GUI.
+     */
+    public FileIO(String inputPath, String outputPath, JTextArea displayDetails) {
+        this.inputPath = inputPath;
+        this.outputPath = outputPath;
+        this.displayDetails = displayDetails;
     }
 
     /**
@@ -52,19 +69,26 @@ public class FileIO {
                     case "Calculate" -> {
                         out = handleCalculate(lineToken);
                         printOutput.printf("%-69s>>> %s", line, out);
+                        if (displayDetails != null) displayDetails.append(String.format("%s", out));
                     }
                     case "Convert" -> {
                         out = handleConvert(lineToken);
                         printOutput.printf("%-69s>>> %s", line, out);
+                        if (displayDetails != null) displayDetails.append(String.format("%s", out));
                     } // if first word not Calculate or Convert print error
-                    default -> printOutput.printf("%s      (#_#) Error, invalid input.\n", line);
+                    default -> {
+                        printOutput.printf("%s      (#_#) Error, invalid input.\n", line);
+                        if (displayDetails != null)
+                            displayDetails.append("      (#_#) Error, invalid input.\n");
+                    }
                 }
             }
             printOutput.close();
-            System.out.println("Output generated successfully.");
-
+            if (displayDetails != null) displayDetails.append("---------------Output generated successfully---------------\n");
+            else System.out.println("---------------Output generated successfully---------------");
         } catch (FileNotFoundException e) {
-            System.out.println("Error, file not found");
+            if (displayDetails != null) displayDetails.append("Error, file not found\n");
+            else System.out.println("Error, file not found");
         }
     }
 

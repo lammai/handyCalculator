@@ -37,7 +37,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         outputDetailScroll.setBorder(null);
         browseFile = new javax.swing.JFileChooser();
         browseFile.setCurrentDirectory(new File("C:\\"));
-        browseFile.setFileFilter(new FileNameExtensionFilter("TEXT FILES", "txt", "text"));
+        browseFile.setFileFilter(new FileNameExtensionFilter(".txt", "txt", "text"));
         cardLayout = (CardLayout)(calcMainPane.getLayout());
     }
 
@@ -1448,11 +1448,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         pathText.setText("Path to Text File:");
 
         pathEntry.setText("C:\\Users\\ExampleUser\\Desktop\\exampleFile.txt");
-        pathEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                pathEntryFocusGained(evt);
-            }
-        });
+        pathEntry.setEditable(false);
 
         browseButton.setText("Browse...");
         browseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -2093,15 +2089,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
     //--------------------END of Bandwidth calculator-----------------------
 
     //--------------------FILE IO---------------------------
-    private boolean firstFocusPath = true;
-    private void pathEntryFocusGained(java.awt.event.FocusEvent evt) {
-        // TODO add your handling code here:
-        if (firstFocusPath) {
-            pathEntry.setText("");
-            firstFocusPath = false;
-        }
-    }
-
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         int returnVal = browseFile.showOpenDialog(this);
@@ -2117,11 +2104,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
                 // Give the output the original input name with output.txt at the end
                 fileName = path.substring(1 + path.lastIndexOf("/") + path.lastIndexOf("\\"),path.lastIndexOf(".txt"));
                 int slashIndex = path.lastIndexOf("/") > 0 ? path.lastIndexOf("/")+1 : path.lastIndexOf("\\")+1;
-                outPath = path.substring(0, slashIndex)+fileName+"-output.txt";
+                outPath = path.substring(0, slashIndex-1)+fileName+"-output.txt";
             }
-            FileIO fileIO = new FileIO(path, outPath);
+            FileIO fileIO = new FileIO(path, outPath, outputDetailArea);
             fileIO.processFile();
-            outputDetailArea.append("Output file generated:\n");
             outputDetailArea.append(outPath+"\n");
         } else {
             pathEntry.setText("");

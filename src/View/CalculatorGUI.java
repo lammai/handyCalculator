@@ -1336,6 +1336,11 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
 
         bothWaysConvertIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_up_down_arrow_36px.png"))); // NOI18N
+        bothWaysConvertIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bothWaysConvertIconMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout hostBandwidthPaneLayout = new javax.swing.GroupLayout(hostBandwidthPane);
         hostBandwidthPane.setLayout(hostBandwidthPaneLayout);
@@ -2085,6 +2090,19 @@ public class CalculatorGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         monthlyUseEntry.setText("");
         bandwidthHostingEntry.setText("");
+    }
+
+    private void bothWaysConvertIconMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        if (monthlyUseEntry.getText().isEmpty() && !bandwidthHostingEntry.getText().isEmpty()) {
+            String input = bandwidthHostingEntry.getText();
+            monthlyUseEntry.setText(input);
+            bandwidthHostingEntry.setText("");
+        } else {
+            String input = monthlyUseEntry.getText();
+            monthlyUseEntry.setText("");
+            bandwidthHostingEntry.setText(input);
+        }
     }
     //--------------------END of Bandwidth calculator-----------------------
 

@@ -26,7 +26,7 @@ class HostingBandwidthCalculatorTest {
     @Test
     void rate2Month() {
         String result = hostCalc2.convert();
-        String correctResult = "78266214093.04762 GB per month";
+        String correctResult = "78266214093.04762 Gigabytes (GB) per month";
         assertEquals(correctResult, result);
     }
 }

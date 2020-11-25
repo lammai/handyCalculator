@@ -53,10 +53,10 @@ public class BinHexCLI {
             default -> System.err.println("Calculation Error.");
         }
         if (results[0] == null) {
-            return new String[]{ "Binary value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new BinaryCalculator(num).toDecimal().getValue())) };
+            return new String[]{ "Binary value: " + num.getValue(), String.format("Decimal value: %s", new BinaryCalculator(num).toDecimal().getValue()) };
         }
         return new String[]{ String.format("Binary value: %s    Remainder: %s", num.getValue(), results[1]),
-                String.format("Decimal value: %.0f    Remainder: %s", Double.parseDouble(new BinaryCalculator(num).toDecimal().getValue()), results[0])};
+                String.format("Decimal value: %s    Remainder: %s", new BinaryCalculator(num).toDecimal().getValue(), results[0])};
     }
 
     /**
@@ -77,10 +77,10 @@ public class BinHexCLI {
             default -> System.err.println("Calculation Error.");
         }
         if (remainder[0] == null) {
-            return new String[]{ "Hex value: " + num.getValue(), String.format("Decimal value: %.0f", Double.parseDouble(new HexCalculator(num).toDecimal().getValue())) };
+            return new String[]{ "Hex value: " + num.getValue(), String.format("Decimal value: %s", new HexCalculator(num).toDecimal().getValue()) };
         }
         return new String[]{ String.format("Hex value: %s    Hex remainder: %s", num.getValue(), remainder[1]),
-                String.format("Decimal value: %.0f    Decimal remainder: %s", Double.parseDouble(new HexCalculator(num).toDecimal().getValue()), remainder[0])};
+                String.format("Decimal value: %s    Decimal remainder: %s", new HexCalculator(num).toDecimal().getValue(), remainder[0])};
     }
 
     /**

@@ -8,33 +8,35 @@ package View;
 import Controller.*;
 import Model.*;
 
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.util.Arrays;
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import static View.BinHexCLI.performCalculation;
 import static View.BinHexCLI.splitCalculation;
 
 /**
  *
- * @author Kusanagi
+ *
  */
-public class CalculatorGUI extends javax.swing.JFrame {
+public class CalculatorGUI extends JFrame {
 
-    /**
-     * Creates new form CalculatorGUI
-     */
     CardLayout cardLayout;
 
+    /**
+     *
+     */
     public CalculatorGUI() {
         initComponents();
         jScrollPane1.setBorder(null);
         hexResultScroll.setBorder(null);
         bandwidthResultScroll.setBorder(null);
         outputDetailScroll.setBorder(null);
-        browseFile = new javax.swing.JFileChooser();
+        browseFile = new JFileChooser();
         browseFile.setCurrentDirectory(new File("C:\\"));
         browseFile.setFileFilter(new FileNameExtensionFilter(".txt", "txt", "text"));
         cardLayout = (CardLayout)(calcMainPane.getLayout());
@@ -42,387 +44,390 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     /**
      * This method is called from within the constructor to initialize the form.
+     * Responsible for setting up GUI components position and functionalities.
      */
     private void initComponents() {
 
-        rootPane = new javax.swing.JPanel();
-        selectionPane = new javax.swing.JPanel();
-        binaryTab = new javax.swing.JPanel();
-        binaryLabel = new javax.swing.JLabel();
-        hexTab = new javax.swing.JPanel();
-        hexLabel = new javax.swing.JLabel();
-        bandwidthTab = new javax.swing.JPanel();
-        bandwidthLabel = new javax.swing.JLabel();
-        fileIOTab = new javax.swing.JPanel();
-        fileIOlabel = new javax.swing.JLabel();
-        topLogo = new javax.swing.JLabel();
-        closeButton = new javax.swing.JLabel();
-        minimizeButton = new javax.swing.JLabel();
-        calcMainPane = new javax.swing.JPanel();
-        welcomePane = new javax.swing.JPanel();
-        binaryPane = new javax.swing.JPanel();
-        binCalcPane = new javax.swing.JPanel();
-        calcEntryText = new javax.swing.JLabel();
-        calculationEntry = new javax.swing.JTextField();
-        equalButton = new javax.swing.JLabel();
-        clearButton = new javax.swing.JLabel();
-        binaryCalculationHeader = new javax.swing.JLabel();
-        calcInvalidText = new javax.swing.JLabel();
-        binToDecPane = new javax.swing.JPanel();
-        bin2DecHeader = new javax.swing.JLabel();
-        binValueText = new javax.swing.JLabel();
-        binValueEntry = new javax.swing.JTextField();
-        equalBin2Dec = new javax.swing.JLabel();
-        clearBin2Dec = new javax.swing.JLabel();
-        decToBinPane = new javax.swing.JPanel();
-        dec2BinHeader = new javax.swing.JLabel();
-        decValueText = new javax.swing.JLabel();
-        decValueEntry = new javax.swing.JTextField();
-        equalDec2Bin = new javax.swing.JLabel();
-        clearDec2Bin = new javax.swing.JLabel();
-        decimalBinInvalidText = new javax.swing.JLabel();
-        resultPane = new javax.swing.JPanel();
-        dec2BinHeader1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        binResultArea = new javax.swing.JTextArea();
-        hexPane = new javax.swing.JPanel();
-        hexCalcPane = new javax.swing.JPanel();
-        hexCalcText = new javax.swing.JLabel();
-        hexCalcEntry = new javax.swing.JTextField();
-        hexCalcEqual = new javax.swing.JLabel();
-        hexCalcClear = new javax.swing.JLabel();
-        hexCalcHeader = new javax.swing.JLabel();
-        hexCalcInvalid = new javax.swing.JLabel();
-        hexToDecPane = new javax.swing.JPanel();
-        hex2DecHeader = new javax.swing.JLabel();
-        hexValueText = new javax.swing.JLabel();
-        hexValueEntry = new javax.swing.JTextField();
-        equalHex2Dec = new javax.swing.JLabel();
-        clearHex2Dec = new javax.swing.JLabel();
-        decToHexPane = new javax.swing.JPanel();
-        dec2HexHeader = new javax.swing.JLabel();
-        decValueText1 = new javax.swing.JLabel();
-        decValueEntry1 = new javax.swing.JTextField();
-        equalDec2Hex = new javax.swing.JLabel();
-        clearDec2Hex = new javax.swing.JLabel();
-        decHexInvalid = new javax.swing.JLabel();
-        hexResultPane = new javax.swing.JPanel();
-        hexResultHeader = new javax.swing.JLabel();
-        hexResultScroll = new javax.swing.JScrollPane();
-        hexResultArea = new javax.swing.JTextArea();
-        bandwidthPane = new javax.swing.JPanel();
-        bandwidthActionPane = new javax.swing.JPanel();
-        dataConvertPane = new javax.swing.JPanel();
-        dataText = new javax.swing.JLabel();
-        dataEntry = new javax.swing.JTextField();
+        JPanel rootPane = new JPanel();
+        JPanel selectionPane = new JPanel();
+        binaryTab = new JPanel();
+        JLabel binaryLabel = new JLabel();
+        hexTab = new JPanel();
+        JLabel hexLabel = new JLabel();
+        bandwidthTab = new JPanel();
+        JLabel bandwidthLabel = new JLabel();
+        fileIOTab = new JPanel();
+        JLabel fileIOlabel = new JLabel();
+        JLabel topLogo = new JLabel();
+        JLabel closeButton = new JLabel();
+        JLabel minimizeButton = new JLabel();
+        calcMainPane = new JPanel();
+        JPanel welcomePane = new JPanel();
+        JPanel binaryPane = new JPanel();
+        JPanel binCalcPane = new JPanel();
+        JLabel calcEntryText = new JLabel();
+        calculationEntry = new JTextField();
+        JLabel equalButton = new JLabel();
+        JLabel clearButton = new JLabel();
+        JLabel binaryCalculationHeader = new JLabel();
+        calcInvalidText = new JLabel();
+        JPanel binToDecPane = new JPanel();
+        JLabel bin2DecHeader = new JLabel();
+        JLabel binValueText = new JLabel();
+        binValueEntry = new JTextField();
+        JLabel equalBin2Dec = new JLabel();
+        JLabel clearBin2Dec = new JLabel();
+        JPanel decToBinPane = new JPanel();
+        JLabel dec2BinHeader = new JLabel();
+        JLabel decValueText = new JLabel();
+        decValueEntry = new JTextField();
+        JLabel equalDec2Bin = new JLabel();
+        JLabel clearDec2Bin = new JLabel();
+        decimalBinInvalidText = new JLabel();
+        JPanel resultPane = new JPanel();
+        JLabel dec2BinHeader1 = new JLabel();
+        jScrollPane1 = new JScrollPane();
+        binResultArea = new JTextArea();
+        JPanel hexPane = new JPanel();
+        JPanel hexCalcPane = new JPanel();
+        JLabel hexCalcText = new JLabel();
+        hexCalcEntry = new JTextField();
+        JLabel hexCalcEqual = new JLabel();
+        JLabel hexCalcClear = new JLabel();
+        JLabel hexCalcHeader = new JLabel();
+        hexCalcInvalid = new JLabel();
+        JPanel hexToDecPane = new JPanel();
+        JLabel hex2DecHeader = new JLabel();
+        JLabel hexValueText = new JLabel();
+        hexValueEntry = new JTextField();
+        JLabel equalHex2Dec = new JLabel();
+        JLabel clearHex2Dec = new JLabel();
+        JPanel decToHexPane = new JPanel();
+        JLabel dec2HexHeader = new JLabel();
+        JLabel decValueText1 = new JLabel();
+        decValueEntry1 = new JTextField();
+        JLabel equalDec2Hex = new JLabel();
+        JLabel clearDec2Hex = new JLabel();
+        decHexInvalid = new JLabel();
+        JPanel hexResultPane = new JPanel();
+        JLabel hexResultHeader = new JLabel();
+        hexResultScroll = new JScrollPane();
+        hexResultArea = new JTextArea();
+        JPanel bandwidthPane = new JPanel();
+        JPanel bandwidthActionPane = new JPanel();
+        JPanel dataConvertPane = new JPanel();
+        JLabel dataText = new JLabel();
+        dataEntry = new JTextField();
         dataUnitCombo = new JComboBox<>();
-        dataEqualButton = new javax.swing.JLabel();
-        dataClearButton = new javax.swing.JLabel();
-        downUpPane = new javax.swing.JPanel();
-        fileSizeText = new javax.swing.JLabel();
-        fileSizeEntry = new javax.swing.JTextField();
+        JLabel dataEqualButton = new JLabel();
+        JLabel dataClearButton = new JLabel();
+        JPanel downUpPane = new JPanel();
+        JLabel fileSizeText = new JLabel();
+        fileSizeEntry = new JTextField();
         fileSizeUnit = new JComboBox<>();
-        downUpEqual = new javax.swing.JLabel();
-        downUpClear = new javax.swing.JLabel();
-        bandwidthText = new javax.swing.JLabel();
-        bandwidthEntry = new javax.swing.JTextField();
+        JLabel downUpEqual = new JLabel();
+        JLabel downUpClear = new JLabel();
+        JLabel bandwidthText = new JLabel();
+        bandwidthEntry = new JTextField();
         bandwidthUnit = new JComboBox<>();
-        webBandwidthPane = new javax.swing.JPanel();
-        pageViewText = new javax.swing.JLabel();
-        pageViewEntry = new javax.swing.JTextField();
+        JPanel webBandwidthPane = new JPanel();
+        JLabel pageViewText = new JLabel();
+        pageViewEntry = new JTextField();
         pageViewUnit = new JComboBox<>();
-        webBandwidthEqual = new javax.swing.JLabel();
-        webBandwidthClear = new javax.swing.JLabel();
-        avgPageSizeText = new javax.swing.JLabel();
-        avgPageSizeEntry = new javax.swing.JTextField();
+        JLabel webBandwidthEqual = new JLabel();
+        JLabel webBandwidthClear = new JLabel();
+        JLabel avgPageSizeText = new JLabel();
+        avgPageSizeEntry = new JTextField();
         avgPageSizeUnit = new JComboBox<>();
-        redunFactorEntry = new javax.swing.JTextField();
-        redunFactorText = new javax.swing.JLabel();
-        hostBandwidthPane = new javax.swing.JPanel();
-        monthlyUseEntry = new javax.swing.JTextField();
-        monthlyUseText = new javax.swing.JLabel();
+        redunFactorEntry = new JTextField();
+        JLabel redunFactorText = new JLabel();
+        JPanel hostBandwidthPane = new JPanel();
+        monthlyUseEntry = new JTextField();
+        JLabel monthlyUseText = new JLabel();
         monthlyUseUnit = new JComboBox<>();
-        bandwidthHostingText = new javax.swing.JLabel();
-        bandwidthHostingEntry = new javax.swing.JTextField();
+        JLabel bandwidthHostingText = new JLabel();
+        bandwidthHostingEntry = new JTextField();
         bandwidthHostingUnit = new JComboBox<>();
-        hostingEqual = new javax.swing.JLabel();
-        hostingClear = new javax.swing.JLabel();
-        bothWaysConvertIcon = new javax.swing.JLabel();
-        bandwidthResultHeader = new javax.swing.JLabel();
-        bandwidthResultScroll = new javax.swing.JScrollPane();
-        bandwidthResultArea = new javax.swing.JTextArea();
-        filePane = new javax.swing.JPanel();
-        browseButton = new javax.swing.JButton();
-        fileIOheader = new javax.swing.JLabel();
-        outputDetailScroll = new javax.swing.JScrollPane();
-        outputDetailArea = new javax.swing.JTextArea();
-        pathEntry = new javax.swing.JTextField();
-        pathText = new javax.swing.JLabel();
-        fillerImage = new javax.swing.JLabel();
-        welcomeImage = new javax.swing.JLabel();
+        JLabel hostingEqual = new JLabel();
+        JLabel hostingClear = new JLabel();
+        JLabel bothWaysConvertIcon = new JLabel();
+        JLabel bandwidthResultHeader = new JLabel();
+        bandwidthResultScroll = new JScrollPane();
+        bandwidthResultArea = new JTextArea();
+        JPanel filePane = new JPanel();
+        JButton browseButton = new JButton();
+        JLabel fileIOheader = new JLabel();
+        outputDetailScroll = new JScrollPane();
+        outputDetailArea = new JTextArea();
+        pathEntry = new JTextField();
+        JLabel pathText = new JLabel();
+        JLabel fillerImage = new JLabel();
+        JLabel welcomeImage = new JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
 
-        rootPane.setBackground(new java.awt.Color(51, 51, 51));
-        rootPane.setPreferredSize(new java.awt.Dimension(900, 600));
-        rootPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
+        rootPane.setBackground(new Color(51, 51, 51));
+        rootPane.setPreferredSize(new Dimension(900, 600));
+        rootPane.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent evt) {
                 rootPaneMouseDragged(evt);
             }
         });
-        rootPane.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+        rootPane.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
                 rootPaneMousePressed(evt);
             }
         });
 
-        selectionPane.setBackground(new java.awt.Color(26, 26, 26));
-        selectionPane.setPreferredSize(new java.awt.Dimension(318, 500));
+        selectionPane.setBackground(new Color(26, 26, 26));
+        selectionPane.setPreferredSize(new Dimension(300, 600));
 
-        binaryTab.setBackground(new java.awt.Color(15, 15, 15));
-        binaryTab.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        binaryTab.setPreferredSize(new java.awt.Dimension(144, 54));
-        binaryTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                binaryTabMouseEntered(evt);
+        binaryTab.setBackground(new Color(15, 15, 15));
+        binaryTab.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        binaryTab.setPreferredSize(new Dimension(144, 54));
+        binaryTab.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                binaryTabMouseEntered();
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                binaryTabMouseExited(evt);
+            public void mouseExited(MouseEvent evt) {
+                binaryTabMouseExited();
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                binaryTabMousePressed(evt);
+            public void mousePressed(MouseEvent evt) {
+                binaryTabMousePressed();
             }
         });
 
-        binaryLabel.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        binaryLabel.setForeground(new java.awt.Color(255, 255, 255));
-        binaryLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_binary_file_25px.png"))); // NOI18N
+        binaryLabel.setFont(new Font("Consolas", Font.BOLD, 14)); // NOI18N
+        binaryLabel.setForeground(new Color(255, 255, 255));
+        binaryLabel.setIcon(new ImageIcon(getClass().getResource("/images/icons8_binary_file_25px.png"))); // NOI18N
         binaryLabel.setText("Binary");
         binaryTab.add(binaryLabel);
 
-        hexTab.setBackground(new java.awt.Color(15, 15, 15));
-        hexTab.setPreferredSize(new java.awt.Dimension(318, 54));
-        hexTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                hexTabMouseEntered(evt);
+        hexTab.setBackground(new Color(15, 15, 15));
+        hexTab.setPreferredSize(new Dimension(318, 54));
+        hexTab.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                hexTabMouseEntered();
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                hexTabMouseExited(evt);
+            public void mouseExited(MouseEvent evt) {
+                hexTabMouseExited();
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                hexTabMousePressed(evt);
+            public void mousePressed(MouseEvent evt) {
+                hexTabMousePressed();
             }
         });
 
-        hexLabel.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        hexLabel.setForeground(new java.awt.Color(255, 255, 255));
-        hexLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_hexadecimal_25px.png"))); // NOI18N
+        hexLabel.setFont(new Font("Consolas", Font.BOLD, 14)); // NOI18N
+        hexLabel.setForeground(new Color(255, 255, 255));
+        hexLabel.setIcon(new ImageIcon(getClass().getResource("/images/icons8_hexadecimal_25px.png"))); // NOI18N
         hexLabel.setText("Hexadecimal");
         hexTab.add(hexLabel);
 
-        bandwidthTab.setBackground(new java.awt.Color(15, 15, 15));
-        bandwidthTab.setPreferredSize(new java.awt.Dimension(196, 54));
-        bandwidthTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                bandwidthTabMouseEntered(evt);
+        bandwidthTab.setBackground(new Color(15, 15, 15));
+        bandwidthTab.setPreferredSize(new Dimension(196, 54));
+        bandwidthTab.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                bandwidthTabMouseEntered();
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                bandwidthTabMouseExited(evt);
+            public void mouseExited(MouseEvent evt) {
+                bandwidthTabMouseExited();
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                bandwidthTabMousePressed(evt);
+            public void mousePressed(MouseEvent evt) {
+                bandwidthTabMousePressed();
             }
         });
 
-        bandwidthLabel.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        bandwidthLabel.setForeground(new java.awt.Color(255, 255, 255));
-        bandwidthLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_outgoing_data_25px.png"))); // NOI18N
+        bandwidthLabel.setFont(new Font("Consolas", Font.BOLD, 14)); // NOI18N
+        bandwidthLabel.setForeground(new Color(255, 255, 255));
+        bandwidthLabel.setIcon(new ImageIcon(getClass().getResource("/images/icons8_outgoing_data_25px.png"))); // NOI18N
         bandwidthLabel.setText("Bandwidth");
         bandwidthTab.add(bandwidthLabel);
 
-        fileIOTab.setBackground(new java.awt.Color(15, 15, 15));
-        fileIOTab.setPreferredSize(new java.awt.Dimension(196, 54));
-        fileIOTab.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                fileIOTabMouseEntered(evt);
+        fileIOTab.setBackground(new Color(15, 15, 15));
+        fileIOTab.setPreferredSize(new Dimension(196, 54));
+        fileIOTab.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                fileIOTabMouseEntered();
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                fileIOTabMouseExited(evt);
+            public void mouseExited(MouseEvent evt) {
+                fileIOTabMouseExited();
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                fileIOTabMousePressed(evt);
+            public void mousePressed(MouseEvent evt) {
+                fileIOTabMousePressed();
             }
         });
 
-        fileIOlabel.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-        fileIOlabel.setForeground(new java.awt.Color(255, 255, 255));
-        fileIOlabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_txt_25px.png"))); // NOI18N
+        fileIOlabel.setFont(new Font("Consolas", Font.BOLD, 14)); // NOI18N
+        fileIOlabel.setForeground(new Color(255, 255, 255));
+        fileIOlabel.setIcon(new ImageIcon(getClass().getResource("/images/icons8_txt_25px.png"))); // NOI18N
         fileIOlabel.setText("File I/O");
         fileIOTab.add(fileIOlabel);
 
-        topLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/topLogoAsset 18.png"))); // NOI18N
+        topLogo.setHorizontalAlignment(SwingConstants.RIGHT);
+        topLogo.setIcon(new ImageIcon(getClass().getResource("/images/topLogoAsset 30.png"))); // NOI18N
 
-        fillerImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/fillerAsset 24.png"))); // NOI18N
+        fillerImage.setIcon(new ImageIcon(getClass().getResource("/images/fillerAsset 24.png"))); // NOI18N
 
-        javax.swing.GroupLayout selectionPaneLayout = new javax.swing.GroupLayout(selectionPane);
+        GroupLayout selectionPaneLayout = new GroupLayout(selectionPane);
         selectionPane.setLayout(selectionPaneLayout);
         selectionPaneLayout.setHorizontalGroup(
-                selectionPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(binaryTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(hexTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bandwidthTab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fileIOTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                selectionPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(binaryTab, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hexTab, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(bandwidthTab, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fileIOTab, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(selectionPaneLayout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(topLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selectionPaneLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(fillerImage))
+                                .addComponent(topLogo, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, selectionPaneLayout.createSequentialGroup()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fillerImage)
+                                .addContainerGap())
         );
         selectionPaneLayout.setVerticalGroup(
-                selectionPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                selectionPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(selectionPaneLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(topLogo)
                                 .addGap(0, 0, 0)
-                                .addComponent(binaryTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(binaryTab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(hexTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(hexTab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(bandwidthTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bandwidthTab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(fileIOTab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fileIOTab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(fillerImage)
                                 .addContainerGap())
         );
 
-        closeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_close_window_25px.png"))); // NOI18N
-        closeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                closeButtonMousePressed(evt);
+        closeButton.setIcon(new ImageIcon(getClass().getResource("/images/icons8_close_window_25px.png"))); // NOI18N
+        closeButton.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                closeButtonMousePressed();
             }
         });
 
-        minimizeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_minimize_window_25px.png"))); // NOI18N
-        minimizeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                minimizeButtonMousePressed(evt);
+        minimizeButton.setIcon(new ImageIcon(getClass().getResource("/images/icons8_minimize_window_25px.png"))); // NOI18N
+        minimizeButton.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                minimizeButtonMousePressed();
             }
         });
 
-        calcMainPane.setLayout(new java.awt.CardLayout());
+        calcMainPane.setLayout(new CardLayout());
 
-        welcomePane.setBackground(new java.awt.Color(51, 51, 51));
+        welcomePane.setBackground(new Color(51, 51, 51));
 
-        welcomeImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        welcomeImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/welcomeImageAsset 28.png"))); // NOI18N
+        welcomeImage.setHorizontalAlignment(SwingConstants.CENTER);
+        welcomeImage.setIcon(new ImageIcon(getClass().getResource("/images/welcomeImageAsset 28.png"))); // NOI18N
 
-        javax.swing.GroupLayout welcomePaneLayout = new javax.swing.GroupLayout(welcomePane);
+        GroupLayout welcomePaneLayout = new GroupLayout(welcomePane);
         welcomePane.setLayout(welcomePaneLayout);
         welcomePaneLayout.setHorizontalGroup(
-                welcomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePaneLayout.createSequentialGroup()
-                                .addContainerGap(150, Short.MAX_VALUE)
+                welcomePaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, welcomePaneLayout.createSequentialGroup()
+                                .addContainerGap(141, Short.MAX_VALUE)
                                 .addComponent(welcomeImage)
                                 .addGap(150, 150, 150))
         );
         welcomePaneLayout.setVerticalGroup(
-                welcomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                welcomePaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(welcomePaneLayout.createSequentialGroup()
                                 .addGap(228, 228, 228)
                                 .addComponent(welcomeImage)
-                                .addContainerGap(229, Short.MAX_VALUE))
+                                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         calcMainPane.add(welcomePane, "card6");
 
-        binaryPane.setBackground(new java.awt.Color(51, 51, 51));
-        binaryPane.setLayout(new java.awt.GridLayout(4, 1));
+        binaryPane.setBackground(new Color(51, 51, 51));
+        binaryPane.setLayout(new GridLayout(4, 1));
 
-        binCalcPane.setBackground(new java.awt.Color(51, 51, 51));
+        binCalcPane.setBackground(new Color(51, 51, 51));
 
-        calcEntryText.setForeground(new java.awt.Color(255, 255, 255));
+        calcEntryText.setForeground(new Color(255, 255, 255));
         calcEntryText.setText("Input Binary Calculation:");
 
         calculationEntry.setText("1010 + 1010");
-        calculationEntry.setPreferredSize(new java.awt.Dimension(300, 30));
-        calculationEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
-        calculationEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                calculationEntryFocusGained(evt);
+        calculationEntry.setPreferredSize(new Dimension(300, 30));
+        calculationEntry.setSelectionColor(new Color(204, 204, 204));
+        calculationEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                calculationEntryFocusGained();
             }
         });
-        calculationEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        calculationEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 calculationEntryKeyTyped(evt);
             }
         });
 
-        equalButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        equalButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                equalButtonMouseClicked(evt);
+        equalButton.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                equalButtonMouseClicked();
             }
         });
 
-        clearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        clearButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearButtonMouseClicked(evt);
+        clearButton.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                clearButtonMouseClicked();
             }
         });
 
-        binaryCalculationHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        binaryCalculationHeader.setForeground(new java.awt.Color(255, 255, 255));
-        binaryCalculationHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        binaryCalculationHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        binaryCalculationHeader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        binaryCalculationHeader.setForeground(new Color(255, 255, 255));
+        binaryCalculationHeader.setHorizontalAlignment(SwingConstants.TRAILING);
+        binaryCalculationHeader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         binaryCalculationHeader.setText("Binary Calculation");
-        binaryCalculationHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        binaryCalculationHeader.setHorizontalTextPosition(SwingConstants.LEFT);
 
-        calcInvalidText.setForeground(new java.awt.Color(255, 51, 51));
+        calcInvalidText.setForeground(new Color(255, 51, 51));
         calcInvalidText.setText("Invalid input!");
         calcInvalidText.setVisible(false);
 
-        javax.swing.GroupLayout binCalcPaneLayout = new javax.swing.GroupLayout(binCalcPane);
+        GroupLayout binCalcPaneLayout = new GroupLayout(binCalcPane);
         binCalcPane.setLayout(binCalcPaneLayout);
         binCalcPaneLayout.setHorizontalGroup(
-                binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                binCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(binCalcPaneLayout.createSequentialGroup()
-                                .addGroup(binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(binCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(binCalcPaneLayout.createSequentialGroup()
                                                 .addContainerGap()
                                                 .addComponent(binaryCalculationHeader))
                                         .addGroup(binCalcPaneLayout.createSequentialGroup()
-                                                .addGap(45, 45, 45)
+                                                .addGap(66, 66, 66)
                                                 .addComponent(calcEntryText)
                                                 .addGap(5, 5, 5)
-                                                .addGroup(binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(binCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                                                         .addGroup(binCalcPaneLayout.createSequentialGroup()
                                                                 .addGap(0, 0, 0)
                                                                 .addComponent(calcInvalidText)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(equalButton)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(clearButton))
-                                                        .addComponent(calculationEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(calculationEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(70, Short.MAX_VALUE))
         );
         binCalcPaneLayout.setVerticalGroup(
-                binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, binCalcPaneLayout.createSequentialGroup()
+                binCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, binCalcPaneLayout.createSequentialGroup()
                                 .addContainerGap(19, Short.MAX_VALUE)
                                 .addComponent(binaryCalculationHeader)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(binCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(binCalcPaneLayout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
                                                 .addComponent(calcEntryText))
-                                        .addComponent(calculationEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(binCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(calculationEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(binCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(equalButton)
                                         .addComponent(clearButton)
                                         .addComponent(calcInvalidText))
@@ -431,80 +436,80 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         binaryPane.add(binCalcPane);
 
-        binToDecPane.setBackground(new java.awt.Color(51, 51, 51));
+        binToDecPane.setBackground(new Color(51, 51, 51));
 
-        bin2DecHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        bin2DecHeader.setForeground(new java.awt.Color(255, 255, 255));
-        bin2DecHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        bin2DecHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        bin2DecHeader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        bin2DecHeader.setForeground(new Color(255, 255, 255));
+        bin2DecHeader.setHorizontalAlignment(SwingConstants.TRAILING);
+        bin2DecHeader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         bin2DecHeader.setText("Binary to Decimal");
-        bin2DecHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        bin2DecHeader.setHorizontalTextPosition(SwingConstants.LEFT);
 
-        binValueText.setForeground(new java.awt.Color(255, 255, 255));
+        binValueText.setForeground(new Color(255, 255, 255));
         binValueText.setText("Binary value:");
 
         binValueEntry.setText("1000001");
-        binValueEntry.setPreferredSize(new java.awt.Dimension(300, 30));
-        binValueEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
-        binValueEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                binValueEntryFocusGained(evt);
+        binValueEntry.setPreferredSize(new Dimension(300, 30));
+        binValueEntry.setSelectionColor(new Color(204, 204, 204));
+        binValueEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                binValueEntryFocusGained();
             }
         });
-        binValueEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        binValueEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 binValueEntryKeyTyped(evt);
             }
         });
 
-        equalBin2Dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        equalBin2Dec.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                equalBin2DecMouseClicked(evt);
+        equalBin2Dec.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalBin2Dec.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                equalBin2DecMouseClicked();
             }
         });
 
-        clearBin2Dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        clearBin2Dec.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearBin2DecMouseClicked(evt);
+        clearBin2Dec.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearBin2Dec.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                clearBin2DecMouseClicked();
             }
         });
 
-        javax.swing.GroupLayout binToDecPaneLayout = new javax.swing.GroupLayout(binToDecPane);
+        GroupLayout binToDecPaneLayout = new GroupLayout(binToDecPane);
         binToDecPane.setLayout(binToDecPaneLayout);
         binToDecPaneLayout.setHorizontalGroup(
-                binToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                binToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(binToDecPaneLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(bin2DecHeader)
                                 .addContainerGap(72, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, binToDecPaneLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(binToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, binToDecPaneLayout.createSequentialGroup()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(binToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(binToDecPaneLayout.createSequentialGroup()
                                                 .addComponent(equalBin2Dec)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(clearBin2Dec))
                                         .addGroup(binToDecPaneLayout.createSequentialGroup()
                                                 .addComponent(binValueText)
                                                 .addGap(5, 5, 5)
-                                                .addComponent(binValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(binValueEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                                 .addGap(101, 101, 101))
         );
         binToDecPaneLayout.setVerticalGroup(
-                binToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, binToDecPaneLayout.createSequentialGroup()
+                binToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, binToDecPaneLayout.createSequentialGroup()
                                 .addContainerGap(19, Short.MAX_VALUE)
                                 .addComponent(bin2DecHeader)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(binToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(binToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(binToDecPaneLayout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
                                                 .addComponent(binValueText))
-                                        .addComponent(binValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(binToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(binValueEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(binToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(equalBin2Dec)
                                         .addComponent(clearBin2Dec))
                                 .addGap(16, 16, 16))
@@ -512,120 +517,120 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         binaryPane.add(binToDecPane);
 
-        decToBinPane.setBackground(new java.awt.Color(51, 51, 51));
+        decToBinPane.setBackground(new Color(51, 51, 51));
 
-        dec2BinHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        dec2BinHeader.setForeground(new java.awt.Color(255, 255, 255));
-        dec2BinHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        dec2BinHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        dec2BinHeader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        dec2BinHeader.setForeground(new Color(255, 255, 255));
+        dec2BinHeader.setHorizontalAlignment(SwingConstants.TRAILING);
+        dec2BinHeader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         dec2BinHeader.setText("Decimal to Binary");
-        dec2BinHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        dec2BinHeader.setHorizontalTextPosition(SwingConstants.LEFT);
 
-        decValueText.setForeground(new java.awt.Color(255, 255, 255));
+        decValueText.setForeground(new Color(255, 255, 255));
         decValueText.setText("Decimal value:");
 
         decValueEntry.setText("12345");
-        decValueEntry.setPreferredSize(new java.awt.Dimension(300, 30));
-        decValueEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
-        decValueEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                decValueEntryFocusGained(evt);
+        decValueEntry.setPreferredSize(new Dimension(300, 30));
+        decValueEntry.setSelectionColor(new Color(204, 204, 204));
+        decValueEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                decValueEntryFocusGained();
             }
         });
-        decValueEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        decValueEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 decValueEntryKeyTyped(evt);
             }
         });
 
-        equalDec2Bin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        equalDec2Bin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                equalDec2BinMouseClicked(evt);
+        equalDec2Bin.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalDec2Bin.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                equalDec2BinMouseClicked();
             }
         });
 
-        clearDec2Bin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        clearDec2Bin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearDec2BinMouseClicked(evt);
+        clearDec2Bin.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearDec2Bin.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                clearDec2BinMouseClicked();
             }
         });
 
-        decimalBinInvalidText.setForeground(new java.awt.Color(255, 51, 51));
+        decimalBinInvalidText.setForeground(new Color(255, 51, 51));
         decimalBinInvalidText.setText("Invalid input!");
         decimalBinInvalidText.setVisible(false);
 
-        javax.swing.GroupLayout decToBinPaneLayout = new javax.swing.GroupLayout(decToBinPane);
+        GroupLayout decToBinPaneLayout = new GroupLayout(decToBinPane);
         decToBinPane.setLayout(decToBinPaneLayout);
         decToBinPaneLayout.setHorizontalGroup(
-                decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                decToBinPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(decToBinPaneLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(dec2BinHeader)
                                 .addContainerGap(72, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decToBinPaneLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(GroupLayout.Alignment.TRAILING, decToBinPaneLayout.createSequentialGroup()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(decValueText)
                                 .addGap(5, 5, 5)
-                                .addGroup(decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(decToBinPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(decToBinPaneLayout.createSequentialGroup()
                                                 .addComponent(decimalBinInvalidText)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(equalDec2Bin)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(clearDec2Bin))
-                                        .addComponent(decValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(decValueEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addGap(101, 101, 101))
         );
         decToBinPaneLayout.setVerticalGroup(
-                decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decToBinPaneLayout.createSequentialGroup()
+                decToBinPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, decToBinPaneLayout.createSequentialGroup()
                                 .addContainerGap(19, Short.MAX_VALUE)
                                 .addComponent(dec2BinHeader)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(decToBinPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(decToBinPaneLayout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
                                                 .addComponent(decValueText))
-                                        .addComponent(decValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(decValueEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(decToBinPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(decToBinPaneLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(decToBinPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(decToBinPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addComponent(equalDec2Bin)
                                                         .addComponent(clearDec2Bin)))
                                         .addGroup(decToBinPaneLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(decimalBinInvalidText)))
                                 .addGap(16, 16, 16))
         );
 
         binaryPane.add(decToBinPane);
 
-        resultPane.setBackground(new java.awt.Color(51, 51, 51));
+        resultPane.setBackground(new Color(51, 51, 51));
 
-        dec2BinHeader1.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        dec2BinHeader1.setForeground(new java.awt.Color(255, 255, 255));
-        dec2BinHeader1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        dec2BinHeader1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        dec2BinHeader1.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        dec2BinHeader1.setForeground(new Color(255, 255, 255));
+        dec2BinHeader1.setHorizontalAlignment(SwingConstants.TRAILING);
+        dec2BinHeader1.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         dec2BinHeader1.setText("Result");
-        dec2BinHeader1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        dec2BinHeader1.setHorizontalTextPosition(SwingConstants.LEFT);
 
         binResultArea.setEditable(false);
-        binResultArea.setBackground(new java.awt.Color(51, 51, 51));
+        binResultArea.setBackground(new Color(51, 51, 51));
         binResultArea.setColumns(20);
-        binResultArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        binResultArea.setForeground(new java.awt.Color(255, 255, 255));
+        binResultArea.setFont(new Font("Consolas", Font.PLAIN, 14)); // NOI18N
+        binResultArea.setForeground(new Color(255, 255, 255));
         binResultArea.setRows(5);
         binResultArea.setBorder(null);
-        binResultArea.setSelectionColor(new java.awt.Color(0, 0, 0));
+        binResultArea.setSelectionColor(new Color(0, 0, 0));
         jScrollPane1.setViewportView(binResultArea);
 
-        javax.swing.GroupLayout resultPaneLayout = new javax.swing.GroupLayout(resultPane);
+        GroupLayout resultPaneLayout = new GroupLayout(resultPane);
         resultPane.setLayout(resultPaneLayout);
         resultPaneLayout.setHorizontalGroup(
-                resultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                resultPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(resultPaneLayout.createSequentialGroup()
                                 .addContainerGap(123, Short.MAX_VALUE)
                                 .addComponent(dec2BinHeader1)
@@ -636,101 +641,101 @@ public class CalculatorGUI extends javax.swing.JFrame {
                                 .addContainerGap())
         );
         resultPaneLayout.setVerticalGroup(
-                resultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                resultPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(resultPaneLayout.createSequentialGroup()
                                 .addGap(0, 0, 0)
                                 .addComponent(dec2BinHeader1)
                                 .addGap(0, 0, 0)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
         );
 
         binaryPane.add(resultPane);
 
         calcMainPane.add(binaryPane, "binaryCard");
 
-        hexPane.setBackground(new java.awt.Color(51, 51, 51));
-        hexPane.setLayout(new java.awt.GridLayout(4,1));
+        hexPane.setBackground(new Color(51, 51, 51));
+        hexPane.setLayout(new GridLayout(4,1));
 
-        hexCalcPane.setBackground(new java.awt.Color(51, 51, 51));
+        hexCalcPane.setBackground(new Color(51, 51, 51));
 
-        hexCalcText.setForeground(new java.awt.Color(255, 255, 255));
+        hexCalcText.setForeground(new Color(255, 255, 255));
         hexCalcText.setText("Input Hex Calculation:");
 
         hexCalcEntry.setText("EA + BAD");
-        hexCalcEntry.setPreferredSize(new java.awt.Dimension(300, 30));
-        hexCalcEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
-        hexCalcEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                hexCalcEntryFocusGained(evt);
+        hexCalcEntry.setPreferredSize(new Dimension(300, 30));
+        hexCalcEntry.setSelectionColor(new Color(204, 204, 204));
+        hexCalcEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                hexCalcEntryFocusGained();
             }
         });
-        hexCalcEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        hexCalcEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 hexCalcEntryKeyTyped(evt);
             }
         });
 
-        hexCalcEqual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        hexCalcEqual.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hexCalcEqualMouseClicked(evt);
+        hexCalcEqual.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        hexCalcEqual.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                hexCalcEqualMouseClicked();
             }
         });
 
-        hexCalcClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        hexCalcClear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hexCalcClearMouseClicked(evt);
+        hexCalcClear.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        hexCalcClear.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                hexCalcClearMouseClicked();
             }
         });
 
-        hexCalcHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        hexCalcHeader.setForeground(new java.awt.Color(255, 255, 255));
-        hexCalcHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        hexCalcHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        hexCalcHeader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        hexCalcHeader.setForeground(new Color(255, 255, 255));
+        hexCalcHeader.setHorizontalAlignment(SwingConstants.TRAILING);
+        hexCalcHeader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         hexCalcHeader.setText("Hex Calculation");
-        hexCalcHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        hexCalcHeader.setHorizontalTextPosition(SwingConstants.LEFT);
 
-        hexCalcInvalid.setForeground(new java.awt.Color(255, 51, 51));
+        hexCalcInvalid.setForeground(new Color(255, 51, 51));
         hexCalcInvalid.setText("Invalid input!");
         hexCalcInvalid.setVisible(false);
 
-        javax.swing.GroupLayout hexCalcPaneLayout = new javax.swing.GroupLayout(hexCalcPane);
+        GroupLayout hexCalcPaneLayout = new GroupLayout(hexCalcPane);
         hexCalcPane.setLayout(hexCalcPaneLayout);
         hexCalcPaneLayout.setHorizontalGroup(
-                hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                hexCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(hexCalcPaneLayout.createSequentialGroup()
-                                .addGroup(hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hexCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(hexCalcPaneLayout.createSequentialGroup()
                                                 .addContainerGap()
                                                 .addComponent(hexCalcHeader))
                                         .addGroup(hexCalcPaneLayout.createSequentialGroup()
-                                                .addGap(45, 45, 45)
+                                                .addGap(72, 72, 72)
                                                 .addComponent(hexCalcText)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(hexCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                                                         .addGroup(hexCalcPaneLayout.createSequentialGroup()
                                                                 .addComponent(hexCalcInvalid)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                 .addComponent(hexCalcEqual)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(hexCalcClear))
-                                                        .addComponent(hexCalcEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(hexCalcEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap(95, Short.MAX_VALUE))
         );
         hexCalcPaneLayout.setVerticalGroup(
-                hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hexCalcPaneLayout.createSequentialGroup()
+                hexCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, hexCalcPaneLayout.createSequentialGroup()
                                 .addContainerGap(19, Short.MAX_VALUE)
                                 .addComponent(hexCalcHeader)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(hexCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(hexCalcPaneLayout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
                                                 .addComponent(hexCalcText))
-                                        .addComponent(hexCalcEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(hexCalcPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(hexCalcEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hexCalcPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(hexCalcEqual)
                                         .addComponent(hexCalcClear)
                                         .addComponent(hexCalcInvalid))
@@ -739,80 +744,80 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         hexPane.add(hexCalcPane);
 
-        hexToDecPane.setBackground(new java.awt.Color(51, 51, 51));
+        hexToDecPane.setBackground(new Color(51, 51, 51));
 
-        hex2DecHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        hex2DecHeader.setForeground(new java.awt.Color(255, 255, 255));
-        hex2DecHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        hex2DecHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        hex2DecHeader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        hex2DecHeader.setForeground(new Color(255, 255, 255));
+        hex2DecHeader.setHorizontalAlignment(SwingConstants.TRAILING);
+        hex2DecHeader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         hex2DecHeader.setText("Hex to Decimal");
-        hex2DecHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        hex2DecHeader.setHorizontalTextPosition(SwingConstants.LEFT);
 
-        hexValueText.setForeground(new java.awt.Color(255, 255, 255));
+        hexValueText.setForeground(new Color(255, 255, 255));
         hexValueText.setText("Hex value:");
 
         hexValueEntry.setText("1F1F1F");
-        hexValueEntry.setPreferredSize(new java.awt.Dimension(300, 30));
-        hexValueEntry.setSelectionColor(new java.awt.Color(204, 204, 204));
-        hexValueEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                hexValueEntryFocusGained(evt);
+        hexValueEntry.setPreferredSize(new Dimension(300, 30));
+        hexValueEntry.setSelectionColor(new Color(204, 204, 204));
+        hexValueEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                hexValueEntryFocusGained();
             }
         });
-        hexValueEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        hexValueEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 hexValueEntryKeyTyped(evt);
             }
         });
 
-        equalHex2Dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        equalHex2Dec.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                equalHex2DecMouseClicked(evt);
+        equalHex2Dec.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalHex2Dec.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                equalHex2DecMouseClicked();
             }
         });
 
-        clearHex2Dec.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        clearHex2Dec.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearHex2DecMouseClicked(evt);
+        clearHex2Dec.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearHex2Dec.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                clearHex2DecMouseClicked();
             }
         });
 
-        javax.swing.GroupLayout hexToDecPaneLayout = new javax.swing.GroupLayout(hexToDecPane);
+        GroupLayout hexToDecPaneLayout = new GroupLayout(hexToDecPane);
         hexToDecPane.setLayout(hexToDecPaneLayout);
         hexToDecPaneLayout.setHorizontalGroup(
-                hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                hexToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(hexToDecPaneLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(hex2DecHeader)
                                 .addContainerGap(97, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hexToDecPaneLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, hexToDecPaneLayout.createSequentialGroup()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(hexToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(hexToDecPaneLayout.createSequentialGroup()
                                                 .addComponent(equalHex2Dec)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(clearHex2Dec))
                                         .addGroup(hexToDecPaneLayout.createSequentialGroup()
                                                 .addComponent(hexValueText)
                                                 .addGap(5, 5, 5)
-                                                .addComponent(hexValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(hexValueEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                                 .addGap(101, 101, 101))
         );
         hexToDecPaneLayout.setVerticalGroup(
-                hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hexToDecPaneLayout.createSequentialGroup()
+                hexToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, hexToDecPaneLayout.createSequentialGroup()
                                 .addContainerGap(19, Short.MAX_VALUE)
                                 .addComponent(hex2DecHeader)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hexToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(hexToDecPaneLayout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
                                                 .addComponent(hexValueText))
-                                        .addComponent(hexValueEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(hexToDecPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(hexValueEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hexToDecPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(equalHex2Dec)
                                         .addComponent(clearHex2Dec))
                                 .addGap(16, 16, 16))
@@ -820,85 +825,85 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         hexPane.add(hexToDecPane);
 
-        decToHexPane.setBackground(new java.awt.Color(51, 51, 51));
+        decToHexPane.setBackground(new Color(51, 51, 51));
 
-        dec2HexHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        dec2HexHeader.setForeground(new java.awt.Color(255, 255, 255));
-        dec2HexHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        dec2HexHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        dec2HexHeader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        dec2HexHeader.setForeground(new Color(255, 255, 255));
+        dec2HexHeader.setHorizontalAlignment(SwingConstants.TRAILING);
+        dec2HexHeader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         dec2HexHeader.setText("Decimal to Hex");
-        dec2HexHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        dec2HexHeader.setHorizontalTextPosition(SwingConstants.LEFT);
 
-        decValueText1.setForeground(new java.awt.Color(255, 255, 255));
+        decValueText1.setForeground(new Color(255, 255, 255));
         decValueText1.setText("Decimal value:");
 
         decValueEntry1.setText("12345");
-        decValueEntry1.setPreferredSize(new java.awt.Dimension(300, 30));
-        decValueEntry1.setSelectionColor(new java.awt.Color(204, 204, 204));
-        decValueEntry1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                decValueEntry1FocusGained(evt);
+        decValueEntry1.setPreferredSize(new Dimension(300, 30));
+        decValueEntry1.setSelectionColor(new Color(204, 204, 204));
+        decValueEntry1.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                decValueEntry1FocusGained();
             }
         });
-        decValueEntry1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        decValueEntry1.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 decValueEntryKeyTyped(evt);
             }
         });
 
-        equalDec2Hex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        equalDec2Hex.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                equalDec2HexMouseClicked(evt);
+        equalDec2Hex.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        equalDec2Hex.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                equalDec2HexMouseClicked();
             }
         });
 
-        clearDec2Hex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        clearDec2Hex.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearDec2HexMouseClicked(evt);
+        clearDec2Hex.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        clearDec2Hex.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                clearDec2HexMouseClicked();
             }
         });
 
-        decHexInvalid.setForeground(new java.awt.Color(255, 51, 51));
+        decHexInvalid.setForeground(new Color(255, 51, 51));
         decHexInvalid.setText("Invalid input!");
         decHexInvalid.setVisible(false);
 
-        javax.swing.GroupLayout decToHexPaneLayout = new javax.swing.GroupLayout(decToHexPane);
+        GroupLayout decToHexPaneLayout = new GroupLayout(decToHexPane);
         decToHexPane.setLayout(decToHexPaneLayout);
         decToHexPaneLayout.setHorizontalGroup(
-                decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                decToHexPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(decToHexPaneLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(dec2HexHeader)
                                 .addContainerGap(97, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decToHexPaneLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(GroupLayout.Alignment.TRAILING, decToHexPaneLayout.createSequentialGroup()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(decValueText1)
                                 .addGap(5, 5, 5)
-                                .addGroup(decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(decToHexPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(decToHexPaneLayout.createSequentialGroup()
                                                 .addComponent(decHexInvalid)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(equalDec2Hex)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(clearDec2Hex))
-                                        .addComponent(decValueEntry1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(decValueEntry1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addGap(101, 101, 101))
         );
         decToHexPaneLayout.setVerticalGroup(
-                decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, decToHexPaneLayout.createSequentialGroup()
+                decToHexPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, decToHexPaneLayout.createSequentialGroup()
                                 .addContainerGap(19, Short.MAX_VALUE)
                                 .addComponent(dec2HexHeader)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(decToHexPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(decToHexPaneLayout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
                                                 .addComponent(decValueText1))
-                                        .addComponent(decValueEntry1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(decToHexPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(decValueEntry1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(decToHexPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(equalDec2Hex)
                                         .addComponent(clearDec2Hex)
                                         .addComponent(decHexInvalid))
@@ -907,29 +912,29 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         hexPane.add(decToHexPane);
 
-        hexResultPane.setBackground(new java.awt.Color(51, 51, 51));
+        hexResultPane.setBackground(new Color(51, 51, 51));
 
-        hexResultHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        hexResultHeader.setForeground(new java.awt.Color(255, 255, 255));
-        hexResultHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        hexResultHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        hexResultHeader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        hexResultHeader.setForeground(new Color(255, 255, 255));
+        hexResultHeader.setHorizontalAlignment(SwingConstants.TRAILING);
+        hexResultHeader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         hexResultHeader.setText("Result");
-        hexResultHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        hexResultHeader.setHorizontalTextPosition(SwingConstants.LEFT);
 
         hexResultArea.setEditable(false);
-        hexResultArea.setBackground(new java.awt.Color(51, 51, 51));
+        hexResultArea.setBackground(new Color(51, 51, 51));
         hexResultArea.setColumns(20);
-        hexResultArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        hexResultArea.setForeground(new java.awt.Color(255, 255, 255));
+        hexResultArea.setFont(new Font("Consolas", Font.PLAIN, 14)); // NOI18N
+        hexResultArea.setForeground(new Color(255, 255, 255));
         hexResultArea.setRows(5);
         hexResultArea.setBorder(null);
-        hexResultArea.setSelectionColor(new java.awt.Color(0, 0, 0));
+        hexResultArea.setSelectionColor(new Color(0, 0, 0));
         hexResultScroll.setViewportView(hexResultArea);
 
-        javax.swing.GroupLayout hexResultPaneLayout = new javax.swing.GroupLayout(hexResultPane);
+        GroupLayout hexResultPaneLayout = new GroupLayout(hexResultPane);
         hexResultPane.setLayout(hexResultPaneLayout);
         hexResultPaneLayout.setHorizontalGroup(
-                hexResultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                hexResultPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(hexResultPaneLayout.createSequentialGroup()
                                 .addContainerGap(123, Short.MAX_VALUE)
                                 .addComponent(hexResultHeader)
@@ -940,38 +945,38 @@ public class CalculatorGUI extends javax.swing.JFrame {
                                 .addContainerGap())
         );
         hexResultPaneLayout.setVerticalGroup(
-                hexResultPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                hexResultPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(hexResultPaneLayout.createSequentialGroup()
                                 .addGap(0, 0, 0)
                                 .addComponent(hexResultHeader)
                                 .addGap(0, 0, 0)
-                                .addComponent(hexResultScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                                .addComponent(hexResultScroll, GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
         );
 
         hexPane.add(hexResultPane);
 
         calcMainPane.add(hexPane, "hexCard");
 
-        bandwidthPane.setBackground(new java.awt.Color(51, 51, 51));
+        bandwidthPane.setBackground(new Color(51, 51, 51));
 
-        bandwidthActionPane.setBackground(new java.awt.Color(51, 51, 51));
-        bandwidthActionPane.setLayout(new java.awt.GridLayout(2, 2));
+        bandwidthActionPane.setBackground(new Color(51, 51, 51));
+        bandwidthActionPane.setLayout(new GridLayout(2, 2));
 
-        dataConvertPane.setBackground(new java.awt.Color(51, 51, 51));
-        dataConvertPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Data Unit Converter"), "Data Unit Converter", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Corbel Light", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        dataConvertPane.setBackground(new Color(51, 51, 51));
+        dataConvertPane.setBorder(BorderFactory.createTitledBorder(BorderFactory.createTitledBorder("Data Unit Converter"), "Data Unit Converter", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Corbel Light", Font.PLAIN, 18), new Color(255, 255, 255))); // NOI18N
 
-        dataText.setForeground(new java.awt.Color(255, 255, 255));
+        dataText.setForeground(new Color(255, 255, 255));
         dataText.setText("Data Value:");
 
         dataEntry.setText("500");
-        dataEntry.setPreferredSize(new java.awt.Dimension(7, 24));
-        dataEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                dataEntryFocusGained(evt);
+        dataEntry.setPreferredSize(new Dimension(7, 24));
+        dataEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                dataEntryFocusGained();
             }
         });
-        dataEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        dataEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 onlyPositiveNumbers(evt);
             }
         });
@@ -979,48 +984,48 @@ public class CalculatorGUI extends javax.swing.JFrame {
         dataUnitCombo.setModel(new DefaultComboBoxModel<>(SizeUnit.Size.values()));
         dataUnitCombo.setSelectedIndex(7);  // set default selection to Megabytes (MB)
 
-        dataEqualButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        dataEqualButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dataEqualButtonMouseClicked(evt);
+        dataEqualButton.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        dataEqualButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                dataEqualButtonMouseClicked();
             }
         });
 
-        dataClearButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        dataClearButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dataClearButtonMouseClicked(evt);
+        dataClearButton.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        dataClearButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                dataClearButtonMouseClicked();
             }
         });
 
-        javax.swing.GroupLayout dataConvertPaneLayout = new javax.swing.GroupLayout(dataConvertPane);
+        GroupLayout dataConvertPaneLayout = new GroupLayout(dataConvertPane);
         dataConvertPane.setLayout(dataConvertPaneLayout);
         dataConvertPaneLayout.setHorizontalGroup(
-                dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataConvertPaneLayout.createSequentialGroup()
-                                .addGroup(dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                dataConvertPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, dataConvertPaneLayout.createSequentialGroup()
+                                .addGroup(dataConvertPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(dataConvertPaneLayout.createSequentialGroup()
                                                 .addGap(0, 0, Short.MAX_VALUE)
                                                 .addComponent(dataEqualButton)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(dataClearButton))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, dataConvertPaneLayout.createSequentialGroup()
-                                                .addComponent(dataEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(GroupLayout.Alignment.LEADING, dataConvertPaneLayout.createSequentialGroup()
+                                                .addComponent(dataEntry, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(dataUnitCombo, 0, 116, Short.MAX_VALUE))
-                                        .addComponent(dataText, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(dataText, GroupLayout.Alignment.LEADING))
                                 .addGap(0, 0, 0))
         );
         dataConvertPaneLayout.setVerticalGroup(
-                dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                dataConvertPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(dataConvertPaneLayout.createSequentialGroup()
                                 .addComponent(dataText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(dataEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(dataUnitCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(dataConvertPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dataConvertPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(dataEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dataUnitCombo, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(dataConvertPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(dataEqualButton)
                                         .addComponent(dataClearButton))
                                 .addGap(0, 67, Short.MAX_VALUE))
@@ -1028,21 +1033,21 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         bandwidthActionPane.add(dataConvertPane);
 
-        downUpPane.setBackground(new java.awt.Color(51, 51, 51));
-        downUpPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Download/Upload Time Calculator", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Corbel Light", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        downUpPane.setBackground(new Color(51, 51, 51));
+        downUpPane.setBorder(BorderFactory.createTitledBorder(null, "Download/Upload Time Calculator", TitledBorder.RIGHT, TitledBorder.DEFAULT_POSITION, new Font("Corbel Light", Font.PLAIN, 18), new Color(255, 255, 255))); // NOI18N
 
-        fileSizeText.setForeground(new java.awt.Color(255, 255, 255));
+        fileSizeText.setForeground(new Color(255, 255, 255));
         fileSizeText.setText("File Size:");
 
         fileSizeEntry.setText("500");
-        fileSizeEntry.setPreferredSize(new java.awt.Dimension(7, 24));
-        fileSizeEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                fileSizeEntryFocusGained(evt);
+        fileSizeEntry.setPreferredSize(new Dimension(7, 24));
+        fileSizeEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                fileSizeEntryFocusGained();
             }
         });
-        fileSizeEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        fileSizeEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 onlyPositiveNumbers(evt);
             }
         });
@@ -1056,78 +1061,78 @@ public class CalculatorGUI extends javax.swing.JFrame {
         fileSizeUnit.setSelectedIndex(2);   // set default selection to Megabytes (MB)
         avgPageSizeUnit.setSelectedIndex(1);   // set default selection to Kilobytes (KB)
 
-        downUpEqual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        downUpEqual.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                downUpEqualMouseClicked(evt);
+        downUpEqual.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        downUpEqual.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                downUpEqualMouseClicked();
             }
         });
 
-        downUpClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        downUpClear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                downUpClearMouseClicked(evt);
+        downUpClear.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        downUpClear.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                downUpClearMouseClicked();
             }
         });
 
-        bandwidthText.setForeground(new java.awt.Color(255, 255, 255));
+        bandwidthText.setForeground(new Color(255, 255, 255));
         bandwidthText.setText("Bandwidth:");
 
         bandwidthEntry.setText("5");
-        bandwidthEntry.setPreferredSize(new java.awt.Dimension(7, 24));
-        bandwidthEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                bandwidthEntryFocusGained(evt);
+        bandwidthEntry.setPreferredSize(new Dimension(7, 24));
+        bandwidthEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                bandwidthEntryFocusGained();
             }
         });
-        bandwidthEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        bandwidthEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 onlyPositiveNumbers(evt);
             }
         });
 
-        bandwidthUnit.setModel(new javax.swing.DefaultComboBoxModel<>(RateUnit.Rate.values()));
+        bandwidthUnit.setModel(new DefaultComboBoxModel<>(RateUnit.Rate.values()));
         bandwidthUnit.setSelectedIndex(2);  // Set default selection to Mbit/s
 
-        javax.swing.GroupLayout downUpPaneLayout = new javax.swing.GroupLayout(downUpPane);
+        GroupLayout downUpPaneLayout = new GroupLayout(downUpPane);
         downUpPane.setLayout(downUpPaneLayout);
         downUpPaneLayout.setHorizontalGroup(
-                downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, downUpPaneLayout.createSequentialGroup()
-                                .addGroup(downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                downUpPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, downUpPaneLayout.createSequentialGroup()
+                                .addGroup(downUpPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(downUpPaneLayout.createSequentialGroup()
                                                 .addGap(0, 0, Short.MAX_VALUE)
                                                 .addComponent(downUpEqual)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(downUpClear))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, downUpPaneLayout.createSequentialGroup()
-                                                .addComponent(fileSizeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(GroupLayout.Alignment.LEADING, downUpPaneLayout.createSequentialGroup()
+                                                .addComponent(fileSizeEntry, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(fileSizeUnit, 0, 120, Short.MAX_VALUE))
-                                        .addComponent(fileSizeText, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, downUpPaneLayout.createSequentialGroup()
-                                                .addComponent(bandwidthEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(fileSizeText, GroupLayout.Alignment.LEADING)
+                                        .addGroup(GroupLayout.Alignment.LEADING, downUpPaneLayout.createSequentialGroup()
+                                                .addComponent(bandwidthEntry, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(bandwidthUnit, 0, 120, Short.MAX_VALUE))
-                                        .addComponent(bandwidthText, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(bandwidthText, GroupLayout.Alignment.LEADING))
                                 .addGap(0, 0, 0))
         );
         downUpPaneLayout.setVerticalGroup(
-                downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                downUpPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(downUpPaneLayout.createSequentialGroup()
                                 .addComponent(fileSizeText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(fileSizeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fileSizeUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(downUpPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(fileSizeEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(fileSizeUnit, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                                 .addComponent(bandwidthText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(bandwidthEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(bandwidthUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(downUpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(downUpPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(bandwidthEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bandwidthUnit, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(downUpPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(downUpEqual)
                                         .addComponent(downUpClear))
                                 .addContainerGap())
@@ -1135,121 +1140,121 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         bandwidthActionPane.add(downUpPane);
 
-        webBandwidthPane.setBackground(new java.awt.Color(51, 51, 51));
-        webBandwidthPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Website Bandwidth Calculator", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Corbel Light", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        webBandwidthPane.setBackground(new Color(51, 51, 51));
+        webBandwidthPane.setBorder(BorderFactory.createTitledBorder(null, "Website Bandwidth Calculator", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Corbel Light", Font.PLAIN, 18), new Color(255, 255, 255))); // NOI18N
 
-        pageViewText.setForeground(new java.awt.Color(255, 255, 255));
+        pageViewText.setForeground(new Color(255, 255, 255));
         pageViewText.setText("Page Views:");
 
         pageViewEntry.setText("5000");
-        pageViewEntry.setPreferredSize(new java.awt.Dimension(7, 24));
-        pageViewEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                pageViewEntryFocusGained(evt);
+        pageViewEntry.setPreferredSize(new Dimension(7, 24));
+        pageViewEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                pageViewEntryFocusGained();
             }
         });
-        pageViewEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        pageViewEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 onlyPositiveNumbers(evt);
             }
         });
 
-        pageViewUnit.setModel(new javax.swing.DefaultComboBoxModel<>(TimeUnit.Time.values()));
+        pageViewUnit.setModel(new DefaultComboBoxModel<>(TimeUnit.Time.values()));
         pageViewUnit.setSelectedIndex(3);
 
-        webBandwidthEqual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        webBandwidthEqual.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                webBandwidthEqualMouseClicked(evt);
+        webBandwidthEqual.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        webBandwidthEqual.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                webBandwidthEqualMouseClicked();
             }
         });
 
-        webBandwidthClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        webBandwidthClear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                webBandwidthClearMouseClicked(evt);
+        webBandwidthClear.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        webBandwidthClear.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                webBandwidthClearMouseClicked();
             }
         });
 
-        avgPageSizeText.setForeground(new java.awt.Color(255, 255, 255));
+        avgPageSizeText.setForeground(new Color(255, 255, 255));
         avgPageSizeText.setText("Average Page Size:");
 
         avgPageSizeEntry.setText("500");
-        avgPageSizeEntry.setPreferredSize(new java.awt.Dimension(7, 24));
-        avgPageSizeEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                avgPageSizeEntryFocusGained(evt);
+        avgPageSizeEntry.setPreferredSize(new Dimension(7, 24));
+        avgPageSizeEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                avgPageSizeEntryFocusGained();
             }
         });
-        avgPageSizeEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        avgPageSizeEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 onlyPositiveNumbers(evt);
             }
         });
 
         redunFactorEntry.setText("2");
-        redunFactorEntry.setPreferredSize(new java.awt.Dimension(7, 24));
-        redunFactorEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                redunFactorEntryFocusGained(evt);
+        redunFactorEntry.setPreferredSize(new Dimension(7, 24));
+        redunFactorEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                redunFactorEntryFocusGained();
             }
         });
-        redunFactorEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        redunFactorEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 onlyPositiveNumbers(evt);
             }
         });
 
-        redunFactorText.setForeground(new java.awt.Color(255, 255, 255));
+        redunFactorText.setForeground(new Color(255, 255, 255));
         redunFactorText.setText("Redundancy Factor:");
 
-        javax.swing.GroupLayout webBandwidthPaneLayout = new javax.swing.GroupLayout(webBandwidthPane);
+        GroupLayout webBandwidthPaneLayout = new GroupLayout(webBandwidthPane);
         webBandwidthPane.setLayout(webBandwidthPaneLayout);
         webBandwidthPaneLayout.setHorizontalGroup(
-                webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                webBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(webBandwidthPaneLayout.createSequentialGroup()
-                                .addComponent(pageViewEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pageViewEntry, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(pageViewUnit, 0, 120, Short.MAX_VALUE))
                         .addGroup(webBandwidthPaneLayout.createSequentialGroup()
-                                .addComponent(avgPageSizeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(avgPageSizeEntry, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(avgPageSizeUnit, 0, 120, Short.MAX_VALUE))
                         .addGroup(webBandwidthPaneLayout.createSequentialGroup()
-                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(pageViewText, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(avgPageSizeText, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(webBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(pageViewText, GroupLayout.Alignment.LEADING)
+                                        .addComponent(avgPageSizeText, GroupLayout.Alignment.LEADING))
                                 .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(webBandwidthPaneLayout.createSequentialGroup()
-                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(webBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(redunFactorText)
-                                        .addComponent(redunFactorEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(redunFactorEntry, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(webBandwidthEqual)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(webBandwidthClear))
         );
         webBandwidthPaneLayout.setVerticalGroup(
-                webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                webBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(webBandwidthPaneLayout.createSequentialGroup()
                                 .addComponent(pageViewText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(pageViewEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(pageViewUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(webBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(pageViewEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(pageViewUnit, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(webBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(webBandwidthPaneLayout.createSequentialGroup()
                                                 .addComponent(avgPageSizeText)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                        .addComponent(avgPageSizeEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(avgPageSizeUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(webBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(avgPageSizeEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(avgPageSizeUnit, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(redunFactorText)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(redunFactorEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(webBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(redunFactorEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(webBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                 .addComponent(webBandwidthEqual)
                                                 .addComponent(webBandwidthClear)))
                                 .addGap(23, 23, 23))
@@ -1257,299 +1262,295 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         bandwidthActionPane.add(webBandwidthPane);
 
-        hostBandwidthPane.setBackground(new java.awt.Color(51, 51, 51));
-        hostBandwidthPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hosting Bandwidth Converter", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Corbel Light", 0, 18), new java.awt.Color(255, 255, 255))); // NOI18N
+        hostBandwidthPane.setBackground(new Color(51, 51, 51));
+        hostBandwidthPane.setBorder(BorderFactory.createTitledBorder(null, "Hosting Bandwidth Converter", TitledBorder.RIGHT, TitledBorder.DEFAULT_POSITION, new Font("Corbel Light", Font.PLAIN, 18), new Color(255, 255, 255))); // NOI18N
 
         monthlyUseEntry.setText("1000");
-        monthlyUseEntry.setPreferredSize(new java.awt.Dimension(7, 24));
-        monthlyUseEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                monthlyUseEntryFocusGained(evt);
+        monthlyUseEntry.setPreferredSize(new Dimension(7, 24));
+        monthlyUseEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                monthlyUseEntryFocusGained();
             }
         });
-        monthlyUseEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        monthlyUseEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 onlyPositiveNumbers(evt);
             }
         });
 
-        monthlyUseText.setForeground(new java.awt.Color(255, 255, 255));
+        monthlyUseText.setForeground(new Color(255, 255, 255));
         monthlyUseText.setText("Monthly Usage:");
 
-        bandwidthHostingText.setForeground(new java.awt.Color(255, 255, 255));
+        bandwidthHostingText.setForeground(new Color(255, 255, 255));
         bandwidthHostingText.setText("Bandwidth:");
 
-        bandwidthHostingEntry.setPreferredSize(new java.awt.Dimension(7, 24));
-        bandwidthHostingEntry.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                bandwidthHostingEntryFocusGained(evt);
+        bandwidthHostingEntry.setPreferredSize(new Dimension(7, 24));
+        bandwidthHostingEntry.addFocusListener(new FocusAdapter() {
+            public void focusGained(FocusEvent evt) {
+                bandwidthHostingEntryFocusGained();
             }
         });
-        bandwidthHostingEntry.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        bandwidthHostingEntry.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent evt) {
                 onlyPositiveNumbers(evt);
             }
         });
 
-        bandwidthHostingUnit.setModel(new javax.swing.DefaultComboBoxModel<>(RateUnit.Rate.values()));
+        bandwidthHostingUnit.setModel(new DefaultComboBoxModel<>(RateUnit.Rate.values()));
 
-        hostingEqual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
-        hostingEqual.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hostingEqualMouseClicked(evt);
+        hostingEqual.setIcon(new ImageIcon(getClass().getResource("/images/icons8_equals_36px.png"))); // NOI18N
+        hostingEqual.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                hostingEqualMouseClicked();
             }
         });
 
-        hostingClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
-        hostingClear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hostingClearMouseClicked(evt);
+        hostingClear.setIcon(new ImageIcon(getClass().getResource("/images/icons8_clear_symbol_36px.png"))); // NOI18N
+        hostingClear.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                hostingClearMouseClicked();
             }
         });
 
-        bothWaysConvertIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8_up_down_arrow_36px.png"))); // NOI18N
-        bothWaysConvertIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bothWaysConvertIconMouseClicked(evt);
+        bothWaysConvertIcon.setIcon(new ImageIcon(getClass().getResource("/images/icons8_up_down_arrow_36px.png"))); // NOI18N
+        bothWaysConvertIcon.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                bothWaysConvertIconMouseClicked();
             }
         });
 
-        javax.swing.GroupLayout hostBandwidthPaneLayout = new javax.swing.GroupLayout(hostBandwidthPane);
+        GroupLayout hostBandwidthPaneLayout = new GroupLayout(hostBandwidthPane);
         hostBandwidthPane.setLayout(hostBandwidthPaneLayout);
         hostBandwidthPaneLayout.setHorizontalGroup(
-                hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hostBandwidthPaneLayout.createSequentialGroup()
-                                .addComponent(bandwidthHostingEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bandwidthHostingUnit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                hostBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, hostBandwidthPaneLayout.createSequentialGroup()
+                                .addComponent(bandwidthHostingEntry, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bandwidthHostingUnit, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
-                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
-                                                .addComponent(monthlyUseEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hostBandwidthPaneLayout.createSequentialGroup()
+                                                .addComponent(monthlyUseEntry, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED))
+                                        .addGroup(GroupLayout.Alignment.TRAILING, hostBandwidthPaneLayout.createSequentialGroup()
                                                 .addComponent(bothWaysConvertIcon)
                                                 .addGap(56, 56, 56)))
-                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
                                                 .addComponent(hostingEqual)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(hostingClear)
                                                 .addGap(0, 0, Short.MAX_VALUE))
                                         .addComponent(monthlyUseUnit, 0, 120, Short.MAX_VALUE)))
                         .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
-                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(monthlyUseText)
                                         .addComponent(bandwidthHostingText))
                                 .addGap(0, 0, Short.MAX_VALUE))
         );
         hostBandwidthPaneLayout.setVerticalGroup(
-                hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                hostBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(hostBandwidthPaneLayout.createSequentialGroup()
                                 .addComponent(monthlyUseText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(monthlyUseEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(monthlyUseUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(monthlyUseEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(monthlyUseUnit, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(hostingEqual)
                                         .addComponent(hostingClear)
                                         .addComponent(bothWaysConvertIcon))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(bandwidthHostingText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(bandwidthHostingEntry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(bandwidthHostingUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(hostBandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(bandwidthHostingEntry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bandwidthHostingUnit, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())
         );
 
         bandwidthActionPane.add(hostBandwidthPane);
 
-        bandwidthResultHeader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        bandwidthResultHeader.setForeground(new java.awt.Color(255, 255, 255));
-        bandwidthResultHeader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        bandwidthResultHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        bandwidthResultHeader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        bandwidthResultHeader.setForeground(new Color(255, 255, 255));
+        bandwidthResultHeader.setHorizontalAlignment(SwingConstants.TRAILING);
+        bandwidthResultHeader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         bandwidthResultHeader.setText("Result");
-        bandwidthResultHeader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        bandwidthResultHeader.setHorizontalTextPosition(SwingConstants.LEFT);
 
         bandwidthResultArea.setEditable(false);
-        bandwidthResultArea.setBackground(new java.awt.Color(51, 51, 51));
+        bandwidthResultArea.setBackground(new Color(51, 51, 51));
         bandwidthResultArea.setColumns(20);
-        bandwidthResultArea.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        bandwidthResultArea.setForeground(new java.awt.Color(255, 255, 255));
+        bandwidthResultArea.setFont(new Font("Consolas", Font.PLAIN, 12)); // NOI18N
+        bandwidthResultArea.setForeground(new Color(255, 255, 255));
         bandwidthResultArea.setRows(5);
         bandwidthResultArea.setBorder(null);
-        bandwidthResultArea.setSelectionColor(new java.awt.Color(0, 0, 0));
+        bandwidthResultArea.setSelectionColor(new Color(0, 0, 0));
         bandwidthResultScroll.setViewportView(bandwidthResultArea);
 
-        javax.swing.GroupLayout bandwidthPaneLayout = new javax.swing.GroupLayout(bandwidthPane);
+        GroupLayout bandwidthPaneLayout = new GroupLayout(bandwidthPane);
         bandwidthPane.setLayout(bandwidthPaneLayout);
         bandwidthPaneLayout.setHorizontalGroup(
-                bandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bandwidthActionPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bandwidthPaneLayout.createSequentialGroup()
+                bandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(bandwidthActionPane, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(GroupLayout.Alignment.TRAILING, bandwidthPaneLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(bandwidthResultScroll)
                                 .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bandwidthPaneLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(GroupLayout.Alignment.TRAILING, bandwidthPaneLayout.createSequentialGroup()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(bandwidthResultHeader)
                                 .addGap(65, 65, 65))
         );
         bandwidthPaneLayout.setVerticalGroup(
-                bandwidthPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                bandwidthPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(bandwidthPaneLayout.createSequentialGroup()
-                                .addComponent(bandwidthActionPane, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bandwidthActionPane, GroupLayout.PREFERRED_SIZE, 360, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(bandwidthResultHeader)
                                 .addGap(0, 0, 0)
-                                .addComponent(bandwidthResultScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(bandwidthResultScroll, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                 .addGap(0, 0, 0))
         );
 
         calcMainPane.add(bandwidthPane, "bandwidthCard");
 
-        filePane.setBackground(new java.awt.Color(51, 51, 51));
+        filePane.setBackground(new Color(51, 51, 51));
 
-        fileIOheader.setFont(new java.awt.Font("Corbel Light", 0, 24)); // NOI18N
-        fileIOheader.setForeground(new java.awt.Color(255, 255, 255));
-        fileIOheader.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        fileIOheader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
+        fileIOheader.setFont(new Font("Corbel Light", Font.PLAIN, 24)); // NOI18N
+        fileIOheader.setForeground(new Color(255, 255, 255));
+        fileIOheader.setHorizontalAlignment(SwingConstants.TRAILING);
+        fileIOheader.setIcon(new ImageIcon(getClass().getResource("/images/Club 6Asset 11.png"))); // NOI18N
         fileIOheader.setText("Batch Operation");
-        fileIOheader.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        fileIOheader.setHorizontalTextPosition(SwingConstants.LEFT);
 
-        pathText.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        pathText.setForeground(new java.awt.Color(255, 255, 255));
+        pathText.setFont(new Font("Consolas", Font.PLAIN, 12)); // NOI18N
+        pathText.setForeground(new Color(255, 255, 255));
         pathText.setText("Path to Text File:");
 
         pathEntry.setText("C:\\Users\\ExampleUser\\Desktop\\exampleFile.txt");
         pathEntry.setEditable(false);
 
         browseButton.setText("Browse...");
-        browseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseButtonActionPerformed(evt);
-            }
-        });
+        browseButton.addActionListener(this::browseButtonActionPerformed);
 
         outputDetailScroll.setToolTipText("");
 
         outputDetailArea.setEditable(false);
-        outputDetailArea.setBackground(new java.awt.Color(51, 51, 51));
+        outputDetailArea.setBackground(new Color(51, 51, 51));
         outputDetailArea.setColumns(20);
-        outputDetailArea.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        outputDetailArea.setForeground(new java.awt.Color(255, 255, 255));
+        outputDetailArea.setFont(new Font("Consolas", Font.PLAIN, 12)); // NOI18N
+        outputDetailArea.setForeground(new Color(255, 255, 255));
         outputDetailArea.setRows(5);
         outputDetailArea.setBorder(null);
-        outputDetailArea.setSelectionColor(new java.awt.Color(0, 0, 0));
+        outputDetailArea.setSelectionColor(new Color(0, 0, 0));
         outputDetailScroll.setViewportView(outputDetailArea);
 
-        javax.swing.GroupLayout filePaneLayout = new javax.swing.GroupLayout(filePane);
+        GroupLayout filePaneLayout = new GroupLayout(filePane);
         filePane.setLayout(filePaneLayout);
         filePaneLayout.setHorizontalGroup(
-                filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                filePaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(filePaneLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(filePaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(filePaneLayout.createSequentialGroup()
                                                 .addComponent(outputDetailScroll)
                                                 .addContainerGap())
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
+                                        .addGroup(GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
                                                 .addGap(0, 33, Short.MAX_VALUE)
-                                                .addGroup(filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
-                                                                .addGroup(filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(filePaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
+                                                                .addGroup(filePaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                                         .addComponent(pathText)
                                                                         .addComponent(fileIOheader))
                                                                 .addGap(66, 66, 66))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
-                                                                .addComponent(pathEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, filePaneLayout.createSequentialGroup()
+                                                                .addComponent(pathEntry, GroupLayout.PREFERRED_SIZE, 402, GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(browseButton)
                                                                 .addGap(48, 48, 48))))))
         );
         filePaneLayout.setVerticalGroup(
-                filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                filePaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(filePaneLayout.createSequentialGroup()
                                 .addComponent(fileIOheader)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(pathText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(filePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(pathEntry, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(filePaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(pathEntry, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(browseButton))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(outputDetailScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(outputDetailScroll, GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
         );
 
         calcMainPane.add(filePane, "fileCard");
 
-        javax.swing.GroupLayout rootPaneLayout = new javax.swing.GroupLayout(rootPane);
+        GroupLayout rootPaneLayout = new GroupLayout(rootPane);
         rootPane.setLayout(rootPaneLayout);
         rootPaneLayout.setHorizontalGroup(
-                rootPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                rootPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(rootPaneLayout.createSequentialGroup()
-                                .addComponent(selectionPane, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(selectionPane, GroupLayout.PREFERRED_SIZE, 309, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addGroup(rootPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(calcMainPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(rootPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(calcMainPane, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(rootPaneLayout.createSequentialGroup()
                                                 .addGap(0, 0, Short.MAX_VALUE)
                                                 .addComponent(minimizeButton)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(closeButton))))
         );
         rootPaneLayout.setVerticalGroup(
-                rootPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                rootPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(rootPaneLayout.createSequentialGroup()
-                                .addGroup(rootPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(rootPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addComponent(closeButton)
                                         .addComponent(minimizeButton))
                                 .addGap(0, 0, 0)
-                                .addComponent(calcMainPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(selectionPane, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                                .addComponent(calcMainPane, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(selectionPane, GroupLayout.PREFERRED_SIZE, 600, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(rootPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(rootPane, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(rootPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(rootPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>
 
-    private void rootPaneMousePressed(java.awt.event.MouseEvent evt) {
+    private void rootPaneMousePressed(MouseEvent evt) {
         // TODO add your handling code here:
         xx = evt.getX();
         yy = evt.getY();
     }
 
-    private void rootPaneMouseDragged(java.awt.event.MouseEvent evt) {
+    private void rootPaneMouseDragged(MouseEvent evt) {
         // TODO add your handling code here:
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x-xx, y-yy);
     }
 
-    private void minimizeButtonMousePressed(java.awt.event.MouseEvent evt) {
+    private void minimizeButtonMousePressed() {
         // TODO add your handling code here:
         setState(JFrame.ICONIFIED);
     }
 
-    private void closeButtonMousePressed(java.awt.event.MouseEvent evt) {
+    private void closeButtonMousePressed() {
         // TODO add your handling code here:
         System.exit(0);
     }
 
-    private void fileIOTabMousePressed(java.awt.event.MouseEvent evt) {
+    private void fileIOTabMousePressed() {
         // TODO add your handling code here:
         cardLayout.show(calcMainPane, "fileCard");
         setTabColor(fileIOTab);
@@ -1558,7 +1559,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         resetTabColor(bandwidthTab);
     }
 
-    private void bandwidthTabMousePressed(java.awt.event.MouseEvent evt) {
+    private void bandwidthTabMousePressed() {
         // TODO add your handling code here:
         cardLayout.show(calcMainPane, "bandwidthCard");
         setTabColor(bandwidthTab);
@@ -1567,7 +1568,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         resetTabColor(fileIOTab);
     }
 
-    private void hexTabMousePressed(java.awt.event.MouseEvent evt) {
+    private void hexTabMousePressed() {
         // TODO add your handling code here:
         cardLayout.show(calcMainPane, "hexCard");
         setTabColor(hexTab);
@@ -1576,7 +1577,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         resetTabColor(fileIOTab);
     }
 
-    private void binaryTabMousePressed(java.awt.event.MouseEvent evt) {
+    private void binaryTabMousePressed() {
         // TODO add your handling code here:
         cardLayout.show(calcMainPane, "binaryCard");
         setTabColor(binaryTab);
@@ -1585,56 +1586,56 @@ public class CalculatorGUI extends javax.swing.JFrame {
         resetTabColor(fileIOTab);
     }
 
-    private void binaryTabMouseEntered(java.awt.event.MouseEvent evt) {
+    private void binaryTabMouseEntered() {
         // TODO add your handling code here:
         Color previousColor = binaryTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             setHoverColor(binaryTab);
     }
 
-    private void binaryTabMouseExited(java.awt.event.MouseEvent evt) {
+    private void binaryTabMouseExited() {
         // TODO add your handling code here:
         Color previousColor = binaryTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             resetTabColor(binaryTab);
     }
 
-    private void hexTabMouseEntered(java.awt.event.MouseEvent evt) {
+    private void hexTabMouseEntered() {
         // TODO add your handling code here:
         Color previousColor = hexTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             setHoverColor(hexTab);
     }
 
-    private void hexTabMouseExited(java.awt.event.MouseEvent evt) {
+    private void hexTabMouseExited() {
         // TODO add your handling code here:
         Color previousColor = hexTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             resetTabColor(hexTab);
     }
 
-    private void bandwidthTabMouseEntered(java.awt.event.MouseEvent evt) {
+    private void bandwidthTabMouseEntered() {
         // TODO add your handling code here:
         Color previousColor = bandwidthTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             setHoverColor(bandwidthTab);
     }
 
-    private void bandwidthTabMouseExited(java.awt.event.MouseEvent evt) {
+    private void bandwidthTabMouseExited() {
         // TODO add your handling code here:
         Color previousColor = bandwidthTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             resetTabColor(bandwidthTab);
     }
 
-    private void fileIOTabMouseEntered(java.awt.event.MouseEvent evt) {
+    private void fileIOTabMouseEntered() {
         // TODO add your handling code here:
         Color previousColor = fileIOTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             setHoverColor(fileIOTab);
     }
 
-    private void fileIOTabMouseExited(java.awt.event.MouseEvent evt) {
+    private void fileIOTabMouseExited() {
         // TODO add your handling code here:
         Color previousColor = fileIOTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
@@ -1642,7 +1643,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     // --------------------Binary calculator-----------------------
-    private void calculationEntryKeyTyped(java.awt.event.KeyEvent evt) {
+    private void calculationEntryKeyTyped(KeyEvent evt) {
         // TODO add your handling code here:
         // Not allowing any keys besides 0s and 1s, space, and operators
         char c = evt.getKeyChar();
@@ -1652,7 +1653,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private boolean firstFocusCalc = true;
-    private void calculationEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void calculationEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusCalc) {
             calculationEntry.setText("");   //Careful: if user never focus on textField, getText() will return the default String: "1010 + 1010"
@@ -1661,7 +1662,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private boolean firstFocusBin = true;
-    private void binValueEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void binValueEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusBin) {
             binValueEntry.setText("");
@@ -1669,7 +1670,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void binValueEntryKeyTyped(java.awt.event.KeyEvent evt) {
+    private void binValueEntryKeyTyped(KeyEvent evt) {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ("01".indexOf(c) == -1) {
@@ -1678,7 +1679,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private boolean firstFocusDecB = true;
-    private void decValueEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void decValueEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusDecB) {
             decValueEntry.setText("");
@@ -1686,7 +1687,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void decValueEntryKeyTyped(java.awt.event.KeyEvent evt) {
+    private void decValueEntryKeyTyped(KeyEvent evt) {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ("-0123456789".indexOf(c) == -1) {
@@ -1694,12 +1695,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void clearButtonMouseClicked(java.awt.event.MouseEvent evt) {
+    private void clearButtonMouseClicked() {
         // TODO add your handling code here:
         calculationEntry.setText("");
     }
 
-    private void equalButtonMouseClicked(java.awt.event.MouseEvent evt) {
+    private void equalButtonMouseClicked() {
         // TODO add your handling code here:
         String input = calculationEntry.getText();
         String regex = "[0-1]+[\\s]*[-+*/][\\s]*[0-1]+";
@@ -1718,12 +1719,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void clearBin2DecMouseClicked(java.awt.event.MouseEvent evt) {
+    private void clearBin2DecMouseClicked() {
         // TODO add your handling code here:
         binValueEntry.setText("");
     }
 
-    private void equalBin2DecMouseClicked(java.awt.event.MouseEvent evt) {
+    private void equalBin2DecMouseClicked() {
         // TODO add Binary to Decimal conversion:
         if (!binValueEntry.getText().isEmpty()) {
             String convertedDec = new BinaryCalculator(new Binary(binValueEntry.getText())).toDecimal().getValue();
@@ -1731,12 +1732,12 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void clearDec2BinMouseClicked(java.awt.event.MouseEvent evt) {
+    private void clearDec2BinMouseClicked() {
         // TODO add your handling code here:
         decValueEntry.setText("");
     }
 
-    private void equalDec2BinMouseClicked(java.awt.event.MouseEvent evt) {
+    private void equalDec2BinMouseClicked() {
         // TODO add your handling code here:
         String regex = "[-]?[0-9]+";
         if (decValueEntry.getText().matches(regex)) {
@@ -1752,7 +1753,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     // --------------------Hex calculator-----------------------
     private boolean firstFocusHexCalc = true;
-    private void hexCalcEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void hexCalcEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusHexCalc) {
             hexCalcEntry.setText("");
@@ -1760,7 +1761,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void hexCalcEntryKeyTyped(java.awt.event.KeyEvent evt) {
+    private void hexCalcEntryKeyTyped(KeyEvent evt) {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ("0123456789ABCDEFabcdef+-*/ ".indexOf(c) == -1) {
@@ -1768,7 +1769,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void hexCalcEqualMouseClicked(java.awt.event.MouseEvent evt) {
+    private void hexCalcEqualMouseClicked() {
         // TODO add your handling code here:
         String input = hexCalcEntry.getText().toUpperCase();
         String regex = "[0-9A-F]+[\\s]*[-+*/][\\s]*[0-9A-F]+";
@@ -1787,13 +1788,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void hexCalcClearMouseClicked(java.awt.event.MouseEvent evt) {
+    private void hexCalcClearMouseClicked() {
         // TODO add your handling code here:
         hexCalcEntry.setText("");
     }
 
     private boolean firstFocusHex = true;
-    private void hexValueEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void hexValueEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusHex) {
             hexValueEntry.setText("");
@@ -1801,7 +1802,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void hexValueEntryKeyTyped(java.awt.event.KeyEvent evt) {
+    private void hexValueEntryKeyTyped(KeyEvent evt) {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ("0123456789ABCDEFabcdef".indexOf(c) == -1) {
@@ -1809,7 +1810,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void equalHex2DecMouseClicked(java.awt.event.MouseEvent evt) {
+    private void equalHex2DecMouseClicked() {
         // TODO add your handling code here:
         if (!hexValueEntry.getText().isEmpty()) {
             String convertedDec = new HexCalculator(new Hex(hexValueEntry.getText())).toDecimal().getValue();
@@ -1817,13 +1818,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void clearHex2DecMouseClicked(java.awt.event.MouseEvent evt) {
+    private void clearHex2DecMouseClicked() {
         // TODO add your handling code here:
         hexValueEntry.setText("");
     }
 
     private boolean firstFocusDecH = true;
-    private void decValueEntry1FocusGained(java.awt.event.FocusEvent evt) {
+    private void decValueEntry1FocusGained() {
         // TODO add your handling code here:
         if (firstFocusDecH) {
             decValueEntry1.setText("");
@@ -1831,7 +1832,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void equalDec2HexMouseClicked(java.awt.event.MouseEvent evt) {
+    private void equalDec2HexMouseClicked() {
         // TODO add your handling code here:
         String regex = "[-]?[0-9]+";
         if (decValueEntry1.getText().matches(regex)) {
@@ -1844,7 +1845,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void clearDec2HexMouseClicked(java.awt.event.MouseEvent evt) {
+    private void clearDec2HexMouseClicked() {
         // TODO add your handling code here:
         decValueEntry1.setText("");
     }
@@ -1853,7 +1854,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
     //--------------------Bandwidth calculator-----------------------
     private boolean firstFocusData = true;
-    private void dataEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void dataEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusData) {
             dataEntry.setText("");
@@ -1861,7 +1862,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void dataEqualButtonMouseClicked(java.awt.event.MouseEvent evt) {
+    private void dataEqualButtonMouseClicked() {
         // TODO add your handling code here:
         if (!dataEntry.getText().isEmpty()) {
             SizeUnit.Size valueUnit = (SizeUnit.Size) dataUnitCombo.getSelectedItem();
@@ -1880,13 +1881,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void dataClearButtonMouseClicked(java.awt.event.MouseEvent evt) {
+    private void dataClearButtonMouseClicked() {
         // TODO add your handling code here:
         dataEntry.setText("");
     }
 
     private boolean firstFocusFileSize = true;
-    private void fileSizeEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void fileSizeEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusFileSize) {
             fileSizeEntry.setText("");
@@ -1895,7 +1896,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private boolean firstFocusDUBandwidth = true;
-    private void bandwidthEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void bandwidthEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusDUBandwidth) {
             bandwidthEntry.setText("");
@@ -1903,7 +1904,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void downUpEqualMouseClicked(java.awt.event.MouseEvent evt) {
+    private void downUpEqualMouseClicked() {
         // TODO add your handling code here:
         if (!fileSizeEntry.getText().isEmpty() && !bandwidthEntry.getText().isEmpty()) {
             String fileSize = fileSizeEntry.getText();
@@ -1918,14 +1919,14 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void downUpClearMouseClicked(java.awt.event.MouseEvent evt) {
+    private void downUpClearMouseClicked() {
         // TODO add your handling code here:
         fileSizeEntry.setText("");
         bandwidthEntry.setText("");
     }
 
     private boolean firstFocusPgVw = true;
-    private void pageViewEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void pageViewEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusPgVw) {
             pageViewEntry.setText("");
@@ -1934,7 +1935,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private boolean firstFocusAvgPg = true;
-    private void avgPageSizeEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void avgPageSizeEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusAvgPg) {
             avgPageSizeEntry.setText("");
@@ -1943,7 +1944,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private boolean firstFocusRedun = true;
-    private void redunFactorEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void redunFactorEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusRedun) {
             redunFactorEntry.setText("");
@@ -1951,7 +1952,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void webBandwidthEqualMouseClicked(java.awt.event.MouseEvent evt) {
+    private void webBandwidthEqualMouseClicked() {
         // TODO add your handling code here:
         if (!pageViewEntry.getText().isEmpty() && !avgPageSizeEntry.getText().isEmpty() && !redunFactorEntry.getText().isEmpty()) {
             String pageView = pageViewEntry.getText();
@@ -1969,7 +1970,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void webBandwidthClearMouseClicked(java.awt.event.MouseEvent evt) {
+    private void webBandwidthClearMouseClicked() {
         // TODO add your handling code here:
         pageViewEntry.setText("");
         avgPageSizeEntry.setText("");
@@ -1977,7 +1978,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private boolean firstFocusMonthly = true;
-    private void monthlyUseEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void monthlyUseEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusMonthly) {
             monthlyUseEntry.setText("");
@@ -1986,7 +1987,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     }
 
     private boolean firstFocusBWHosting = true;
-    private void bandwidthHostingEntryFocusGained(java.awt.event.FocusEvent evt) {
+    private void bandwidthHostingEntryFocusGained() {
         // TODO add your handling code here:
         if (firstFocusBWHosting) {
             bandwidthHostingEntry.setText("");
@@ -1994,7 +1995,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void hostingEqualMouseClicked(java.awt.event.MouseEvent evt) {
+    private void hostingEqualMouseClicked() {
         // TODO add your handling code here:
         HostingBandwidthCalculator hostCalc;
         if (!monthlyUseEntry.getText().isEmpty() && !bandwidthHostingEntry.getText().isEmpty() ||
@@ -2013,13 +2014,13 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void hostingClearMouseClicked(java.awt.event.MouseEvent evt) {
+    private void hostingClearMouseClicked() {
         // TODO add your handling code here:
         monthlyUseEntry.setText("");
         bandwidthHostingEntry.setText("");
     }
 
-    private void bothWaysConvertIconMouseClicked(java.awt.event.MouseEvent evt) {
+    private void bothWaysConvertIconMouseClicked() {
         // TODO add your handling code here:
         if (monthlyUseEntry.getText().isEmpty() && !bandwidthHostingEntry.getText().isEmpty()) {
             String input = bandwidthHostingEntry.getText();
@@ -2034,7 +2035,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
     //--------------------END of Bandwidth calculator-----------------------
 
     //--------------------FILE IO---------------------------
-    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void browseButtonActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
         int returnVal = browseFile.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -2059,7 +2060,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
     //--------------------END of FILE IO---------------------------
-    private void onlyPositiveNumbers(java.awt.event.KeyEvent evt) {
+    private void onlyPositiveNumbers(KeyEvent evt) {
         char c = evt.getKeyChar();
         if ("0123456789".indexOf(c) == -1) {
             evt.consume();
@@ -2084,158 +2085,72 @@ public class CalculatorGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Metal look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 //                if ("Metal".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    UIManager.setLookAndFeel(info.getClassName());
 //                    break;
 //                }
 //            }
-//            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getCrossPlatformLookAndFeelClassName());
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+//            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CalculatorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CalculatorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CalculatorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CalculatorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CalculatorGUI().setVisible(true);
-            }
-        });
+        EventQueue.invokeLater(() -> new CalculatorGUI().setVisible(true));
     }
 
     private int xx, yy; // for moving window
-    private final javax.swing.JFileChooser browseFile;
+    private final JFileChooser browseFile;
     // Variables declaration - do not modify
-    private javax.swing.JTextField avgPageSizeEntry;
-    private javax.swing.JLabel avgPageSizeText;
+    private JTextField avgPageSizeEntry;
     private JComboBox<SizeUnit.Size> avgPageSizeUnit;
-    private javax.swing.JPanel bandwidthActionPane;
-    private javax.swing.JTextField bandwidthEntry;
-    private javax.swing.JTextField bandwidthHostingEntry;
-    private javax.swing.JLabel bandwidthHostingText;
+    private JTextField bandwidthEntry;
+    private JTextField bandwidthHostingEntry;
     private JComboBox<RateUnit.Rate> bandwidthHostingUnit;
-    private javax.swing.JLabel bandwidthLabel;
-    private javax.swing.JLabel fileIOlabel;
-    private javax.swing.JPanel bandwidthPane;
-    private javax.swing.JTextArea bandwidthResultArea;
-    private javax.swing.JLabel bandwidthResultHeader;
-    private javax.swing.JScrollPane bandwidthResultScroll;
-    private javax.swing.JPanel bandwidthTab;
-    private javax.swing.JLabel bandwidthText;
+    private JTextArea bandwidthResultArea;
+    private JScrollPane bandwidthResultScroll;
+    private JPanel bandwidthTab;
     private JComboBox<RateUnit.Rate> bandwidthUnit;
-    private javax.swing.JLabel bin2DecHeader;
-    private javax.swing.JPanel binCalcPane;
-    private javax.swing.JPanel binToDecPane;
-    private javax.swing.JTextField binValueEntry;
-    private javax.swing.JLabel binValueText;
-    private javax.swing.JLabel binaryCalculationHeader;
-    private javax.swing.JLabel binaryLabel;
-    private javax.swing.JPanel binaryPane;
-    private javax.swing.JPanel binaryTab;
-    private javax.swing.JLabel bothWaysConvertIcon;
-    private javax.swing.JButton browseButton;
-    private javax.swing.JLabel calcEntryText;
-    private javax.swing.JLabel calcInvalidText;
-    private javax.swing.JPanel calcMainPane;
-    private javax.swing.JTextField calculationEntry;
-    private javax.swing.JLabel clearBin2Dec;
-    private javax.swing.JLabel clearButton;
-    private javax.swing.JLabel clearDec2Bin;
-    private javax.swing.JLabel clearDec2Hex;
-    private javax.swing.JLabel clearHex2Dec;
-    private javax.swing.JLabel closeButton;
-    private javax.swing.JLabel dataClearButton;
-    private javax.swing.JPanel dataConvertPane;
-    private javax.swing.JTextField dataEntry;
-    private javax.swing.JLabel dataEqualButton;
-    private javax.swing.JLabel dataText;
+    private JTextField binValueEntry;
+    private JPanel binaryTab;
+    private JLabel calcInvalidText;
+    private JPanel calcMainPane;
+    private JTextField calculationEntry;
+    private JTextField dataEntry;
     private JComboBox<SizeUnit.Size> dataUnitCombo;
-    private javax.swing.JLabel dec2BinHeader;
-    private javax.swing.JLabel dec2BinHeader1;
-    private javax.swing.JLabel dec2HexHeader;
-    private javax.swing.JLabel decHexInvalid;
-    private javax.swing.JPanel decToBinPane;
-    private javax.swing.JPanel decToHexPane;
-    private javax.swing.JTextField decValueEntry;
-    private javax.swing.JTextField decValueEntry1;
-    private javax.swing.JLabel decValueText;
-    private javax.swing.JLabel decValueText1;
-    private javax.swing.JLabel decimalBinInvalidText;
-    private javax.swing.JLabel downUpClear;
-    private javax.swing.JLabel downUpEqual;
-    private javax.swing.JPanel downUpPane;
-    private javax.swing.JLabel equalBin2Dec;
-    private javax.swing.JLabel equalButton;
-    private javax.swing.JLabel equalDec2Bin;
-    private javax.swing.JLabel equalDec2Hex;
-    private javax.swing.JLabel equalHex2Dec;
-    private javax.swing.JPanel fileIOTab;
-    private javax.swing.JLabel fileIOheader;
-    private javax.swing.JPanel filePane;
-    private javax.swing.JTextField fileSizeEntry;
-    private javax.swing.JLabel fileSizeText;
+    private JLabel decHexInvalid;
+    private JTextField decValueEntry;
+    private JTextField decValueEntry1;
+    private JLabel decimalBinInvalidText;
+    private JPanel fileIOTab;
+    private JTextField fileSizeEntry;
     private JComboBox<SizeUnit.Size> fileSizeUnit;
-    private javax.swing.JLabel hex2DecHeader;
-    private javax.swing.JLabel hexCalcClear;
-    private javax.swing.JTextField hexCalcEntry;
-    private javax.swing.JLabel hexCalcEqual;
-    private javax.swing.JLabel hexCalcHeader;
-    private javax.swing.JLabel hexCalcInvalid;
-    private javax.swing.JPanel hexCalcPane;
-    private javax.swing.JLabel hexCalcText;
-    private javax.swing.JLabel hexLabel;
-    private javax.swing.JPanel hexPane;
-    private javax.swing.JTextArea hexResultArea;
-    private javax.swing.JLabel hexResultHeader;
-    private javax.swing.JPanel hexResultPane;
-    private javax.swing.JScrollPane hexResultScroll;
-    private javax.swing.JPanel hexTab;
-    private javax.swing.JPanel hexToDecPane;
-    private javax.swing.JTextField hexValueEntry;
-    private javax.swing.JLabel hexValueText;
-    private javax.swing.JPanel hostBandwidthPane;
-    private javax.swing.JLabel hostingClear;
-    private javax.swing.JLabel hostingEqual;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel minimizeButton;
-    private javax.swing.JTextField monthlyUseEntry;
-    private javax.swing.JLabel monthlyUseText;
+    private JTextField hexCalcEntry;
+    private JLabel hexCalcInvalid;
+    private JTextArea hexResultArea;
+    private JScrollPane hexResultScroll;
+    private JPanel hexTab;
+    private JTextField hexValueEntry;
+    private JScrollPane jScrollPane1;
+    private JTextField monthlyUseEntry;
     private JComboBox<SizeUnit.Size> monthlyUseUnit;
-    private javax.swing.JTextArea outputDetailArea;
-    private javax.swing.JScrollPane outputDetailScroll;
-    private javax.swing.JTextField pageViewEntry;
-    private javax.swing.JLabel pageViewText;
+    private JTextArea outputDetailArea;
+    private JScrollPane outputDetailScroll;
+    private JTextField pageViewEntry;
     private JComboBox<TimeUnit.Time> pageViewUnit;
-    private javax.swing.JTextField pathEntry;
-    private javax.swing.JLabel pathText;
-    private javax.swing.JTextField redunFactorEntry;
-    private javax.swing.JLabel redunFactorText;
-    private javax.swing.JTextArea binResultArea;
-    private javax.swing.JPanel resultPane;
-    private javax.swing.JPanel rootPane;
-    private javax.swing.JPanel selectionPane;
-    private javax.swing.JLabel topLogo;
-    private javax.swing.JLabel webBandwidthClear;
-    private javax.swing.JLabel webBandwidthEqual;
-    private javax.swing.JPanel webBandwidthPane;
-    private javax.swing.JPanel welcomePane;
-    private javax.swing.JLabel fillerImage;
-    private javax.swing.JLabel welcomeImage;
+    private JTextField pathEntry;
+    private JTextField redunFactorEntry;
+    private JTextArea binResultArea;
     // End of variables declaration
 }

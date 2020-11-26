@@ -8,8 +8,7 @@ package View;
 import Controller.*;
 import Model.*;
 
-import java.awt.CardLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.io.File;
 import java.util.Arrays;
 import javax.swing.*;
@@ -324,11 +323,14 @@ public class CalculatorGUI extends javax.swing.JFrame {
 
         underLine.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         underLine.setForeground(new java.awt.Color(255, 255, 255));
+        underLine.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         underLine.setText("___________________________________");
 
+        logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo90px.png"))); // NOI18N
 
         designedBy.setForeground(new java.awt.Color(255, 255, 255));
+        designedBy.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         designedBy.setText("Designed by Lam Mai | TCSS 305");
 
         javax.swing.GroupLayout welcomePaneLayout = new javax.swing.GroupLayout(welcomePane);
@@ -336,7 +338,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         welcomePaneLayout.setHorizontalGroup(
                 welcomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(welcomePaneLayout.createSequentialGroup()
-                                .addContainerGap(179, Short.MAX_VALUE)
+                                .addContainerGap(194, Short.MAX_VALUE)
                                 .addGroup(welcomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, welcomePaneLayout.createSequentialGroup()
                                                 .addGroup(welcomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -870,7 +872,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         decValueEntry1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                decValueEntry1KeyTyped(evt);
+                decValueEntryKeyTyped(evt);
             }
         });
 
@@ -1000,7 +1002,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         dataEntry.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                dataEntryKeyTyped(evt);
+                onlyPositiveNumbers(evt);
             }
         });
 
@@ -1071,7 +1073,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         fileSizeEntry.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                fileSizeEntryKeyTyped(evt);
+                onlyPositiveNumbers(evt);
             }
         });
 
@@ -1110,7 +1112,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         bandwidthEntry.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                bandwidthEntryKeyTyped(evt);
+                onlyPositiveNumbers(evt);
             }
         });
 
@@ -1178,7 +1180,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         pageViewEntry.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                pageViewEntryKeyTyped(evt);
+                onlyPositiveNumbers(evt);
             }
         });
 
@@ -1211,7 +1213,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         avgPageSizeEntry.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                avgPageSizeEntryKeyTyped(evt);
+                onlyPositiveNumbers(evt);
             }
         });
 
@@ -1224,7 +1226,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         redunFactorEntry.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                redunFactorEntryKeyTyped(evt);
+                onlyPositiveNumbers(evt);
             }
         });
 
@@ -1297,7 +1299,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         monthlyUseEntry.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                monthlyUseEntryKeyTyped(evt);
+                onlyPositiveNumbers(evt);
             }
         });
 
@@ -1315,7 +1317,7 @@ public class CalculatorGUI extends javax.swing.JFrame {
         });
         bandwidthHostingEntry.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                bandwidthHostingEntryKeyTyped(evt);
+                onlyPositiveNumbers(evt);
             }
         });
 
@@ -1859,11 +1861,6 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void decValueEntry1KeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
-
     private void equalDec2HexMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         String regex = "[-]?[0-9]+";
@@ -1894,10 +1891,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void dataEntryKeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
+//    private void dataEntryKeyTyped(java.awt.event.KeyEvent evt) {
+//        // TODO add your handling code here:
+//        onlyPositiveNumbers(evt);
+//    }
 
     private void dataEqualButtonMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
@@ -1932,10 +1929,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void fileSizeEntryKeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
+//    private void fileSizeEntryKeyTyped(java.awt.event.KeyEvent evt) {
+//        // TODO add your handling code here:
+//        onlyPositiveNumbers(evt);
+//    }
 
     private boolean firstFocusDUBandwidth = true;
     private void bandwidthEntryFocusGained(java.awt.event.FocusEvent evt) {
@@ -1946,10 +1943,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void bandwidthEntryKeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
+//    private void bandwidthEntryKeyTyped(java.awt.event.KeyEvent evt) {
+//        // TODO add your handling code here:
+//        onlyPositiveNumbers(evt);
+//    }
 
     private void downUpEqualMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
@@ -1981,10 +1978,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void pageViewEntryKeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
+//    private void pageViewEntryKeyTyped(java.awt.event.KeyEvent evt) {
+//        // TODO add your handling code here:
+//        onlyPositiveNumbers(evt);
+//    }
 
     private boolean firstFocusAvgPg = true;
     private void avgPageSizeEntryFocusGained(java.awt.event.FocusEvent evt) {
@@ -1995,10 +1992,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void avgPageSizeEntryKeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
+//    private void avgPageSizeEntryKeyTyped(java.awt.event.KeyEvent evt) {
+//        // TODO add your handling code here:
+//        onlyPositiveNumbers(evt);
+//    }
 
     private boolean firstFocusRedun = true;
     private void redunFactorEntryFocusGained(java.awt.event.FocusEvent evt) {
@@ -2009,10 +2006,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void redunFactorEntryKeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
+//    private void redunFactorEntryKeyTyped(java.awt.event.KeyEvent evt) {
+//        // TODO add your handling code here:
+//        onlyPositiveNumbers(evt);
+//    }
 
     private void webBandwidthEqualMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
@@ -2048,10 +2045,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void monthlyUseEntryKeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
+//    private void monthlyUseEntryKeyTyped(java.awt.event.KeyEvent evt) {
+//        // TODO add your handling code here:
+//        onlyPositiveNumbers(evt);
+//    }
 
     private boolean firstFocusBWHosting = true;
     private void bandwidthHostingEntryFocusGained(java.awt.event.FocusEvent evt) {
@@ -2062,10 +2059,10 @@ public class CalculatorGUI extends javax.swing.JFrame {
         }
     }
 
-    private void bandwidthHostingEntryKeyTyped(java.awt.event.KeyEvent evt) {
-        // TODO add your handling code here:
-        onlyPositiveNumbers(evt);
-    }
+//    private void bandwidthHostingEntryKeyTyped(java.awt.event.KeyEvent evt) {
+//        // TODO add your handling code here:
+//        onlyPositiveNumbers(evt);
+//    }
 
     private void hostingEqualMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:

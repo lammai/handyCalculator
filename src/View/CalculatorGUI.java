@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import Controller.*;
 import Model.*;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,20 +9,22 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.Arrays;
-
 import static View.BinHexCLI.performCalculation;
 import static View.BinHexCLI.splitCalculation;
 
 /**
- *
- *
+ * This class is the GUI for the handy calculator. It includes
+ * every component's placement and event handling.
+ * @author Lam Mai
+ * @version 3.0
+ * @since 11-21-2020
  */
 public class CalculatorGUI extends JFrame {
 
-    CardLayout cardLayout;
+    public final CardLayout cardLayout;
 
     /**
-     *
+     * The constructor setup every components with default values and placements.
      */
     public CalculatorGUI() {
         initComponents();
@@ -1525,33 +1521,28 @@ public class CalculatorGUI extends JFrame {
         );
 
         pack();
-    }// </editor-fold>
+    }
 
     private void rootPaneMousePressed(MouseEvent evt) {
-        // TODO add your handling code here:
         xx = evt.getX();
         yy = evt.getY();
     }
 
     private void rootPaneMouseDragged(MouseEvent evt) {
-        // TODO add your handling code here:
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x-xx, y-yy);
     }
 
     private void minimizeButtonMousePressed() {
-        // TODO add your handling code here:
         setState(JFrame.ICONIFIED);
     }
 
     private void closeButtonMousePressed() {
-        // TODO add your handling code here:
         System.exit(0);
     }
 
     private void fileIOTabMousePressed() {
-        // TODO add your handling code here:
         cardLayout.show(calcMainPane, "fileCard");
         setTabColor(fileIOTab);
         resetTabColor(binaryTab);
@@ -1560,7 +1551,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void bandwidthTabMousePressed() {
-        // TODO add your handling code here:
         cardLayout.show(calcMainPane, "bandwidthCard");
         setTabColor(bandwidthTab);
         resetTabColor(binaryTab);
@@ -1569,7 +1559,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void hexTabMousePressed() {
-        // TODO add your handling code here:
         cardLayout.show(calcMainPane, "hexCard");
         setTabColor(hexTab);
         resetTabColor(binaryTab);
@@ -1578,7 +1567,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void binaryTabMousePressed() {
-        // TODO add your handling code here:
         cardLayout.show(calcMainPane, "binaryCard");
         setTabColor(binaryTab);
         resetTabColor(hexTab);
@@ -1587,56 +1575,48 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void binaryTabMouseEntered() {
-        // TODO add your handling code here:
         Color previousColor = binaryTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             setHoverColor(binaryTab);
     }
 
     private void binaryTabMouseExited() {
-        // TODO add your handling code here:
         Color previousColor = binaryTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             resetTabColor(binaryTab);
     }
 
     private void hexTabMouseEntered() {
-        // TODO add your handling code here:
         Color previousColor = hexTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             setHoverColor(hexTab);
     }
 
     private void hexTabMouseExited() {
-        // TODO add your handling code here:
         Color previousColor = hexTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             resetTabColor(hexTab);
     }
 
     private void bandwidthTabMouseEntered() {
-        // TODO add your handling code here:
         Color previousColor = bandwidthTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             setHoverColor(bandwidthTab);
     }
 
     private void bandwidthTabMouseExited() {
-        // TODO add your handling code here:
         Color previousColor = bandwidthTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             resetTabColor(bandwidthTab);
     }
 
     private void fileIOTabMouseEntered() {
-        // TODO add your handling code here:
         Color previousColor = fileIOTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             setHoverColor(fileIOTab);
     }
 
     private void fileIOTabMouseExited() {
-        // TODO add your handling code here:
         Color previousColor = fileIOTab.getBackground();
         if (!previousColor.equals(new Color(51,51,51)))
             resetTabColor(fileIOTab);
@@ -1644,7 +1624,6 @@ public class CalculatorGUI extends JFrame {
 
     // --------------------Binary calculator-----------------------
     private void calculationEntryKeyTyped(KeyEvent evt) {
-        // TODO add your handling code here:
         // Not allowing any keys besides 0s and 1s, space, and operators
         char c = evt.getKeyChar();
         if ("01+-*/ ".indexOf(c) == -1) {
@@ -1654,7 +1633,6 @@ public class CalculatorGUI extends JFrame {
 
     private boolean firstFocusCalc = true;
     private void calculationEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusCalc) {
             calculationEntry.setText("");   //Careful: if user never focus on textField, getText() will return the default String: "1010 + 1010"
             firstFocusCalc = false;
@@ -1663,7 +1641,6 @@ public class CalculatorGUI extends JFrame {
 
     private boolean firstFocusBin = true;
     private void binValueEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusBin) {
             binValueEntry.setText("");
             firstFocusBin = false;
@@ -1671,7 +1648,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void binValueEntryKeyTyped(KeyEvent evt) {
-        // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ("01".indexOf(c) == -1) {
             evt.consume();
@@ -1680,7 +1656,6 @@ public class CalculatorGUI extends JFrame {
 
     private boolean firstFocusDecB = true;
     private void decValueEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusDecB) {
             decValueEntry.setText("");
             firstFocusDecB = false;
@@ -1688,7 +1663,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void decValueEntryKeyTyped(KeyEvent evt) {
-        // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ("-0123456789".indexOf(c) == -1) {
             evt.consume();
@@ -1696,12 +1670,10 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void clearButtonMouseClicked() {
-        // TODO add your handling code here:
         calculationEntry.setText("");
     }
 
     private void equalButtonMouseClicked() {
-        // TODO add your handling code here:
         String input = calculationEntry.getText();
         String regex = "[0-1]+[\\s]*[-+*/][\\s]*[0-1]+";
         if (input.matches(regex)) {
@@ -1720,12 +1692,10 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void clearBin2DecMouseClicked() {
-        // TODO add your handling code here:
         binValueEntry.setText("");
     }
 
     private void equalBin2DecMouseClicked() {
-        // TODO add Binary to Decimal conversion:
         if (!binValueEntry.getText().isEmpty()) {
             String convertedDec = new BinaryCalculator(new Binary(binValueEntry.getText())).toDecimal().getValue();
             binResultArea.append(String.format("Binary: %s\nDecimal: %s\n-----------------------------\n", binValueEntry.getText(), convertedDec));
@@ -1733,12 +1703,10 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void clearDec2BinMouseClicked() {
-        // TODO add your handling code here:
         decValueEntry.setText("");
     }
 
     private void equalDec2BinMouseClicked() {
-        // TODO add your handling code here:
         String regex = "[-]?[0-9]+";
         if (decValueEntry.getText().matches(regex)) {
             decimalBinInvalidText.setVisible(false);
@@ -1754,7 +1722,6 @@ public class CalculatorGUI extends JFrame {
     // --------------------Hex calculator-----------------------
     private boolean firstFocusHexCalc = true;
     private void hexCalcEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusHexCalc) {
             hexCalcEntry.setText("");
             firstFocusHexCalc = false;
@@ -1762,7 +1729,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void hexCalcEntryKeyTyped(KeyEvent evt) {
-        // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ("0123456789ABCDEFabcdef+-*/ ".indexOf(c) == -1) {
             evt.consume();
@@ -1770,7 +1736,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void hexCalcEqualMouseClicked() {
-        // TODO add your handling code here:
         String input = hexCalcEntry.getText().toUpperCase();
         String regex = "[0-9A-F]+[\\s]*[-+*/][\\s]*[0-9A-F]+";
         if (input.matches(regex)) {
@@ -1789,13 +1754,11 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void hexCalcClearMouseClicked() {
-        // TODO add your handling code here:
         hexCalcEntry.setText("");
     }
 
     private boolean firstFocusHex = true;
     private void hexValueEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusHex) {
             hexValueEntry.setText("");
             firstFocusHex = false;
@@ -1803,7 +1766,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void hexValueEntryKeyTyped(KeyEvent evt) {
-        // TODO add your handling code here:
         char c = evt.getKeyChar();
         if ("0123456789ABCDEFabcdef".indexOf(c) == -1) {
             evt.consume();
@@ -1811,7 +1773,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void equalHex2DecMouseClicked() {
-        // TODO add your handling code here:
         if (!hexValueEntry.getText().isEmpty()) {
             String convertedDec = new HexCalculator(new Hex(hexValueEntry.getText())).toDecimal().getValue();
             hexResultArea.append(String.format("Hex: %s\nDecimal: %s\n-----------------------------\n", hexValueEntry.getText(), convertedDec));
@@ -1819,13 +1780,11 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void clearHex2DecMouseClicked() {
-        // TODO add your handling code here:
         hexValueEntry.setText("");
     }
 
     private boolean firstFocusDecH = true;
     private void decValueEntry1FocusGained() {
-        // TODO add your handling code here:
         if (firstFocusDecH) {
             decValueEntry1.setText("");
             firstFocusDecH = false;
@@ -1833,7 +1792,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void equalDec2HexMouseClicked() {
-        // TODO add your handling code here:
         String regex = "[-]?[0-9]+";
         if (decValueEntry1.getText().matches(regex)) {
             decHexInvalid.setVisible(false);
@@ -1846,7 +1804,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void clearDec2HexMouseClicked() {
-        // TODO add your handling code here:
         decValueEntry1.setText("");
     }
     //--------------------END of Hex calculator-----------------------
@@ -1855,7 +1812,6 @@ public class CalculatorGUI extends JFrame {
     //--------------------Bandwidth calculator-----------------------
     private boolean firstFocusData = true;
     private void dataEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusData) {
             dataEntry.setText("");
             firstFocusData = false;
@@ -1863,7 +1819,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void dataEqualButtonMouseClicked() {
-        // TODO add your handling code here:
         if (!dataEntry.getText().isEmpty()) {
             SizeUnit.Size valueUnit = (SizeUnit.Size) dataUnitCombo.getSelectedItem();
             SizeUnit data = new SizeUnit(dataEntry.getText(), valueUnit);
@@ -1882,13 +1837,11 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void dataClearButtonMouseClicked() {
-        // TODO add your handling code here:
         dataEntry.setText("");
     }
 
     private boolean firstFocusFileSize = true;
     private void fileSizeEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusFileSize) {
             fileSizeEntry.setText("");
             firstFocusFileSize = false;
@@ -1897,7 +1850,6 @@ public class CalculatorGUI extends JFrame {
 
     private boolean firstFocusDUBandwidth = true;
     private void bandwidthEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusDUBandwidth) {
             bandwidthEntry.setText("");
             firstFocusDUBandwidth = false;
@@ -1905,7 +1857,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void downUpEqualMouseClicked() {
-        // TODO add your handling code here:
         if (!fileSizeEntry.getText().isEmpty() && !bandwidthEntry.getText().isEmpty()) {
             String fileSize = fileSizeEntry.getText();
             SizeUnit.Size fileSizeU = (SizeUnit.Size)fileSizeUnit.getSelectedItem();
@@ -1920,14 +1871,12 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void downUpClearMouseClicked() {
-        // TODO add your handling code here:
         fileSizeEntry.setText("");
         bandwidthEntry.setText("");
     }
 
     private boolean firstFocusPgVw = true;
     private void pageViewEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusPgVw) {
             pageViewEntry.setText("");
             firstFocusPgVw = false;
@@ -1936,7 +1885,6 @@ public class CalculatorGUI extends JFrame {
 
     private boolean firstFocusAvgPg = true;
     private void avgPageSizeEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusAvgPg) {
             avgPageSizeEntry.setText("");
             firstFocusAvgPg = false;
@@ -1945,7 +1893,6 @@ public class CalculatorGUI extends JFrame {
 
     private boolean firstFocusRedun = true;
     private void redunFactorEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusRedun) {
             redunFactorEntry.setText("");
             firstFocusRedun = false;
@@ -1953,7 +1900,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void webBandwidthEqualMouseClicked() {
-        // TODO add your handling code here:
         if (!pageViewEntry.getText().isEmpty() && !avgPageSizeEntry.getText().isEmpty() && !redunFactorEntry.getText().isEmpty()) {
             String pageView = pageViewEntry.getText();
             TimeUnit.Time pageViewU = (TimeUnit.Time)pageViewUnit.getSelectedItem();
@@ -1971,7 +1917,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void webBandwidthClearMouseClicked() {
-        // TODO add your handling code here:
         pageViewEntry.setText("");
         avgPageSizeEntry.setText("");
         redunFactorEntry.setText("");
@@ -1979,7 +1924,6 @@ public class CalculatorGUI extends JFrame {
 
     private boolean firstFocusMonthly = true;
     private void monthlyUseEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusMonthly) {
             monthlyUseEntry.setText("");
             firstFocusMonthly = false;
@@ -1988,7 +1932,6 @@ public class CalculatorGUI extends JFrame {
 
     private boolean firstFocusBWHosting = true;
     private void bandwidthHostingEntryFocusGained() {
-        // TODO add your handling code here:
         if (firstFocusBWHosting) {
             bandwidthHostingEntry.setText("");
             firstFocusBWHosting = false;
@@ -1996,7 +1939,6 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void hostingEqualMouseClicked() {
-        // TODO add your handling code here:
         HostingBandwidthCalculator hostCalc;
         if (!monthlyUseEntry.getText().isEmpty() && !bandwidthHostingEntry.getText().isEmpty() ||
             !monthlyUseEntry.getText().isEmpty() && bandwidthHostingEntry.getText().isEmpty()) {
@@ -2015,13 +1957,11 @@ public class CalculatorGUI extends JFrame {
     }
 
     private void hostingClearMouseClicked() {
-        // TODO add your handling code here:
         monthlyUseEntry.setText("");
         bandwidthHostingEntry.setText("");
     }
 
     private void bothWaysConvertIconMouseClicked() {
-        // TODO add your handling code here:
         if (monthlyUseEntry.getText().isEmpty() && !bandwidthHostingEntry.getText().isEmpty()) {
             String input = bandwidthHostingEntry.getText();
             monthlyUseEntry.setText(input);
@@ -2036,7 +1976,6 @@ public class CalculatorGUI extends JFrame {
 
     //--------------------FILE IO---------------------------
     private void browseButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
         int returnVal = browseFile.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             String path = browseFile.getSelectedFile().getPath();
@@ -2060,6 +1999,8 @@ public class CalculatorGUI extends JFrame {
         }
     }
     //--------------------END of FILE IO---------------------------
+
+    //--------------------UTILITIES---------------------------
     private void onlyPositiveNumbers(KeyEvent evt) {
         char c = evt.getKeyChar();
         if ("0123456789".indexOf(c) == -1) {
@@ -2081,38 +2022,22 @@ public class CalculatorGUI extends JFrame {
     private void resetTabColor(JPanel panel) {
         panel.setBackground(new Color(15,15,15));
     }
+    // --------------------END OF UTILITIES---------------------------
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        /* Set the Metal look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
         try {
-//            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-//                if ("Metal".equals(info.getName())) {
-//                    UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CalculatorGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
+        //display the GUI
         EventQueue.invokeLater(() -> new CalculatorGUI().setVisible(true));
     }
 
     private int xx, yy; // for moving window
     private final JFileChooser browseFile;
-    // Variables declaration - do not modify
     private JTextField avgPageSizeEntry;
     private JComboBox<SizeUnit.Size> avgPageSizeUnit;
     private JTextField bandwidthEntry;
@@ -2152,5 +2077,4 @@ public class CalculatorGUI extends JFrame {
     private JTextField pathEntry;
     private JTextField redunFactorEntry;
     private JTextArea binResultArea;
-    // End of variables declaration
 }

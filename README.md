@@ -2,6 +2,8 @@
 
 ## Introduction
 
+![Calculator](src/images/calc.PNG)
+
 > This program contains three different types of calculator. It supports calculations/conversions for Binary, Hexadecimal, and Bandwidth. 
 
 ## Installation

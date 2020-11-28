@@ -1977,25 +1977,27 @@ public class CalculatorGUI extends JFrame {
     //--------------------FILE IO---------------------------
     private void browseButtonActionPerformed(ActionEvent evt) {
         int returnVal = browseFile.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            String path = browseFile.getSelectedFile().getPath();
-            pathEntry.setText(path);
-            String outPath;
-            String fileName;
-            if (path.lastIndexOf("/") < 0 && path.lastIndexOf("\\") < 0) {
-                fileName = path.substring(0 ,path.lastIndexOf(".txt"));
-                outPath = fileName+"-output.txt";
+        if (browseFile.getSelectedFile().getName().contains(".txt")) {
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                String path = browseFile.getSelectedFile().getPath();
+                pathEntry.setText(path);
+                String outPath;
+                String fileName;
+                if (path.lastIndexOf("/") < 0 && path.lastIndexOf("\\") < 0) {
+                    fileName = path.substring(0 ,path.lastIndexOf(".txt"));
+                    outPath = fileName+"-output.txt";
+                } else {
+                    // Give the output the original input name with output.txt at the end
+                    fileName = path.substring(1 + path.lastIndexOf("/") + path.lastIndexOf("\\"),path.lastIndexOf(".txt"));
+                    int slashIndex = path.lastIndexOf("/") > 0 ? path.lastIndexOf("/")+1 : path.lastIndexOf("\\")+1;
+                    outPath = path.substring(0, slashIndex-1)+fileName+"-output.txt";
+                }
+                FileIO fileIO = new FileIO(path, outPath, outputDetailArea);
+                fileIO.processFile();
+                outputDetailArea.append(outPath+"\n");
             } else {
-                // Give the output the original input name with output.txt at the end
-                fileName = path.substring(1 + path.lastIndexOf("/") + path.lastIndexOf("\\"),path.lastIndexOf(".txt"));
-                int slashIndex = path.lastIndexOf("/") > 0 ? path.lastIndexOf("/")+1 : path.lastIndexOf("\\")+1;
-                outPath = path.substring(0, slashIndex-1)+fileName+"-output.txt";
+                pathEntry.setText("");
             }
-            FileIO fileIO = new FileIO(path, outPath, outputDetailArea);
-            fileIO.processFile();
-            outputDetailArea.append(outPath+"\n");
-        } else {
-            pathEntry.setText("");
         }
     }
     //--------------------END of FILE IO---------------------------
